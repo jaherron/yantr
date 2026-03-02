@@ -3,11 +3,10 @@ services:
     image: tailscale/tailscale:latest
     container_name: tailscale
     hostname: tailscale
+    network_mode: host
     volumes:
       - tailscale_state:/var/lib/tailscale
       - /dev/net/tun:/dev/net/tun
-    ports:
-      - "41641:41641/udp"
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
@@ -16,6 +15,7 @@ services:
       TS_AUTH_ONCE: "true"
       TS_STATE_DIR: /var/lib/tailscale
       TS_USERSPACE: "false"
+      TS_ACCEPT_DNS: "true"
       TS_AUTHKEY: ${TAILSCALE_AUTH_KEY}
     labels:
       yantr.app: "tailscale"
