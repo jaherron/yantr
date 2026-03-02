@@ -558,96 +558,49 @@
         class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 py-20 sm:py-24 border-y border-gray-100 bg-white mt-10 sm:mt-14 overflow-hidden"
       >
         <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
-          <!-- Background Decor -->
-          <div class="absolute inset-0 pointer-events-none opacity-[0.03]">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border border-black"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-black"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-black"></div>
-          </div>
-
-          <div class="text-center mb-16 relative z-10">
+          <div class="text-center mb-10 relative z-10">
             <p class="text-[11px] uppercase tracking-[0.2em] text-gray-500 mb-2">Architecture</p>
-            <h2 class="text-3xl sm:text-4xl font-bold font-sans tracking-tight mb-4">How Yantr Works</h2>
-            <p class="text-gray-600 font-sans max-w-2xl mx-auto">
-              A centralized control plane that orchestrates your Docker environment. Yantr sits in the middle, translating your intent into safe, atomic
-              infrastructure actions.
+            <h2 class="text-3xl sm:text-4xl font-bold font-sans tracking-tight mb-3">How Yantr Works</h2>
+            <p class="text-gray-500 font-sans max-w-xl mx-auto text-sm">
+              Drag nodes to explore. Click any component to see details.
             </p>
           </div>
 
-          <div class="relative max-w-4xl mx-auto h-[600px] sm:h-[500px]">
-            <!-- Center Node (Yantr Core) -->
-            <div
-              class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-32 h-32 sm:w-40 sm:h-40 bg-black rounded-full flex items-center justify-center shadow-2xl ring-8 ring-gray-50"
-            >
-              <div class="text-center text-white">
-                <span class="text-3xl sm:text-4xl block mb-1">🕷️</span>
-                <span class="font-bold font-sans text-sm sm:text-base tracking-widest">YANTR</span>
-                <span class="block text-[10px] opacity-75 mt-1">DAEMON</span>
+          <!-- Interactive Graph -->
+          <div id="arch-wrap" class="relative w-full rounded-2xl border border-gray-100 overflow-hidden select-none" style="height:520px; cursor:default;">
+            <!-- SVG edges layer -->
+            <svg id="arch-svg" class="absolute inset-0 w-full h-full pointer-events-none" style="overflow:visible;"></svg>
+            <!-- Nodes injected by JS -->
+          </div>
+
+          <!-- Detail Panel (below graph, full width) -->
+          <div id="arch-detail" class="w-full rounded-2xl border border-gray-200 bg-white overflow-hidden transition-all duration-300 mt-4">
+            <div id="arch-detail-default" class="py-5 px-6 flex items-center gap-3 text-gray-400">
+              <span class="text-2xl">⬡</span>
+              <p class="text-xs font-medium tracking-wide uppercase">Click any node to inspect the component</p>
+            </div>
+            <div id="arch-detail-content" class="hidden p-6 flex flex-col sm:flex-row gap-6">
+              <div class="flex items-center gap-4 sm:flex-col sm:items-start sm:w-48 shrink-0">
+                <div id="arch-detail-icon" class="text-4xl w-14 h-14 flex items-center justify-center rounded-xl border border-gray-100 bg-gray-50 shrink-0"></div>
+                <div>
+                  <p id="arch-detail-label" class="font-bold text-gray-900 text-base leading-tight"></p>
+                  <p id="arch-detail-tag" class="text-[10px] uppercase tracking-widest text-gray-400 mt-1"></p>
+                </div>
+              </div>
+              <div class="flex-1 flex flex-col sm:flex-row gap-6">
+                <p id="arch-detail-desc" class="text-sm text-gray-600 leading-relaxed flex-1"></p>
+                <ul id="arch-detail-bullets" class="space-y-2 sm:w-56 shrink-0"></ul>
               </div>
             </div>
+          </div>
 
-            <!-- Orbiting Nodes -->
-
-            <!-- Node 1: Docker Socket (Top) -->
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-48 sm:w-56 text-center group z-10">
-              <div
-                class="bg-white border-2 border-gray-100 p-4 rounded-2xl shadow-sm group-hover:border-blue-500 group-hover:shadow-lg transition-all duration-300 relative z-10"
-              >
-                <div class="text-2xl mb-2">🐳</div>
-                <h3 class="font-bold font-sans text-sm">Docker Engine</h3>
-                <p class="text-xs text-gray-500 mt-1">Direct socket communication for container lifecycle management.</p>
-              </div>
-              <!-- Connector Line -->
-              <div class="absolute top-full left-1/2 h-[calc(50vh-100px)] sm:h-[110px] w-px bg-gradient-to-b from-gray-200 to-transparent -z-10"></div>
-            </div>
-
-            <!-- Node 2: File System (Right) -->
-            <div class="absolute top-1/2 right-0 -translate-y-1/2 translate-x-4 sm:translate-x-0 w-48 sm:w-56 text-center group z-10">
-              <div
-                class="bg-white border-2 border-gray-100 p-4 rounded-2xl shadow-sm group-hover:border-amber-500 group-hover:shadow-lg transition-all duration-300 relative z-10"
-              >
-                <div class="text-2xl mb-2">📂</div>
-                <h3 class="font-bold font-sans text-sm">Volume Manager</h3>
-                <p class="text-xs text-gray-500 mt-1">Atomic filesystem operations, backups, and restores.</p>
-              </div>
-              <div class="absolute top-1/2 right-full h-px w-[60px] sm:w-[100px] bg-gradient-to-l from-gray-200 to-transparent -z-10"></div>
-            </div>
-
-            <!-- Node 3: User Intent (Bottom) -->
-            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-48 sm:w-56 text-center group z-10">
-              <div class="absolute bottom-full left-1/2 h-[calc(50vh-100px)] sm:h-[110px] w-px bg-gradient-to-t from-gray-200 to-transparent -z-10"></div>
-              <div
-                class="bg-white border-2 border-gray-100 p-4 rounded-2xl shadow-sm group-hover:border-emerald-500 group-hover:shadow-lg transition-all duration-300 relative z-10"
-              >
-                <div class="text-2xl mb-2">🧠</div>
-                <h3 class="font-bold font-sans text-sm">Intent Parser</h3>
-                <p class="text-xs text-gray-500 mt-1">Translates user requests into deterministic compose files.</p>
-              </div>
-            </div>
-
-            <!-- Node 4: Networking (Left) -->
-            <div class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-4 sm:translate-x-0 w-48 sm:w-56 text-center group z-10">
-              <div
-                class="bg-white border-2 border-gray-100 p-4 rounded-2xl shadow-sm group-hover:border-purple-500 group-hover:shadow-lg transition-all duration-300 relative z-10"
-              >
-                <div class="text-2xl mb-2">🌐</div>
-                <h3 class="font-bold font-sans text-sm">Network Layer</h3>
-                <p class="text-xs text-gray-500 mt-1">Manages ports, DNS, and internal service discovery.</p>
-              </div>
-              <div class="absolute top-1/2 left-full h-px w-[60px] sm:w-[100px] bg-gradient-to-r from-gray-200 to-transparent -z-10"></div>
-            </div>
-
-            <!-- Connecting Lines (Spiderweb effect) -->
-            <svg class="absolute inset-0 w-full h-full pointer-events-none -z-10 opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <!-- Center connections -->
-              <line x1="50" y1="50" x2="50" y2="15" stroke="currentColor" stroke-width="0.2" stroke-dasharray="1 1" />
-              <line x1="50" y1="50" x2="50" y2="85" stroke="currentColor" stroke-width="0.2" stroke-dasharray="1 1" />
-              <line x1="50" y1="50" x2="85" y2="50" stroke="currentColor" stroke-width="0.2" stroke-dasharray="1 1" />
-              <line x1="50" y1="50" x2="15" y2="50" stroke="currentColor" stroke-width="0.2" stroke-dasharray="1 1" />
-
-              <!-- Web connections -->
-              <path d="M50 15 L85 50 L50 85 L15 50 Z" stroke="currentColor" stroke-width="0.1" fill="none" />
-            </svg>
+          <!-- Legend -->
+          <div class="flex flex-wrap gap-4 mt-6 justify-center">
+            <span class="flex items-center gap-1.5 text-xs text-gray-500"><span class="w-2.5 h-2.5 rounded-full bg-black inline-block"></span>Core</span>
+            <span class="flex items-center gap-1.5 text-xs text-gray-500"><span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span>Runtime</span>
+            <span class="flex items-center gap-1.5 text-xs text-gray-500"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>API / Interface</span>
+            <span class="flex items-center gap-1.5 text-xs text-gray-500"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span>Storage</span>
+            <span class="flex items-center gap-1.5 text-xs text-gray-500"><span class="w-2.5 h-2.5 rounded-full bg-purple-500 inline-block"></span>Network</span>
           </div>
         </div>
       </section>
@@ -1217,7 +1170,402 @@
         loadContributors();
         loadRandomScreenshot();
         initHeroAnimation();
+        initArchDiagram();
       });
+
+    // ── Interactive Architecture Diagram ──────────────────────────
+    function initArchDiagram() {
+      const wrap = document.getElementById("arch-wrap");
+      const svg  = document.getElementById("arch-svg");
+      if (!wrap || !svg) return;
+
+      const NODES = [
+        {
+          id: "daemon",
+          icon: "🕷️",
+          label: "YANTR Daemon",
+          tag: "Core · Node.js",
+          color: "#000000",
+          textColor: "#ffffff",
+          px: 50, py: 48,
+          desc: "The heart of Yantr — a lightweight Node.js process (~67 MB RAM) that runs 24/7. It orchestrates every container operation, serves the Web UI, and exposes the REST API.",
+          bullets: [
+            "~67 MB RAM at idle",
+            "Runs as a single Docker container",
+            "Communicates with Docker via unix socket",
+            "Handles all lifecycle events",
+          ],
+        },
+        {
+          id: "docker",
+          icon: "🐳",
+          label: "Docker Engine",
+          tag: "Runtime · docker.sock",
+          color: "#3b82f6",
+          textColor: "#ffffff",
+          px: 50, py: 8,
+          desc: "Direct socket-level communication with Docker. Yantr never shells out — all container operations use the Docker API for deterministic, auditable control.",
+          bullets: [
+            "Reads /var/run/docker.sock",
+            "Create, start, stop, remove containers",
+            "Real-time log streaming",
+            "Container health monitoring",
+          ],
+        },
+        {
+          id: "catalog",
+          icon: "📦",
+          label: "App Catalog",
+          tag: "Templates · 100+ apps",
+          color: "#6366f1",
+          textColor: "#ffffff",
+          px: 82, py: 18,
+          desc: "100+ curated Docker Compose templates covering media, AI, finance, networking, databases, and dev tools. Always updated to the latest upstream versions.",
+          bullets: [
+            "100+ maintained compose.yml files",
+            "Always ships latest app versions",
+            "Versioned in Git — full audit history",
+            "Categories: AI, media, finance, infra…",
+          ],
+        },
+        {
+          id: "api",
+          icon: "⚡",
+          label: "REST API",
+          tag: "Interface · Express.js",
+          color: "#10b981",
+          textColor: "#ffffff",
+          px: 84, py: 56,
+          desc: "An Express.js HTTP server on port 3000 that exposes every Yantr operation as a clean JSON endpoint — installs, removals, logs, backups, and status checks.",
+          bullets: [
+            "JSON endpoints at :3000",
+            "Install / remove / status / logs",
+            "Auth token supported",
+            "Used by both Web UI and CLI",
+          ],
+        },
+        {
+          id: "webui",
+          icon: "🖥️",
+          label: "Web UI",
+          tag: "Frontend · Vue 3",
+          color: "#8b5cf6",
+          textColor: "#ffffff",
+          px: 70, py: 87,
+          desc: "A Vue 3 + Vite single-page app served directly by the daemon. Zero separate web server needed. Connects to the REST API for all operations.",
+          bullets: [
+            "Vue 3 + Vite build",
+            "Served by the daemon itself",
+            "Dark mode support",
+            "Real-time container status",
+          ],
+        },
+        {
+          id: "cli",
+          icon: "⌨️",
+          label: "CLI / Scripts",
+          tag: "Interface · HTTP client",
+          color: "#374151",
+          textColor: "#ffffff",
+          px: 30, py: 87,
+          desc: "Any HTTP client or shell script can talk to the REST API. Use curl, wget, or the built-in CLI for headless servers, cron jobs, and automation pipelines.",
+          bullets: [
+            "curl-friendly REST endpoints",
+            "Ideal for cron / systemd",
+            "Scriptable installs & backups",
+            "Works over SSH tunnels",
+          ],
+        },
+        {
+          id: "network",
+          icon: "🌐",
+          label: "Network Manager",
+          tag: "Networking · Port alloc",
+          color: "#a855f7",
+          textColor: "#ffffff",
+          px: 16, py: 56,
+          desc: "Tracks all allocated ports to prevent collisions. Assigns unique host ports per app, and manages internal Docker network routing between services.",
+          bullets: [
+            "Auto port conflict detection",
+            "Unique port per deployed app",
+            "Internal bridge network isolation",
+            "Service-to-service DNS routing",
+          ],
+        },
+        {
+          id: "volumes",
+          icon: "💾",
+          label: "Volume Manager",
+          tag: "Storage · Atomic ops",
+          color: "#f59e0b",
+          textColor: "#ffffff",
+          px: 18, py: 18,
+          desc: "Manages all persistent data directories for installed apps. Performs atomic filesystem operations — ensuring that installs and removals never leave orphaned data.",
+          bullets: [
+            "Per-app data isolation",
+            "Atomic install / remove ops",
+            "Clean removal — zero orphans",
+            "Mount point registry",
+          ],
+        },
+        {
+          id: "backup",
+          icon: "🔒",
+          label: "Backup Engine",
+          tag: "Storage · Restic",
+          color: "#f97316",
+          textColor: "#ffffff",
+          px: 50, py: 87,
+          desc: "Restic-powered scheduled backups for any app's data volume. Supports local paths, S3-compatible, and Backblaze B2 as destinations. Point-in-time restore included.",
+          bullets: [
+            "Restic deduplication & encryption",
+            "Scheduled via cron expressions",
+            "Destinations: local, S3, B2",
+            "One-command restore to any snapshot",
+          ],
+        },
+      ];
+
+      const EDGES = [
+        { from: "daemon", to: "docker",  label: "docker.sock" },
+        { from: "daemon", to: "catalog", label: "template resolution" },
+        { from: "daemon", to: "api",     label: "serves API" },
+        { from: "daemon", to: "network", label: "port allocation" },
+        { from: "daemon", to: "volumes", label: "data ops" },
+        { from: "api",    to: "webui",   label: "JSON polling" },
+        { from: "api",    to: "cli",     label: "REST calls" },
+        { from: "volumes",to: "backup",  label: "backup trigger" },
+      ];
+
+      // Node size
+      const NW = 96, NH = 78; // px — keep in sync with node template
+      let positions = {}; // id → {x, y} in px (center of node)
+
+      // ─── Build initial pixel positions ───────────────────────────
+      function initPositions() {
+        const W = wrap.clientWidth, H = wrap.clientHeight;
+        NODES.forEach(n => {
+          positions[n.id] = { x: n.px / 100 * W, y: n.py / 100 * H };
+        });
+      }
+
+      // ─── Create DOM nodes ─────────────────────────────────────────
+      function buildNodes() {
+        // Remove old
+        wrap.querySelectorAll(".arch-node").forEach(e => e.remove());
+        NODES.forEach(n => {
+          const el = document.createElement("div");
+          el.className = "arch-node";
+          el.dataset.id = n.id;
+          el.style.cssText = `
+            position:absolute; width:${NW}px; z-index:10; cursor:grab;
+            display:flex; flex-direction:column; align-items:center; gap:4px;
+            transition: filter 0.2s, transform 0.15s;
+          `;
+          el.innerHTML = `
+            <div style="
+              width:${NW}px; height:${NW - 16}px;
+              background:${n.color};
+              border-radius:16px;
+              display:flex; flex-direction:column;
+              align-items:center; justify-content:center;
+              gap:3px;
+              box-shadow: 0 4px 16px ${n.color}33;
+              border: 2px solid transparent;
+              transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+            " class="arch-node-inner">
+              <span style="font-size:22px; line-height:1;">${n.icon}</span>
+              <span style="font-size:10px; font-weight:700; color:${n.textColor}; text-align:center; opacity:0.95; padding:0 6px; letter-spacing:0.01em; line-height:1.2;">${n.label}</span>
+            </div>
+          `;
+          positionNode(el, n.id);
+          wrap.appendChild(el);
+          attachNodeEvents(el, n);
+        });
+      }
+
+      function positionNode(el, id) {
+        const p = positions[id];
+        el.style.left = (p.x - NW / 2) + "px";
+        el.style.top  = (p.y - (NW - 16) / 2) + "px";
+      }
+
+      // ─── SVG edges ────────────────────────────────────────────────
+      let edgeEls = {};
+      let dotEls  = {};
+      let dotAnimStates = {};
+
+      function buildEdges() {
+        svg.innerHTML = "";
+        edgeEls = {}; dotEls = {};
+        // defs for arrow marker
+        const defs = document.createElementNS("http://www.w3.org/2000/svg","defs");
+        EDGES.forEach((e, i) => {
+          const fromNode = NODES.find(n => n.id === e.from);
+          const marker = document.createElementNS("http://www.w3.org/2000/svg","marker");
+          marker.setAttribute("id", `arrow-${i}`);
+          marker.setAttribute("viewBox","0 0 6 6");
+          marker.setAttribute("refX","5");
+          marker.setAttribute("refY","3");
+          marker.setAttribute("markerWidth","6");
+          marker.setAttribute("markerHeight","6");
+          marker.setAttribute("orient","auto-start-reverse");
+          const path = document.createElementNS("http://www.w3.org/2000/svg","path");
+          path.setAttribute("d","M 0 0 L 6 3 L 0 6 z");
+          path.setAttribute("fill", fromNode.color);
+          path.setAttribute("opacity","0.5");
+          marker.appendChild(path);
+          defs.appendChild(marker);
+        });
+        svg.appendChild(defs);
+
+        EDGES.forEach((e, i) => {
+          const fromNode = NODES.find(n => n.id === e.from);
+          // Edge line
+          const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+          line.setAttribute("stroke", fromNode.color);
+          line.setAttribute("stroke-width","1.5");
+          line.setAttribute("stroke-opacity","0.25");
+          line.setAttribute("stroke-dasharray","5 4");
+          line.setAttribute("marker-end", `url(#arrow-${i})`);
+          svg.appendChild(line);
+          edgeEls[`${e.from}-${e.to}`] = line;
+
+          // Flowing dot
+          const dot = document.createElementNS("http://www.w3.org/2000/svg","circle");
+          dot.setAttribute("r","3.5");
+          dot.setAttribute("fill", fromNode.color);
+          dot.setAttribute("opacity","0.8");
+          svg.appendChild(dot);
+          dotEls[`${e.from}-${e.to}`] = dot;
+          dotAnimStates[`${e.from}-${e.to}`] = Math.random(); // stagger start
+        });
+        updateEdges();
+      }
+
+      function updateEdges() {
+        EDGES.forEach(e => {
+          const key = `${e.from}-${e.to}`;
+          const line = edgeEls[key];
+          const fp = positions[e.from], tp = positions[e.to];
+          if (!fp || !tp || !line) return;
+          // Shorten line by node radius so it doesn't overlap the box
+          const dx = tp.x - fp.x, dy = tp.y - fp.y;
+          const len = Math.sqrt(dx*dx + dy*dy) || 1;
+          const pad = 44;
+          const x1 = fp.x + dx/len*pad, y1 = fp.y + dy/len*pad;
+          const x2 = tp.x - dx/len*pad, y2 = tp.y - dy/len*pad;
+          line.setAttribute("x1", x1); line.setAttribute("y1", y1);
+          line.setAttribute("x2", x2); line.setAttribute("y2", y2);
+        });
+      }
+
+      function animateDots(ts) {
+        const SPEED = 0.00025; // fraction of edge per ms
+        EDGES.forEach(e => {
+          const key = `${e.from}-${e.to}`;
+          const dot  = dotEls[key];
+          const line = edgeEls[key];
+          if (!dot || !line) return;
+          let t = dotAnimStates[key] + SPEED * ts;
+          if (t > 1) t -= 1;
+          dotAnimStates[key] = t;
+          const x1 = parseFloat(line.getAttribute("x1")), y1 = parseFloat(line.getAttribute("y1"));
+          const x2 = parseFloat(line.getAttribute("x2")), y2 = parseFloat(line.getAttribute("y2"));
+          dot.setAttribute("cx", x1 + (x2-x1)*t);
+          dot.setAttribute("cy", y1 + (y2-y1)*t);
+        });
+        requestAnimationFrame(animateDots);
+      }
+
+      // ─── Detail panel ─────────────────────────────────────────────
+      let selectedId = null;
+      function showDetail(n) {
+        selectedId = n.id;
+        document.getElementById("arch-detail-default").classList.add("hidden");
+        const content = document.getElementById("arch-detail-content");
+        content.classList.remove("hidden");
+        document.getElementById("arch-detail-icon").textContent = n.icon;
+        document.getElementById("arch-detail-label").textContent = n.label;
+        document.getElementById("arch-detail-tag").textContent = n.tag;
+        document.getElementById("arch-detail-desc").textContent = n.desc;
+        const ul = document.getElementById("arch-detail-bullets");
+        ul.innerHTML = n.bullets.map(b =>
+          `<li class="flex items-start gap-2 text-xs text-gray-600">
+            <span style="color:${n.color}; margin-top:2px; flex-shrink:0;">▸</span>
+            <span>${b}</span>
+          </li>`
+        ).join("");
+        // Highlight selected node
+        wrap.querySelectorAll(".arch-node-inner").forEach(el => {
+          el.style.border = "2px solid transparent";
+        });
+        const selEl = wrap.querySelector(`.arch-node[data-id="${n.id}"] .arch-node-inner`);
+        if (selEl) selEl.style.border = `2px solid ${n.color}`;
+      }
+
+      // ─── Drag ─────────────────────────────────────────────────────
+      let dragging = null, dragOff = {x:0,y:0}, didDrag = false;
+
+      function attachNodeEvents(el, n) {
+        el.addEventListener("pointerdown", e => {
+          e.preventDefault();
+          dragging = n.id;
+          didDrag = false;
+          const p = positions[n.id];
+          const rect = wrap.getBoundingClientRect();
+          dragOff = { x: e.clientX - rect.left - p.x, y: e.clientY - rect.top - p.y };
+          el.setPointerCapture(e.pointerId);
+          el.style.cursor = "grabbing";
+          el.style.zIndex = 30;
+          el.style.filter = "drop-shadow(0 8px 20px rgba(0,0,0,0.18))";
+        });
+        el.addEventListener("pointermove", e => {
+          if (dragging !== n.id) return;
+          didDrag = true;
+          const rect = wrap.getBoundingClientRect();
+          const nx = e.clientX - rect.left - dragOff.x;
+          const ny = e.clientY - rect.top  - dragOff.y;
+          positions[n.id] = {
+            x: Math.max(NW/2, Math.min(rect.width  - NW/2, nx)),
+            y: Math.max((NW-16)/2, Math.min(rect.height - (NW-16)/2, ny)),
+          };
+          positionNode(el, n.id);
+          updateEdges();
+        });
+        el.addEventListener("pointerup", e => {
+          if (dragging !== n.id) return;
+          dragging = null;
+          el.style.cursor = "grab";
+          el.style.zIndex = 10;
+          el.style.filter = "";
+          if (!didDrag) showDetail(n);
+        });
+        el.addEventListener("mouseenter", () => {
+          if (!dragging) el.querySelector(".arch-node-inner").style.transform = "scale(1.06)";
+        });
+        el.addEventListener("mouseleave", () => {
+          el.querySelector(".arch-node-inner").style.transform = "";
+        });
+      }
+
+      // ─── Init ─────────────────────────────────────────────────────
+      initPositions();
+      buildNodes();
+      buildEdges();
+      requestAnimationFrame(animateDots);
+
+      // Re-layout on resize
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          initPositions();
+          wrap.querySelectorAll(".arch-node").forEach(el => positionNode(el, el.dataset.id));
+          updateEdges();
+        }, 120);
+      });
+    }
 
     // ── Hero Features Carousel ──────────────────────────────────────
     (function heroFeaturesCarousel() {
