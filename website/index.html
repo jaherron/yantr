@@ -175,6 +175,47 @@
         animation: heroLetterFloat 6.9s ease-in-out infinite;
         animation-delay: 0.46s;
       }
+      /* Hero keyword highlight */
+      .hero-keyword {
+        color: #111;
+        font-weight: 600;
+        position: relative;
+        display: inline-block;
+        transition: color 0.2s;
+      }
+      .hero-keyword::after {
+        content: '';
+        position: absolute;
+        left: 0; right: 0; bottom: -1px;
+        height: 2px;
+        background: linear-gradient(90deg, #000, #555);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 2px;
+      }
+      .hero-keyword:hover::after {
+        transform: scaleX(1);
+      }
+      /* Hero pillar top accent line */
+      .hero-pillar {
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-pillar::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 10%; right: 10%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #111, transparent);
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 2px;
+      }
+      .hero-pillar:hover::before {
+        transform: scaleX(1);
+      }
       #copy-install.copied .copy-icon {
         display: none;
       }
@@ -330,11 +371,44 @@
               ><span class="hero-letter hero-letter-4">T</span><span class="hero-letter hero-letter-5">R</span>
             </span>
           </h1>
-          <p id="hero-desc" class="text-lg sm:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto mb-10 font-sans animate-fade-in-up delay-200">
-            A homelab app store for your own hardware. No OS replacement, no lock-in. Free & Open Source. 
+          <p id="hero-desc" class="text-lg sm:text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto mb-8 font-sans animate-fade-in-up delay-200">
+            A <span class="hero-keyword">lightweight self-hosted App Store</span> that runs <span class="hero-keyword">alongside your existing OS</span> — MacBook, gaming PC, or Linux server. Spin up powerful software instantly, without touching your machine.
           </p>
 
-          <div class="flex flex-wrap items-center justify-center gap-3 mb-10 animate-fade-in-up delay-300">
+          <!-- Three pillars -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto mb-10 animate-fade-in-up delay-300 text-left">
+            <div class="hero-pillar group rounded-xl border border-gray-200 bg-white px-4 py-4 cursor-default hover:border-gray-400 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+              <div class="flex items-center gap-2 mb-1.5">
+                <span class="text-xl">🫧</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-900 group-hover:text-black transition-colors">Zero OS Footprint</span>
+              </div>
+              <p class="text-xs text-gray-500 leading-relaxed group-hover:text-gray-600 transition-colors">
+                Never touches your host filesystem. Everything lives in <span class="font-semibold text-gray-700">isolated Docker containers</span> and virtual volumes.
+              </p>
+            </div>
+
+            <div class="hero-pillar group rounded-xl border border-gray-200 bg-white px-4 py-4 cursor-default hover:border-gray-400 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+              <div class="flex items-center gap-2 mb-1.5">
+                <span class="text-xl">⚡</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-900 group-hover:text-black transition-colors">No Dependency Hell</span>
+              </div>
+              <p class="text-xs text-gray-500 leading-relaxed group-hover:text-gray-600 transition-colors">
+                Run AI models, media servers, and databases side by side. <span class="font-semibold text-gray-700">Zero Python, Node, or CUDA conflicts</span> — ever.
+              </p>
+            </div>
+
+            <div class="hero-pillar group rounded-xl border border-gray-200 bg-white px-4 py-4 cursor-default hover:border-gray-400 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+              <div class="flex items-center gap-2 mb-1.5">
+                <span class="text-xl">🗑️</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-900 group-hover:text-black transition-colors">Install, Use, Destroy</span>
+              </div>
+              <p class="text-xs text-gray-500 leading-relaxed group-hover:text-gray-600 transition-colors">
+                Delete any app and it's <span class="font-semibold text-gray-700">completely gone</span>. No leftover services, registry keys, or hidden config files.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-3 mb-10 animate-fade-in-up delay-[400ms]">
             <a
               href="https://github.com/besoeasy/yantr"
               target="_blank"
