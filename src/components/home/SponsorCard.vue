@@ -7,7 +7,7 @@ const visible = ref(false);
 
 onMounted(async () => {
   try {
-    const res = await fetch(`https://ipfs.io/ipns/sponser.yantr.org?_=${Math.floor(Date.now() / 3600000)}`, {
+    const res = await fetch(`https://ipfs.io/ipns/ads.yantr.org?_=${Math.floor(Date.now() / 3600000)}`, {
       cache: "no-store",
     });
     if (!res.ok) return;
