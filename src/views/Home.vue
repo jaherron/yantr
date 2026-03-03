@@ -414,7 +414,9 @@ onUnmounted(() => {
               <ExternalLinksCard />
             </div>
 
-            <SponsorCard />
+            <div class="sm:col-span-2">
+              <SponsorCard />
+            </div>
           </div>
         </div>
       </div>

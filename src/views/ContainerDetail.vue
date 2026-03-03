@@ -762,7 +762,7 @@ onUnmounted(() => {
                           @click="deleteBackupFile(volume.name, backup.snapshotId)"
                           class="px-2.5 py-1.5 border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-500 bg-red-50 dark:bg-red-500/10 rounded-md hover:bg-red-100 dark:hover:bg-red-500/20 transition-all text-[10px] font-bold uppercase tracking-wider"
                         >
-                          {{ t('containerDetail.delete') }}
+                          {{ t('containerDetail.terminateContainer') }}
                         </button>
                       </div>
                     </div>

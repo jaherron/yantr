@@ -1,70 +1,82 @@
 <script setup>
-import { Heart, ArrowUpRight, MessageCircle, Zap, Star } from "lucide-vue-next";
+import { ArrowUpRight, MessageCircle, Zap, GitPullRequest, ShieldCheck } from "lucide-vue-next";
 
-const perks = [
-  { icon: MessageCircle, text: "1-on-1 support with core devs" },
-  { icon: Zap,           text: "Priority feature requests" },
-  { icon: Star,          text: "Sponsor badge in the project" },
+const benefits = [
+  {
+    icon: MessageCircle,
+    title: "Direct Dev Access",
+    desc: "Private channel with the core team — not a ticket queue.",
+  },
+  {
+    icon: Zap,
+    title: "Shape the Roadmap",
+    desc: "Your feature requests get triaged first, every sprint.",
+  },
+  {
+    icon: GitPullRequest,
+    title: "Early Builds",
+    desc: "Access pre-release versions before public announcement.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Sponsor Badge",
+    desc: "Credited in the README and releases as a core backer.",
+  },
 ];
 </script>
 
 <template>
-  <div class="group relative flex flex-col h-full rounded-3xl overflow-hidden bg-white dark:bg-zinc-950 shadow-xl shadow-black/5 dark:shadow-black/40 border border-black/5 dark:border-white/6 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-violet-500/10 dark:hover:shadow-violet-500/10">
+  <div class="group relative h-full flex flex-col bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-zinc-800 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-black/5 dark:hover:shadow-black/40 hover:border-gray-300 dark:hover:border-zinc-600">
 
-    <!-- Ambient glow blob -->
-    <div class="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-violet-400/20 dark:bg-violet-600/15 blur-3xl pointer-events-none transition-all duration-700 group-hover:scale-125 group-hover:bg-violet-400/30 dark:group-hover:bg-violet-600/25"></div>
-    <div class="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-indigo-400/10 dark:bg-indigo-600/10 blur-2xl pointer-events-none"></div>
+    <!-- Hover accent line -->
+    <div class="absolute top-0 left-0 w-full h-[2px] bg-linear-to-r from-transparent via-amber-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <!-- Dot-grid pattern -->
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMTUwLCAxNTAsIDE1MCwgMC4xKSIvPjwvc3ZnPg==')] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none mask-[linear-gradient(to_bottom,white,transparent)]"></div>
 
-    <div class="relative z-10 flex flex-col h-full p-6">
+    <!-- Horizontal layout: left = pitch + CTA, right = benefits grid -->
+    <div class="relative z-10 flex flex-col sm:flex-row h-full gap-0">
 
-      <!-- Icon + label -->
-      <div class="flex items-center gap-3 mb-5">
-        <div class="w-10 h-10 rounded-2xl bg-linear-to-br from-violet-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-violet-500/30 transition-transform duration-500 group-hover:scale-105 group-hover:rotate-3">
-          <Heart class="w-5 h-5 text-white" />
-        </div>
+      <!-- Left: headline + CTA -->
+      <div class="flex flex-col justify-between p-6 sm:w-64 shrink-0 sm:border-r border-gray-100 dark:border-zinc-800/80">
         <div>
-          <p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-violet-500 dark:text-violet-400 leading-none mb-0.5">Sponsor</p>
-          <p class="text-[10px] text-gray-400 dark:text-zinc-500 leading-none">Open source</p>
-        </div>
-      </div>
-
-      <!-- Headline -->
-      <h3 class="text-[1.05rem] font-bold text-gray-900 dark:text-white tracking-tight leading-tight mb-1.5">
-        Back the project.<br />
-        <span class="text-transparent bg-clip-text bg-linear-to-r from-violet-500 to-indigo-500">Shape its future.</span>
-      </h3>
-      <p class="text-[11.5px] text-gray-500 dark:text-zinc-500 leading-relaxed mb-5">
-        Sponsors keep Yantr free, fast, and actively maintained for everyone.
-      </p>
-
-      <!-- Perks -->
-      <ul class="grid grid-cols-2 gap-2.5 mb-6">
-        <li
-          v-for="perk in perks"
-          :key="perk.text"
-          class="flex items-center gap-3"
-        >
-          <div class="shrink-0 w-6 h-6 rounded-xl bg-violet-50 dark:bg-violet-950/60 flex items-center justify-center">
-            <component :is="perk.icon" class="w-3 h-3 text-violet-500" />
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-500 dark:text-amber-400">Sponsor</span>
+            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-100 dark:border-amber-500/20">Perks included</span>
           </div>
-          <span class="text-xs text-gray-600 dark:text-zinc-400 leading-tight font-medium">{{ perk.text }}</span>
-        </li>
-      </ul>
+          <h3 class="text-sm font-semibold text-gray-900 dark:text-white tracking-tight leading-snug mb-1.5">
+            You get real benefits.
+          </h3>
+          <p class="text-[11px] text-gray-500 dark:text-zinc-500 leading-relaxed">
+            Not just a good feeling — sponsoring gets you direct access and influence over Yantr's direction.
+          </p>
+        </div>
 
-      <!-- CTA -->
-      <div class="mt-auto">
         <a
           href="https://sponsor.besoeasy.com/"
           target="_blank"
           rel="noopener noreferrer"
-          class="group/cta flex items-center justify-between w-full px-4 py-3 rounded-2xl bg-gray-950 dark:bg-white text-white dark:text-gray-950 transition-all duration-300 hover:opacity-90 active:scale-[0.98] shadow-lg shadow-gray-950/20 dark:shadow-white/10"
+          class="group/cta mt-5 flex items-center justify-between w-full px-4 py-3 rounded-lg bg-gray-950 dark:bg-white text-white dark:text-gray-950 transition-all duration-300 hover:bg-gray-800 dark:hover:bg-gray-100 active:scale-[0.98]"
         >
-          <div class="flex items-center gap-2">
-            <Heart class="w-3.5 h-3.5 transition-all duration-300 group-hover/cta:fill-current" />
-            <span class="text-xs font-semibold tracking-tight">Become a Sponsor</span>
+          <div>
+            <span class="text-xs font-bold tracking-tight">Become a Sponsor</span>
           </div>
-          <ArrowUpRight class="w-3.5 h-3.5 opacity-60 transition-all duration-300 group-hover/cta:opacity-100 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
+          <ArrowUpRight class="w-4 h-4 opacity-50 transition-all duration-300 group-hover/cta:opacity-100 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
         </a>
+      </div>
+
+      <!-- Right: benefits 2×2 grid -->
+      <div class="flex-1 grid grid-cols-2 gap-px bg-gray-100 dark:bg-zinc-800/60 border-t sm:border-t-0 border-gray-100 dark:border-zinc-800/60">
+        <div
+          v-for="b in benefits"
+          :key="b.title"
+          class="flex flex-col gap-1.5 p-4 bg-white dark:bg-[#0A0A0A] group-hover:bg-gray-50/50 dark:group-hover:bg-zinc-900/40 transition-colors"
+        >
+          <div class="flex items-center gap-1.5 mb-0.5">
+            <component :is="b.icon" class="w-3.5 h-3.5 text-amber-500 dark:text-amber-400 shrink-0" />
+            <span class="text-[10px] font-bold uppercase tracking-wider text-gray-700 dark:text-zinc-300">{{ b.title }}</span>
+          </div>
+          <p class="text-[11px] text-gray-500 dark:text-zinc-500 leading-snug">{{ b.desc }}</p>
+        </div>
       </div>
 
     </div>
