@@ -181,7 +181,7 @@ onMounted(() => {
           <!-- Language Dropdown Menu -->
           <div
             v-if="showLanguageMenu"
-            class="absolute left-full ml-3 top-0 bg-white dark:bg-zinc-900 rounded-lg shadow-xl border border-gray-200 dark:border-zinc-700 py-2 min-w-[160px] z-50"
+            class="absolute left-full ml-3 bottom-0 bg-white dark:bg-zinc-900 rounded-lg shadow-xl border border-gray-200 dark:border-zinc-700 py-2 min-w-[160px] z-50"
           >
             <button
               v-for="lang in languages"
