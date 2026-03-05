@@ -35,8 +35,8 @@ const benefits = computed(() => [
     <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-amber-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
     <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMTUwLCAxNTAsIDE1MCwgMC4xKSIvPjwvc3ZnPg==')] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
 
-    <div class="relative z-10 flex flex-col h-full p-6">
-      <div class="flex items-center gap-3 mb-6">
+    <div class="relative z-10 flex flex-col h-full p-5">
+      <div class="flex items-center gap-3 mb-4">
         <div class="w-10 h-10 rounded-lg bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center shrink-0 group-hover:scale-105 transition-all duration-500">
           <Heart class="w-5 h-5 text-gray-400 dark:text-zinc-500 group-hover:text-amber-500 transition-colors" />
         </div>
@@ -46,21 +46,21 @@ const benefits = computed(() => [
         </div>
       </div>
 
-      <div class="flex flex-col gap-2">
+      <div class="grid grid-cols-2 gap-2">
         <div
           v-for="b in benefits"
           :key="b.title"
-          class="flex items-start gap-3 p-3 rounded-lg bg-gray-50 dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800/50"
+          class="flex items-start gap-2 p-2.5 rounded-lg bg-gray-50 dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800/50"
         >
-          <component :is="b.icon" class="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+          <component :is="b.icon" class="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
           <div class="flex flex-col">
-            <span class="text-xs font-semibold text-gray-900 dark:text-white">{{ b.title }}</span>
-            <span class="text-[10px] text-gray-500 dark:text-zinc-400">{{ b.desc }}</span>
+            <span class="text-[11px] font-semibold text-gray-900 dark:text-white">{{ b.title }}</span>
+            <span class="text-[10px] text-gray-500 dark:text-zinc-400 leading-snug mt-0.5">{{ b.desc }}</span>
           </div>
         </div>
       </div>
 
-      <div class="mt-4 pt-4 border-t border-gray-100 dark:border-zinc-800/80">
+      <div class="mt-3 pt-3 border-t border-gray-100 dark:border-zinc-800/80">
         <a
           href="https://sponsor.besoeasy.com/"
           target="_blank"
