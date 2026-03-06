@@ -16,7 +16,7 @@ RUN rm -rf node_modules .npm
 
 FROM docker.io/library/node:alpine
 
-RUN apk add --no-cache docker-cli docker-cli-compose wget restic
+RUN apk add --no-cache docker-cli docker-cli-compose wget restic dufs
 
 WORKDIR /app
 
@@ -27,7 +27,6 @@ RUN npm ci --prefer-offline --no-audit --omit=dev || npm install --omit=dev
 RUN npm cache clean --force
 
 COPY --from=builder /app/dist ./dist
-COPY binary/dufs /usr/local/bin/dufs
 
 COPY daemon/ ./daemon/
 COPY apps/ ./apps/
