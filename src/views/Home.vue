@@ -22,6 +22,7 @@ import WatchtowerNextCheckCard from "../components/quick-metrics/WatchtowerNextC
 import HostMetricsCard from "../components/quick-metrics/HostMetricsCard.vue";
 import BackupStatusCard from "../components/quick-metrics/BackupStatusCard.vue";
 import ToolsNavCard from "../components/home/ToolsNavCard.vue";
+import LogsNavCard from "../components/home/LogsNavCard.vue";
 import ExternalLinksCard from "../components/home/ExternalLinksCard.vue";
 import SponsorCard from "../components/home/SponsorCard.vue";
 
@@ -408,6 +409,10 @@ onUnmounted(() => {
 
             <div v-if="showMetrics">
               <ToolsNavCard />
+            </div>
+
+            <div v-if="showMetrics">
+              <LogsNavCard />
             </div>
             
             <div v-if="showMetrics">
