@@ -1,17 +1,21 @@
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { ShieldAlert, ArrowRight, Shield, CheckCircle, Loader } from 'lucide-vue-next'
+import { ShieldAlert, Shield, CheckCircle, Loader, RefreshCw, Bell, Trash2 } from 'lucide-vue-next'
 import { useApiUrl } from '../composables/useApiUrl'
 import { useI18n } from 'vue-i18n'
 
-const router = useRouter()
 const { apiUrl } = useApiUrl()
 const { t } = useI18n()
 
 const deploying = ref(false)
 const deployError = ref('')
 const deploySuccess = ref(false)
+
+const features = [
+  { icon: RefreshCw, label: t('watchtowerAlert.autoUpdates') },
+  { icon: Bell, label: t('watchtowerAlert.notifications') },
+  { icon: Trash2, label: t('watchtowerAlert.imageCleanup') },
+]
 
 async function deploy() {
   if (deploying.value) return
@@ -74,8 +78,15 @@ async function deploy() {
         </div>
       </div>
 
-      <div class="rounded-lg bg-gray-50 dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800/50 px-4 py-3 text-sm text-gray-600 dark:text-zinc-300 leading-relaxed">
-        {{ t('watchtowerAlert.autoUpdates') }}. {{ t('watchtowerAlert.notifications') }}. {{ t('watchtowerAlert.imageCleanup') }}.
+      <div class="grid grid-cols-1 gap-2 sm:grid-cols-3">
+        <div
+          v-for="feature in features"
+          :key="feature.label"
+          class="flex items-center gap-2 rounded-lg border border-gray-100 bg-gray-50 px-3 py-2.5 text-gray-600 dark:border-zinc-800/50 dark:bg-zinc-900/50 dark:text-zinc-300"
+        >
+          <component :is="feature.icon" class="h-3.5 w-3.5 shrink-0 text-amber-500" />
+          <span class="text-[11px] font-medium leading-tight">{{ feature.label }}</span>
+        </div>
       </div>
 
       <transition
@@ -101,16 +112,6 @@ async function deploy() {
         <Shield v-else class="w-3.5 h-3.5 transition-transform duration-200 group-hover:scale-110" />
         <span>{{ deploying ? t('watchtowerAlert.deploying') : t('watchtowerAlert.deployWatchtower') }}</span>
       </button>
-
-      <div class="pt-4 border-t border-gray-100 dark:border-zinc-800 flex items-center justify-end">
-        <button
-          @click="router.push('/apps/watchtower')"
-          class="group/link inline-flex items-center gap-1 text-[11px] font-semibold text-gray-400 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300 transition-colors duration-200"
-        >
-          <span class="group-hover/link:-translate-y-0.5 transition-transform duration-200">{{ t('watchtowerAlert.viewApp') }}</span>
-          <ArrowRight class="w-3 h-3 transition-transform duration-200 group-hover/link:translate-x-0.5" />
-        </button>
-      </div>
 
     </div>
   </div>
