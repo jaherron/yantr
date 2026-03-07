@@ -1,11 +1,9 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { Shield, ArrowRight, Key, CheckCircle, AlertCircle, Loader } from 'lucide-vue-next'
+import { Shield, ArrowRight, Key, CheckCircle, AlertCircle, Loader, Lock, Globe } from 'lucide-vue-next'
 import { useApiUrl } from '../composables/useApiUrl'
 
-const router = useRouter()
 const { apiUrl } = useApiUrl()
 const { t } = useI18n()
 
@@ -13,6 +11,12 @@ const authKey = ref('')
 const deploying = ref(false)
 const deployError = ref('')
 const deploySuccess = ref(false)
+
+const features = [
+  { icon: Lock, label: t('tailscaleSetupCard.wireGuardE2E') },
+  { icon: Globe, label: t('tailscaleSetupCard.zeroPortForward') },
+  { icon: Shield, label: t('tailscaleSetupCard.worksBehindCgnat') },
+]
 
 const isValidToken = computed(() => {
   const k = authKey.value.trim()
@@ -93,8 +97,15 @@ async function deploy() {
         </div>
       </div>
 
-      <div class="rounded-lg bg-gray-50 dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800/50 px-4 py-3 text-sm text-gray-600 dark:text-zinc-300 leading-relaxed">
-        {{ t('tailscaleSetupCard.wireGuardE2E') }}. {{ t('tailscaleSetupCard.zeroPortForward') }}. {{ t('tailscaleSetupCard.worksBehindCgnat') }}.
+      <div class="grid grid-cols-1 gap-2 sm:grid-cols-3">
+        <div
+          v-for="feature in features"
+          :key="feature.label"
+          class="flex items-center gap-2 rounded-lg border border-gray-100 bg-gray-50 px-3 py-2.5 text-gray-600 dark:border-zinc-800/50 dark:bg-zinc-900/50 dark:text-zinc-300"
+        >
+          <component :is="feature.icon" class="h-3.5 w-3.5 shrink-0 text-violet-500" />
+          <span class="text-[11px] font-medium leading-tight">{{ feature.label }}</span>
+        </div>
       </div>
 
       <div class="flex flex-col gap-3 flex-1">
@@ -153,38 +164,31 @@ async function deploy() {
           </div>
         </transition>
 
-        <button
-          @click="deploy"
-          :disabled="!isValidToken || deploying"
-          class="mt-auto w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-[11px] font-bold uppercase tracking-wider transition-all duration-200"
-          :class="isValidToken && !deploying
-            ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 cursor-pointer'
-            : 'bg-gray-100 dark:bg-zinc-800 text-gray-400 dark:text-zinc-500 cursor-not-allowed'"
-        >
-          <Loader v-if="deploying" class="w-3.5 h-3.5 animate-spin" />
-          <Shield v-else class="w-3.5 h-3.5 transition-transform duration-200" :class="isValidToken ? 'group-hover:scale-110' : ''" />
-          <span>{{ deploying ? t('tailscaleSetupCard.deploying') : t('tailscaleSetupCard.deployTailscale') }}</span>
-        </button>
-      </div>
+        <div class="mt-auto grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <a
+            href="https://login.tailscale.com/admin/settings/keys"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-900/70 text-[11px] font-bold uppercase tracking-wider text-gray-700 dark:text-zinc-200 transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-300 dark:hover:border-violet-500/40 hover:text-violet-600 dark:hover:text-violet-400"
+          >
+            <Key class="w-3.5 h-3.5" />
+            <span>{{ t('tailscaleSetupCard.getAuthKey') }}</span>
+            <ArrowRight class="w-3.5 h-3.5" />
+          </a>
 
-      <div class="pt-4 border-t border-gray-100 dark:border-zinc-800 flex items-center justify-between">
-        <a
-          href="https://login.tailscale.com/admin/settings/keys"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="group/link inline-flex items-center gap-1.5 text-[11px] font-semibold text-gray-400 dark:text-zinc-500 hover:text-violet-600 dark:hover:text-violet-400 transition-colors duration-200"
-        >
-          <Key class="w-3 h-3" />
-          <span>{{ t('tailscaleSetupCard.getAuthKey') }}</span>
-          <ArrowRight class="w-3 h-3 transition-transform duration-200 group-hover/link:translate-x-0.5" />
-        </a>
-        <button
-          @click="router.push('/apps/tailscale')"
-          class="group/link inline-flex items-center gap-1 text-[11px] font-semibold text-gray-400 dark:text-zinc-500 hover:text-gray-700 dark:hover:text-zinc-300 transition-colors duration-200"
-        >
-          <span class="translate-y-0 group-hover/link:-translate-y-0.5 transition-transform duration-200">{{ t('tailscaleSetupCard.viewApp') }}</span>
-          <ArrowRight class="w-3 h-3 transition-transform duration-200 group-hover/link:translate-x-0.5" />
-        </button>
+          <button
+            @click="deploy"
+            :disabled="!isValidToken || deploying"
+            class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-[11px] font-bold uppercase tracking-wider transition-all duration-200"
+            :class="isValidToken && !deploying
+              ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 cursor-pointer'
+              : 'bg-gray-100 dark:bg-zinc-800 text-gray-400 dark:text-zinc-500 cursor-not-allowed'"
+          >
+            <Loader v-if="deploying" class="w-3.5 h-3.5 animate-spin" />
+            <Shield v-else class="w-3.5 h-3.5 transition-transform duration-200" :class="isValidToken ? 'group-hover:scale-110' : ''" />
+            <span>{{ deploying ? t('tailscaleSetupCard.deploying') : t('tailscaleSetupCard.deployTailscale') }}</span>
+          </button>
+        </div>
       </div>
 
     </div>
