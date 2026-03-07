@@ -42,14 +42,9 @@ const activeBenefit = computed(() => benefits.value[currentIndex.value]);
 
 const supportLinks = [
   {
-    label: "GitHub Sponsors",
-    href: "https://github.com/sponsors/besoeasy",
+    label: "Join Us",
+    href: "https://sponsor.besoeasy.com/",
     icon: Github,
-  },
-  {
-    label: "Ko-fi",
-    href: "https://ko-fi.com/besoeasy",
-    icon: Coffee,
   },
 ];
 
