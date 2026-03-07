@@ -7,8 +7,6 @@ apps/*/compose.temp.yml
 apps/*/.compose.temp.yml
 apps/*/.compose.tmp.yml
 
-backup.json
-
 website/tailwind.css
 website/apps.json
 website/apps
