@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { ShieldAlert, ArrowRight, Shield, CheckCircle, Loader, RefreshCw, Bell, Trash2 } from 'lucide-vue-next'
+import { ShieldAlert, ArrowRight, Shield, CheckCircle, Loader } from 'lucide-vue-next'
 import { useApiUrl } from '../composables/useApiUrl'
 import { useI18n } from 'vue-i18n'
 
@@ -12,12 +12,6 @@ const { t } = useI18n()
 const deploying = ref(false)
 const deployError = ref('')
 const deploySuccess = ref(false)
-
-const features = [
-  { icon: RefreshCw, label: t('watchtowerAlert.autoUpdates') },
-  { icon: Bell, label: t('watchtowerAlert.notifications') },
-  { icon: Trash2, label: t('watchtowerAlert.imageCleanup') },
-]
 
 async function deploy() {
   if (deploying.value) return
@@ -45,13 +39,8 @@ async function deploy() {
 
 <template>
   <div class="relative group h-full flex flex-col bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-zinc-800 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-black/5 dark:hover:shadow-black/40 hover:border-gray-300 dark:hover:border-zinc-600 hover:-translate-y-0.5">
+    <div class="absolute top-0 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-amber-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-    <!-- Hover accent line -->
-    <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-amber-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-    <!-- Dot-grid pattern -->
-    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMTUwLCAxNTAsIDE1MCwgMC4xKSIvPjwvc3ZnPg==')] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
-
-    <!-- Success overlay -->
     <transition
       enter-active-class="transition-all duration-500 ease-out"
       enter-from-class="opacity-0 scale-95"
@@ -69,16 +58,14 @@ async function deploy() {
     </transition>
 
     <div class="relative z-10 p-6 flex flex-col h-full gap-5">
-
-      <!-- Header -->
-      <div class="flex items-start justify-between">
-        <div class="min-w-0 pr-3">
-          <div class="flex items-center gap-2 mb-1">
-            <ShieldAlert class="w-3.5 h-3.5 text-amber-500" />
-            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-zinc-500">{{ t('watchtowerAlert.security') }}</span>
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="w-10 h-10 rounded-lg bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center shrink-0 group-hover:scale-105 transition-all duration-500">
+            <ShieldAlert class="w-5 h-5 text-amber-500" />
           </div>
-          <div class="text-base font-semibold tracking-tight text-gray-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors duration-300">
-            Watchtower
+          <div class="min-w-0">
+            <h3 class="text-sm font-semibold text-gray-900 dark:text-white tracking-tight">Watchtower</h3>
+            <div class="text-[11px] font-medium text-gray-500 dark:text-zinc-400 uppercase tracking-wider mt-1">{{ t('watchtowerAlert.security') }}</div>
           </div>
         </div>
         <div class="shrink-0 flex items-center gap-1.5">
@@ -87,20 +74,10 @@ async function deploy() {
         </div>
       </div>
 
-      <!-- Feature pills -->
-      <div class="flex flex-wrap gap-2">
-        <div
-          v-for="(feat, i) in features"
-          :key="feat.label"
-          class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-gray-100 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900/60 text-[10px] font-semibold text-gray-500 dark:text-zinc-400 uppercase tracking-wider transition-all duration-300 group-hover:border-amber-200 dark:group-hover:border-amber-500/30 group-hover:text-amber-600 dark:group-hover:text-amber-400"
-          :style="{ transitionDelay: `${i * 60}ms` }"
-        >
-          <component :is="feat.icon" class="w-2.5 h-2.5 shrink-0" />
-          {{ feat.label }}
-        </div>
+      <div class="rounded-lg bg-gray-50 dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800/50 px-4 py-3 text-sm text-gray-600 dark:text-zinc-300 leading-relaxed">
+        {{ t('watchtowerAlert.autoUpdates') }}. {{ t('watchtowerAlert.notifications') }}. {{ t('watchtowerAlert.imageCleanup') }}.
       </div>
 
-      <!-- Error banner -->
       <transition
         enter-active-class="transition-all duration-300 ease-out"
         enter-from-class="opacity-0 translate-y-1"
@@ -115,7 +92,6 @@ async function deploy() {
         </div>
       </transition>
 
-      <!-- Deploy button -->
       <button
         @click="deploy"
         :disabled="deploying"
@@ -126,7 +102,6 @@ async function deploy() {
         <span>{{ deploying ? t('watchtowerAlert.deploying') : t('watchtowerAlert.deployWatchtower') }}</span>
       </button>
 
-      <!-- Footer -->
       <div class="pt-4 border-t border-gray-100 dark:border-zinc-800 flex items-center justify-end">
         <button
           @click="router.push('/apps/watchtower')"
