@@ -544,7 +544,16 @@ onUnmounted(() => {
             <ExternalLink :size="12" />
             {{ t('stackView.appPage') }}
           </button>
+          <div
+            v-if="stack.app?.customapp"
+            class="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-purple-200 dark:border-purple-500/20 bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 cursor-default"
+            :title="t('stackView.customAppNoUpdate')"
+          >
+            <Bot :size="12" />
+            {{ t('stackView.builtByYantr') }}
+          </div>
           <button
+            v-else
             @click="updateStack"
             :disabled="updating"
             class="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-blue-200 dark:border-blue-500/20 bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-500/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"

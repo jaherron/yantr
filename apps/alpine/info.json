@@ -21,6 +21,7 @@
     "Run scripts and tools in an isolated Alpine environment."
   ],
   "website": "https://www.alpinelinux.org",
+  "customapp": true,
   "dependencies": [],
   "notes": [
     "Set SSH_USER and SSH_PASSWORD env vars before deploying",

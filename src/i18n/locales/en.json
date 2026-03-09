@@ -603,7 +603,9 @@
     "updateComplete": "{count} container(s) updated to the latest image",
     "updateAlreadyLatest": "Already up to date — no new images found",
     "updateFailed": "Update failed",
-    "updateTimedOut": "Update timed out — the image pull took too long"
+    "updateTimedOut": "Update timed out — the image pull took too long",
+    "builtByYantr": "Built by Yantr",
+    "customAppNoUpdate": "This app is custom-built by the Yantr team and does not support automatic updates"
   },
   "appCard": {
     "active": "Active ({count})",

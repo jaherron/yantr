@@ -21,6 +21,7 @@
     "DevOps scripting and container automation."
   ],
   "website": "https://github.com/anomalyco/opencode",
+  "customapp": true,
   "dependencies": [],
   "notes": [
     "Requires Docker installed on the host",

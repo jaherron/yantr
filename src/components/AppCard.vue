@@ -94,7 +94,11 @@ function handleClick() {
       </div>
 
       <!-- Status Indicator (always expanded on mobile, expands on hover on desktop) -->
-      <div class="flex items-center justify-end">
+      <div class="flex items-center justify-end gap-2">
+        <!-- Custom / Yantr-built badge -->
+        <div v-if="app?.customapp" class="flex items-center gap-1 bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-500/20 px-2 py-1.5 rounded-full">
+          <span class="text-[11px] font-bold tracking-wide uppercase whitespace-nowrap">Yantr</span>
+        </div>
         <!-- Running -->
         <div v-if="appState === 'running'" class="flex items-center gap-2 bg-green-50 dark:bg-green-500/10 text-green-600 dark:text-green-400 border border-green-200 dark:border-green-500/20 px-2 py-1.5 rounded-full">
           <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse shrink-0"></div>
