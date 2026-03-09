@@ -62,6 +62,7 @@ Required fields:
 - `website` - `https://` docs/homepage/repo URL
 - `dependencies` - array of app IDs (can be empty)
 - `notes` - optional array of operational caveats
+- `customapp` - optional boolean, set to `true` for apps custom-built by the Yantr team (e.g. apps with a `Dockerfile` in the folder). Custom apps show a "Built by Yantr" badge in the UI and have the auto-update button disabled since they use a locally-built image that watchtower cannot update.
 
 ## Checklist
 
