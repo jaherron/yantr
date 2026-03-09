@@ -2,11 +2,7 @@
 import { toRefs, computed, ref } from "vue";
 import { useI18n } from 'vue-i18n'
 import { 
-  Bot, 
-  ArrowRight, 
-  Tag, 
-  Activity, 
-  Box,
+  Bot,
   Layers
 } from "lucide-vue-next";
 
@@ -58,11 +54,10 @@ function handleClick() {
     @keydown.enter.prevent="handleClick"
     @keydown.space.prevent="handleClick"
     :class="[
-      'group relative flex flex-col h-full bg-white dark:bg-[#0A0A0A] border rounded-xl p-5 overflow-hidden transition-all duration-300',
+      'group relative flex flex-col h-full bg-white dark:bg-[#0A0A0A] rounded-xl p-5 overflow-hidden transition-all duration-300',
       appState === 'installed'
-        ? 'cursor-default border-gray-200 dark:border-zinc-800'
-        : 'cursor-pointer border-gray-200 dark:border-zinc-800 hover:shadow-2xl hover:shadow-black/5 dark:hover:shadow-black/40 hover:-translate-y-1 hover:border-gray-300 dark:hover:border-zinc-600',
-      rippling ? 'border-yellow-400 dark:border-yellow-500' : ''
+        ? 'cursor-default'
+        : 'cursor-pointer hover:shadow-2xl hover:shadow-black/5 dark:hover:shadow-black/40 hover:-translate-y-1'
     ]"
     role="button"
     tabindex="0"
@@ -128,22 +123,13 @@ function handleClick() {
         {{ app?.description || t('appCard.noDescription') }}
       </p>
 
-      <div class="mt-auto pt-4 border-t border-gray-100 dark:border-zinc-800/80 flex items-center justify-between overflow-hidden">
+      <div class="mt-auto pt-4 border-t border-gray-100 dark:border-zinc-800/80 flex items-center overflow-hidden">
         <!-- Category tag -->
         <div class="flex items-center gap-1.5 text-gray-400 dark:text-zinc-500 group-hover:text-gray-600 dark:group-hover:text-zinc-300 transition-colors duration-300">
           <Layers :size="14" />
           <span class="text-[11px] font-semibold uppercase tracking-wider">
             {{ randomTag || t('appCard.application') }}
           </span>
-        </div>
-        
-        <!-- Action hint -->
-        <div v-if="appState !== 'installed'" class="flex items-center gap-1 text-blue-600 dark:text-blue-400 font-semibold text-xs">
-          <span>{{ t('appCard.manage') }}</span>
-          <ArrowRight :size="14" class="group-hover:translate-x-1 transition-transform duration-300" />
-        </div>
-        <div v-else class="flex items-center gap-1 text-yellow-500 dark:text-yellow-400 font-semibold text-xs opacity-60">
-          <span>{{ t('appCard.notRunning') }}</span>
         </div>
       </div>
     </div>
