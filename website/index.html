@@ -437,50 +437,76 @@
             </div>
           </div>
 
-          <div class="w-full max-w-3xl mt-10 animate-fade-in-up delay-200" id="install">
-            <div class="rounded-3xl border border-gray-200 bg-gray-50/80 backdrop-blur px-5 py-6 sm:px-8 sm:py-8 shadow-xl shadow-gray-200/50">
-              <p class="text-[11px] uppercase tracking-[0.24em] text-gray-400 text-center mb-3">Install Yantr with Docker</p>
-              <code id="install-cmd" class="block text-center text-sm sm:text-base text-gray-900 whitespace-pre-wrap break-all leading-relaxed"
-                >docker run -d --name yantr \
+          <div class="w-full max-w-4xl mt-12 animate-fade-in-up delay-200" id="install">
+            <div class="relative overflow-hidden rounded-2xl border border-gray-200 bg-white/70 backdrop-blur-xl shadow-lg shadow-gray-200/40">
+              <div class="px-6 py-6 sm:px-8 sm:py-8">
+                
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-5 gap-4">
+                  <div>
+                    <h3 class="text-base font-bold text-gray-900 tracking-tight flex items-center gap-2">
+                       <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                       Install via Docker
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-1">One command. Zero host dependencies.</p>
+                  </div>
+                  
+                  <div class="flex items-center gap-2 text-[10px] font-mono font-medium uppercase tracking-wider text-gray-400">
+                    <span class="bg-gray-100/80 px-2 py-1 rounded">Linux</span>
+                    <span class="bg-gray-100/80 px-2 py-1 rounded">macOS</span>
+                    <span class="bg-gray-100/80 px-2 py-1 rounded">WSL2</span>
+                    <span class="bg-gray-100/80 px-2 py-1 rounded">ARM</span>
+                  </div>
+                </div>
+
+                <div class="relative group">
+                  <div class="absolute inset-0 bg-linear-to-r from-gray-50 to-gray-100/50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none border border-gray-200/50"></div>
+                  
+                  <div class="relative flex items-stretch">
+                    <div class="bg-gray-50 border border-gray-200 rounded-l-xl px-4 py-4 sm:px-6 flex items-center justify-center border-r-0">
+                       <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+                       </svg>
+                    </div>
+                    <code id="install-cmd" class="flex-1 block text-left text-sm sm:text-[13px] text-gray-800 whitespace-pre-wrap break-all leading-relaxed bg-white border border-gray-200 px-4 py-4 sm:px-6 font-mono selection:bg-gray-900 selection:text-white"
+                      >docker run -d --name yantr \
   -p 80:5252 -p 443:5252 \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v /var/lib/docker/volumes:/var/lib/docker/volumes \
   --restart unless-stopped \
-  ghcr.io/besoeasy/yantr</code
-              >
+  ghcr.io/besoeasy/yantr</code>
+                    
+                    <button
+                      id="copy-install"
+                      onclick="
+                        navigator.clipboard
+                          .writeText(
+                            'docker run -d --name yantr -p 80:5252 -p 443:5252 -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/docker/volumes:/var/lib/docker/volumes --restart unless-stopped ghcr.io/besoeasy/yantr',
+                          )
+                          .then(() => {
+                            const b = document.getElementById('copy-install');
+                            b.classList.add('copied');
+                            setTimeout(() => b.classList.remove('copied'), 2000);
+                          })
+                      "
+                      class="flex items-center justify-center bg-gray-900 hover:bg-black text-white px-5 sm:px-6 rounded-r-xl transition-colors min-w-15 cursor-pointer"
+                      title="Copy command"
+                    >
+                      <svg class="copy-icon h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                      </svg>
+                      <svg class="check-icon hidden h-4 w-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
 
-              <div class="mt-5 flex flex-col items-center gap-3">
-                <button
-                  id="copy-install"
-                  onclick="
-                    navigator.clipboard
-                      .writeText(
-                        'docker run -d --name yantr -p 80:5252 -p 443:5252 -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/docker/volumes:/var/lib/docker/volumes --restart unless-stopped ghcr.io/besoeasy/yantr',
-                      )
-                      .then(() => {
-                        const b = document.getElementById('copy-install');
-                        b.classList.add('copied');
-                        setTimeout(() => b.classList.remove('copied'), 2000);
-                      })
-                  "
-                  class="flex items-center gap-1.5 text-[11px] text-gray-600 hover:text-black transition-colors px-3 py-2 rounded-full border border-gray-200 hover:border-gray-400 hover:bg-white font-mono"
-                  title="Copy command"
-                >
-                  <svg class="copy-icon w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                  </svg>
-                  <svg class="check-icon w-3.5 h-3.5 hidden text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
-                  <span class="copy-icon">Copy command</span>
-                  <span class="check-icon hidden text-emerald-500">Copied!</span>
-                </button>
+                <div class="mt-4 flex justify-between items-center text-xs text-gray-400">
+                  <span>Port 80/443 required.</span>
+                  <a href="./install-docker/" class="hover:text-gray-900 transition-colors font-medium">How to install Docker? &rarr;</a>
+                </div>
 
-                <p class="text-xs text-gray-500 text-center">Linux · macOS · Windows (WSL2) · ARM64</p>
-                <p class="text-xs text-gray-400 text-center">
-                  Don't have Docker?
-                  <a href="./install-docker/" class="underline font-bold hover:text-gray-600 transition-colors">Install guide →</a>
-                </p>
               </div>
             </div>
           </div>
