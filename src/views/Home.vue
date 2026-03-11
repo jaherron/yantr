@@ -216,9 +216,7 @@ onUnmounted(() => {
 
             <!-- Dynamic Widgets from src/Widgets/ -->
             <template v-if="showMetrics">
-              <div v-for="(widget, i) in widgets" :key="i">
-                <component :is="widget" />
-              </div>
+              <component v-for="(widget, i) in widgets" :is="widget" :key="i" />
             </template>
           </div>
         </div>
