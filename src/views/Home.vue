@@ -497,11 +497,11 @@ onUnmounted(() => {
               <ExternalLinksCard />
             </div>
 
-            <div v-if="activeFilter === 'all'">
+            <div v-if="showMetrics">
               <OpenCodeCard />
             </div>
 
-            <div v-if="activeFilter === 'all'">
+            <div v-if="showMetrics">
               <SponsorCard />
             </div>
           </div>
