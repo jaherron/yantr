@@ -19,6 +19,7 @@ import { useApiUrl } from '../composables/useApiUrl'
 const { t } = useI18n()
 const toast = useNotification()
 const { apiUrl } = useApiUrl()
+const emit = defineEmits(['cleaned'])
 
 // State
 const loading = ref(false)
