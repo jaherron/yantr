@@ -46,12 +46,30 @@ Navigate to `http://localhost` in your browser. You are ready to go.
 
 ## Core Features
 
-- **One-Click Deploys:** 100+ pre-configured apps ready to launch instantly.
-- **High-End UI:** A sleek, monochrome interface inspired by modern dev tools (Linear/Vercel). Fast, data-dense, and beautifully animated.
-- **Temporary Installs:** Set an expiration timer. Yantr will automatically delete the app and securely prune its data when time is up.
-- **Direct Volume Access:** Built-in WebDAV allows you to browse, manage, and sync your container data directly from the browser.
-- **S3 Backups:** One-click backup and restore of Docker volumes to any S3-compatible cloud storage (like AWS or local MinIO).
-- **No Lock-In:** Yantr translates everything to standard Docker Compose under the hood. You maintain complete control.
+| Area | Feature | What it does |
+| --- | --- | --- |
+| Platform | Zero OS Footprint | Runs alongside your existing OS in Docker without taking over the machine. |
+| Platform | No Lock-In | Keeps everything in standard Docker Compose and Docker volumes so you retain full control outside Yantr. |
+| Deployment | One-Command Install | Starts Yantr itself with a single `docker run` command. |
+| Deployment | App Catalog | Ships 100+ curated app templates across AI, media, finance, networking, databases, and developer tools. |
+| Deployment | One-Click App Deploys | Launches catalog apps instantly without manually wiring compose files and dependencies. |
+| Deployment | Latest Upstream Versions | Tracks current upstream app versions through maintained catalog templates. |
+| Interface | Web UI | Provides a fast Vue-based UI with real-time status, dense operations, and dark mode support. |
+| Interface | REST API | Exposes installs, removals, logs, backups, and status checks through JSON endpoints. |
+| Interface | CLI / Scriptable Automation | Works with `curl`, shell scripts, cron, and headless automation through the API. |
+| Networking | Docker-Native Port Management | Supports Docker-style mappings like `8080:80` or `80`, including opening extra ports after deployment. |
+| Networking | Port Conflict Detection | Tracks allocated host ports to prevent collisions between deployed apps. |
+| Networking | Internal Service Routing | Manages Docker network routing and service-to-service communication between stack services. |
+| Remote Access | Tailscale Integration | Makes private operator access possible without traditional port forwarding. |
+| Remote Access | Cloudflare Tunnel Integration | Publishes services publicly without exposing inbound ports on your router. |
+| Remote Access | Caddy Auth Proxy | Adds an authenticated front door to internal apps with a one-click reverse proxy pattern. |
+| Storage | Volume Manager | Keeps app data isolated in Docker volumes and avoids orphaned state on install or removal. |
+| Storage | Direct Volume Access | Lets you browse and manage persistent data from the browser via built-in volume tooling. |
+| Backup | Restic Backups | Supports encrypted scheduled backups and point-in-time restore to local, S3-compatible, or B2 storage. |
+| Lifecycle | Temporary Installs | Allows ephemeral apps with expiration timers and automatic cleanup. |
+| Lifecycle | Clean Removal | Removes apps without leaving hidden background services, host dependencies, or stray data behind. |
+| Linux Environments | Debian and Alpine Boxes | Deploys ready-to-use Linux environments with SSH access as disposable or long-lived utility boxes. |
+| Linux Environments | Post-Deploy Port Publishing | Lets Debian/Alpine boxes expose more services later using the same Docker syntax users already know. |
 
 <br/>
 
