@@ -296,6 +296,9 @@ export function restoreVolumeBackup(volumeName, snapshotId, s3Config, overwrite,
         if (!volumeExists) {
           log?.("info", `[Restore ${jobId}] Creating volume ${volumeName}`);
           await docker.createVolume({ Name: volumeName });
+        } else if (overwrite) {
+          log?.("info", `[Restore ${jobId}] Clearing existing contents for volume ${volumeName}`);
+          await restic.clearVolumeData(volumeName, log);
         }
 
         restoreJobs.set(jobId, { ...restoreJobs.get(jobId), progress: 30 });

@@ -1,6 +1,6 @@
 import Docker from "dockerode";
 import { spawnProcess } from "./utils.js";
-import { writeFile, mkdir, rm } from "fs/promises";
+import { writeFile, mkdir, readdir, rm } from "fs/promises";
 import { join } from "path";
 
 const docker = new Docker({ socketPath: process.env.DOCKER_SOCKET || "/var/run/docker.sock" });
@@ -246,6 +246,24 @@ export async function restoreSnapshot(snapshotId, volumeName, s3Config, log) {
   }
 
   log?.("info", `[restic] Restore complete for snapshot ${snapshotId}`);
+}
+
+/**
+ * Remove all existing contents from a Docker volume data directory while
+ * keeping the directory and volume identity intact.
+ *
+ * @param {string} volumeName
+ * @param {Function} [log]
+ */
+export async function clearVolumeData(volumeName, log) {
+  const dataPath = `/var/lib/docker/volumes/${volumeName}/_data`;
+  const entries = await readdir(dataPath);
+
+  for (const entry of entries) {
+    await rm(join(dataPath, entry), { recursive: true, force: true });
+  }
+
+  log?.("info", `[restic] Cleared existing contents for volume ${volumeName}`);
 }
 
 /**
