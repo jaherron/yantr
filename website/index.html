@@ -203,9 +203,11 @@
         transition: color 0.2s;
       }
       .hero-keyword::after {
-        content: '';
+        content: "";
         position: absolute;
-        left: 0; right: 0; bottom: -1px;
+        left: 0;
+        right: 0;
+        bottom: -1px;
         height: 2px;
         background: linear-gradient(90deg, #000, #555);
         transform: scaleX(0);
@@ -222,9 +224,11 @@
         overflow: hidden;
       }
       .hero-pillar::before {
-        content: '';
+        content: "";
         position: absolute;
-        top: 0; left: 10%; right: 10%;
+        top: 0;
+        left: 10%;
+        right: 10%;
         height: 2px;
         background: linear-gradient(90deg, transparent, #111, transparent);
         transform: scaleX(0);
@@ -407,9 +411,12 @@
                 ><span class="hero-letter hero-letter-4">T</span><span class="hero-letter hero-letter-5">R</span>
               </span>
             </h1>
-            <p class="text-xl sm:text-2xl font-semibold text-gray-400 tracking-tight mb-5 font-sans animate-fade-in-up delay-150">The self-hosted app store for your hardware.</p>
+            <p class="text-xl sm:text-2xl font-semibold text-gray-400 tracking-tight mb-5 font-sans animate-fade-in-up delay-150">
+              The self-hosted app store for your hardware.
+            </p>
             <p id="hero-desc" class="text-base text-gray-500 leading-relaxed max-w-2xl mb-5 font-sans animate-fade-in-up delay-200">
-              Browse <span class="hero-keyword">100+ open-source apps</span>. Install with <span class="hero-keyword">one command</span>. No OS replacement, no lock-in — running on your existing machine in under a minute.
+              Browse <span class="hero-keyword">100+ open-source apps</span>. Install with <span class="hero-keyword">one command</span>. No OS replacement, no
+              lock-in — running on your existing machine in under a minute.
             </p>
 
             <!-- CTAs -->
@@ -446,16 +453,15 @@
           <div class="w-full max-w-4xl mt-12 animate-fade-in-up delay-200" id="install">
             <div class="relative overflow-hidden rounded-2xl border border-gray-200 bg-white/70 backdrop-blur-xl shadow-lg shadow-gray-200/40">
               <div class="px-6 py-6 sm:px-8 sm:py-8">
-                
                 <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-5 gap-4">
                   <div>
                     <h3 class="text-base font-bold text-gray-900 tracking-tight flex items-center gap-2">
-                       <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                       Install via Docker
+                      <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                      Install via Docker
                     </h3>
                     <p class="text-xs text-gray-500 mt-1">One command. Zero host dependencies.</p>
                   </div>
-                  
+
                   <div class="flex items-center gap-2 text-[10px] font-mono font-medium uppercase tracking-wider text-gray-400">
                     <span class="bg-gray-100/80 px-2 py-1 rounded">Linux</span>
                     <span class="bg-gray-100/80 px-2 py-1 rounded">macOS</span>
@@ -465,29 +471,30 @@
                 </div>
 
                 <div class="relative group">
-                  <div class="absolute inset-0 bg-linear-to-r from-gray-50 to-gray-100/50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none border border-gray-200/50"></div>
-                  
+                  <div
+                    class="absolute inset-0 bg-linear-to-r from-gray-50 to-gray-100/50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none border border-gray-200/50"
+                  ></div>
+
                   <div class="relative flex items-stretch">
                     <div class="bg-gray-50 border border-gray-200 rounded-l-xl px-4 py-4 sm:px-6 flex items-center justify-center border-r-0">
-                       <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
-                       </svg>
+                      <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+                      </svg>
                     </div>
-                    <code id="install-cmd" class="flex-1 block text-left text-sm sm:text-[13px] text-gray-800 whitespace-pre-wrap break-all leading-relaxed bg-white border border-gray-200 px-4 py-4 sm:px-6 font-mono selection:bg-gray-900 selection:text-white"
-                      >docker run -d --name yantr \
-  -p 80:5252 -p 443:5252 \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v /var/lib/docker/volumes:/var/lib/docker/volumes \
-  --restart unless-stopped \
-  ghcr.io/besoeasy/yantr</code>
-                    
+                    <code
+                      id="install-cmd"
+                      class="flex-1 block text-left text-sm sm:text-[13px] text-gray-800 whitespace-pre-wrap break-all leading-relaxed bg-white border border-gray-200 px-4 py-4 sm:px-6 font-mono selection:bg-gray-900 selection:text-white"
+                      >docker run -d --name yantr --network host -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/docker/volumes:/var/lib/docker/volumes
+                      --restart unless-stopped ghcr.io/besoeasy/yantr</code
+                    >
+
                     <button
                       id="copy-install"
                       onclick="
                         navigator.clipboard
                           .writeText(
-                            'docker run -d --name yantr -p 80:5252 -p 443:5252 -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/docker/volumes:/var/lib/docker/volumes --restart unless-stopped ghcr.io/besoeasy/yantr',
+                            'docker run -d --name yantr --network host -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/docker/volumes:/var/lib/docker/volumes --restart unless-stopped ghcr.io/besoeasy/yantr',
                           )
                           .then(() => {
                             const b = document.getElementById('copy-install');
@@ -499,7 +506,12 @@
                       title="Copy command"
                     >
                       <svg class="copy-icon h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                        ></path>
                       </svg>
                       <svg class="check-icon hidden h-4 w-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
@@ -509,15 +521,13 @@
                 </div>
 
                 <div class="mt-4 flex justify-between items-center text-xs text-gray-400">
-                  <span>Port 80/443 required.</span>
+                  <span>RUns On localhost:5252 </span>
                   <a href="./install-docker/" class="hover:text-gray-900 transition-colors font-medium">How to install Docker? &rarr;</a>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
-
       </div>
 
       <!-- Features Section -->
@@ -529,31 +539,51 @@
             <p class="text-gray-500 font-sans max-w-xl mx-auto text-base leading-relaxed">A robust set of built-in capabilities to run apps effortlessly.</p>
           </div>
         </div>
-        
+
         <div class="w-full">
           <div id="hero-fc-window" class="relative overflow-hidden py-4 w-full flex flex-col gap-4">
             <!-- Edge fade masks -->
-            <div class="pointer-events-none absolute inset-y-0 left-0 w-32 sm:w-48 z-10" style="background: linear-gradient(to right, white 0%, transparent 100%)"></div>
-            <div class="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-48 z-10" style="background: linear-gradient(to left, white 0%, transparent 100%)"></div>
-            
+            <div
+              class="pointer-events-none absolute inset-y-0 left-0 w-32 sm:w-48 z-10"
+              style="background: linear-gradient(to right, white 0%, transparent 100%)"
+            ></div>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-48 z-10"
+              style="background: linear-gradient(to left, white 0%, transparent 100%)"
+            ></div>
+
             <div id="hero-fc-track-1" class="feature-scroll-track flex items-stretch gap-4 pr-4"></div>
-            <div id="hero-fc-track-2" class="feature-scroll-track flex items-stretch gap-4 pr-4" style="animation-direction: reverse; animation-duration: 55s;"></div>
+            <div
+              id="hero-fc-track-2"
+              class="feature-scroll-track flex items-stretch gap-4 pr-4"
+              style="animation-direction: reverse; animation-duration: 55s"
+            ></div>
           </div>
         </div>
       </section>
 
       <!-- App Catalog Showcase -->
-      <section id="hero-apps-showcase" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 min-h-screen flex flex-col items-center justify-center border-t border-gray-100 bg-white overflow-hidden py-20">
-
+      <section
+        id="hero-apps-showcase"
+        class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 min-h-screen flex flex-col items-center justify-center border-t border-gray-100 bg-white overflow-hidden py-20"
+      >
         <!-- Edge fade masks -->
-        <div class="pointer-events-none absolute inset-y-0 left-0 w-32 sm:w-48 z-10" style="background: linear-gradient(to right, white 0%, transparent 100%)"></div>
-        <div class="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-48 z-10" style="background: linear-gradient(to left, white 0%, transparent 100%)"></div>
+        <div
+          class="pointer-events-none absolute inset-y-0 left-0 w-32 sm:w-48 z-10"
+          style="background: linear-gradient(to right, white 0%, transparent 100%)"
+        ></div>
+        <div
+          class="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-48 z-10"
+          style="background: linear-gradient(to left, white 0%, transparent 100%)"
+        ></div>
 
         <!-- Headline -->
         <div class="relative z-20 text-center px-4 mb-12">
           <p class="text-[11px] uppercase tracking-[0.2em] text-gray-400 mb-3">App Catalog</p>
           <h2 class="text-3xl sm:text-5xl font-bold font-sans tracking-tight text-gray-900 mb-4">100+ apps, one command away</h2>
-          <p class="text-gray-500 font-sans max-w-xl mx-auto text-base leading-relaxed">From AI models and media servers to password managers and note-taking tools — browse, pick, deploy.</p>
+          <p class="text-gray-500 font-sans max-w-xl mx-auto text-base leading-relaxed">
+            From AI models and media servers to password managers and note-taking tools — browse, pick, deploy.
+          </p>
         </div>
 
         <!-- Row 1: left -->
@@ -582,23 +612,18 @@
       </section>
 
       <!-- Architecture Diagram Section -->
-      <section
-        id="architecture"
-        class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 py-16 sm:py-24 border-y border-gray-100 bg-white overflow-hidden"
-      >
+      <section id="architecture" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 py-16 sm:py-24 border-y border-gray-100 bg-white overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
           <div class="text-center mb-10 relative z-10">
             <p class="text-[11px] uppercase tracking-[0.2em] text-gray-500 mb-2">Architecture</p>
             <h2 class="text-3xl sm:text-4xl font-bold font-sans tracking-tight mb-3">How Yantr Works</h2>
-            <p class="text-gray-500 font-sans max-w-xl mx-auto text-sm">
-              Drag nodes to explore. Click any component to see details.
-            </p>
+            <p class="text-gray-500 font-sans max-w-xl mx-auto text-sm">Drag nodes to explore. Click any component to see details.</p>
           </div>
 
           <!-- Interactive Graph -->
-          <div id="arch-wrap" class="relative w-full rounded-2xl border border-gray-100 overflow-hidden select-none" style="height:520px; cursor:default;">
+          <div id="arch-wrap" class="relative w-full rounded-2xl border border-gray-100 overflow-hidden select-none" style="height: 520px; cursor: default">
             <!-- SVG edges layer -->
-            <svg id="arch-svg" class="absolute inset-0 w-full h-full pointer-events-none" style="overflow:visible;"></svg>
+            <svg id="arch-svg" class="absolute inset-0 w-full h-full pointer-events-none" style="overflow: visible"></svg>
             <!-- Nodes injected by JS -->
           </div>
 
@@ -610,7 +635,10 @@
             </div>
             <div id="arch-detail-content" class="hidden p-6 flex flex-col sm:flex-row gap-6">
               <div class="flex items-center gap-4 sm:flex-col sm:items-start sm:w-48 shrink-0">
-                <div id="arch-detail-icon" class="text-4xl w-14 h-14 flex items-center justify-center rounded-xl border border-gray-100 bg-gray-50 shrink-0"></div>
+                <div
+                  id="arch-detail-icon"
+                  class="text-4xl w-14 h-14 flex items-center justify-center rounded-xl border border-gray-100 bg-gray-50 shrink-0"
+                ></div>
                 <div>
                   <p id="arch-detail-label" class="font-bold text-gray-900 text-base leading-tight"></p>
                   <p id="arch-detail-tag" class="text-[10px] uppercase tracking-widest text-gray-400 mt-1"></p>
@@ -627,9 +655,13 @@
           <div class="flex flex-wrap gap-4 mt-6 justify-center">
             <span class="flex items-center gap-1.5 text-xs text-gray-500"><span class="w-2.5 h-2.5 rounded-full bg-black inline-block"></span>Core</span>
             <span class="flex items-center gap-1.5 text-xs text-gray-500"><span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span>Runtime</span>
-            <span class="flex items-center gap-1.5 text-xs text-gray-500"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>API / Interface</span>
+            <span class="flex items-center gap-1.5 text-xs text-gray-500"
+              ><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>API / Interface</span
+            >
             <span class="flex items-center gap-1.5 text-xs text-gray-500"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span>Storage</span>
-            <span class="flex items-center gap-1.5 text-xs text-gray-500"><span class="w-2.5 h-2.5 rounded-full bg-purple-500 inline-block"></span>Network</span>
+            <span class="flex items-center gap-1.5 text-xs text-gray-500"
+              ><span class="w-2.5 h-2.5 rounded-full bg-purple-500 inline-block"></span>Network</span
+            >
           </div>
         </div>
       </section>
@@ -678,119 +710,290 @@
                 <!-- Row 1 -->
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="py-4 px-5 text-gray-700 font-medium">Runs on your existing OS</td>
-                  <td class="py-4 px-4 text-center bg-black/[0.02]"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
+                  <td class="py-4 px-4 text-center bg-black/[0.02]">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
                 </tr>
                 <!-- Row 2 -->
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="py-4 px-5 text-gray-700 font-medium">No OS replacement required</td>
-                  <td class="py-4 px-4 text-center bg-black/[0.02]"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
+                  <td class="py-4 px-4 text-center bg-black/[0.02]">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
                 </tr>
                 <!-- Row 3 -->
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="py-4 px-5 text-gray-700 font-medium">Works on any existing hardware</td>
-                  <td class="py-4 px-4 text-center bg-black/[0.02]"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full w-auto h-auto">limited</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
+                  <td class="py-4 px-4 text-center bg-black/[0.02]">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span
+                      class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full w-auto h-auto"
+                      >limited</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
                 </tr>
                 <!-- Row 4 -->
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="py-4 px-5 text-gray-700 font-medium">Standard Docker Compose apps</td>
-                  <td class="py-4 px-4 text-center bg-black/[0.02]"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">partial</span></td>
+                  <td class="py-4 px-4 text-center bg-black/[0.02]">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >partial</span
+                    >
+                  </td>
                 </tr>
                 <!-- Row 5 -->
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="py-4 px-5 text-gray-700 font-medium">Curated app catalog (100+)</td>
-                  <td class="py-4 px-4 text-center bg-black/[0.02]"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span></td>
+                  <td class="py-4 px-4 text-center bg-black/[0.02]">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span>
+                  </td>
                 </tr>
                 <!-- Row 6 -->
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="py-4 px-5 text-gray-700 font-medium">Deploy in under a minute</td>
-                  <td class="py-4 px-4 text-center bg-black/[0.02]"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">20–40 min</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">flash + boot</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">flash + boot</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
+                  <td class="py-4 px-4 text-center bg-black/[0.02]">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >20–40 min</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >flash + boot</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >flash + boot</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
                 </tr>
                 <!-- Row 7 -->
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="py-4 px-5 text-gray-700 font-medium">No platform lock-in</td>
-                  <td class="py-4 px-4 text-center bg-black/[0.02]"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-red-100 text-red-500 font-bold text-xs px-1.5 py-0.5 rounded-full">OS tied</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-red-100 text-red-500 font-bold text-xs px-1.5 py-0.5 rounded-full">HW tied</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-red-100 text-red-500 font-bold text-xs px-1.5 py-0.5 rounded-full">OS tied</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
+                  <td class="py-4 px-4 text-center bg-black/[0.02]">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-red-100 text-red-500 font-bold text-xs px-1.5 py-0.5 rounded-full">OS tied</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-red-100 text-red-500 font-bold text-xs px-1.5 py-0.5 rounded-full">HW tied</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-red-100 text-red-500 font-bold text-xs px-1.5 py-0.5 rounded-full">OS tied</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
                 </tr>
                 <!-- Row 8 -->
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="py-4 px-5 text-gray-700 font-medium">Open source</td>
-                  <td class="py-4 px-4 text-center bg-black/[0.02]"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">partial</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">CE only</span></td>
+                  <td class="py-4 px-4 text-center bg-black/[0.02]">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >partial</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >CE only</span
+                    >
+                  </td>
                 </tr>
                 <!-- Row 9 -->
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="py-4 px-5 text-gray-700 font-medium">Funding model</td>
-                  <td class="py-4 px-4 text-center bg-black/[0.02]"><span class="inline-flex items-center justify-center bg-emerald-100 text-emerald-700 font-bold text-xs px-1.5 py-0.5 rounded-full">bootstrapped</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-gray-100 text-gray-600 font-bold text-xs px-1.5 py-0.5 rounded-full">nonprofit</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">VC-backed</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">VC-backed</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">commercial</span></td>
+                  <td class="py-4 px-4 text-center bg-black/[0.02]">
+                    <span class="inline-flex items-center justify-center bg-emerald-100 text-emerald-700 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >bootstrapped</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-gray-100 text-gray-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >nonprofit</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >VC-backed</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >VC-backed</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >commercial</span
+                    >
+                  </td>
                 </tr>
                 <!-- Row 10 -->
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="py-4 px-5 text-gray-700 font-medium">Ships latest app versions</td>
-                  <td class="py-4 px-4 text-center bg-black/[0.02]"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">varies</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">varies</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">varies</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
+                  <td class="py-4 px-4 text-center bg-black/[0.02]">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">varies</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">varies</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">varies</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
                 </tr>
                 <!-- Row 11 -->
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="py-4 px-5 text-gray-700 font-medium">Clean app removal</td>
-                  <td class="py-4 px-4 text-center bg-black/[0.02]"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">partial</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">partial</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">partial</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
+                  <td class="py-4 px-4 text-center bg-black/[0.02]">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >partial</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >partial</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >partial</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
                 </tr>
                 <!-- Row 12 -->
                 <tr class="hover:bg-gray-50 transition-colors">
                   <td class="py-4 px-5 text-gray-700 font-medium">Temporary / ephemeral installs</td>
-                  <td class="py-4 px-4 text-center bg-black/[0.02]"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span></td>
+                  <td class="py-4 px-4 text-center bg-black/[0.02]">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 font-bold text-base">✓</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span>
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-100 text-red-500 font-bold text-base">✗</span>
+                  </td>
                 </tr>
                 <!-- Row 13 -->
                 <tr class="hover:bg-gray-50 transition-colors rounded-b-2xl">
                   <td class="py-4 px-5 text-gray-700 font-medium">Idle RAM usage</td>
-                  <td class="py-4 px-4 text-center bg-black/[0.02]"><span class="inline-flex items-center justify-center bg-emerald-100 text-emerald-700 font-bold text-xs px-1.5 py-0.5 rounded-full">~67 MB</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">~300 MB+</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">~500 MB+</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">~400 MB+</span></td>
-                  <td class="py-4 px-4 text-center"><span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full">~150 MB+</span></td>
+                  <td class="py-4 px-4 text-center bg-black/[0.02]">
+                    <span class="inline-flex items-center justify-center bg-emerald-100 text-emerald-700 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >~67 MB</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >~300 MB+</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >~500 MB+</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >~400 MB+</span
+                    >
+                  </td>
+                  <td class="py-4 px-4 text-center">
+                    <span class="inline-flex items-center justify-center bg-amber-100 text-amber-600 font-bold text-xs px-1.5 py-0.5 rounded-full"
+                      >~150 MB+</span
+                    >
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -819,10 +1022,7 @@
       </div>
 
       <!-- Contributors Section -->
-      <section
-        id="contributors"
-        class="py-16 sm:py-24 border-t border-gray-100"
-      >
+      <section id="contributors" class="py-16 sm:py-24 border-t border-gray-100">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col items-center">
           <!-- Header -->
           <div class="text-center mb-14">
@@ -843,7 +1043,11 @@
               rel="noopener noreferrer"
               class="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 border border-gray-200 rounded-full px-6 py-3 hover:border-black hover:shadow-md transition-all duration-200"
             >
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"
+                />
+              </svg>
               View all contributors on GitHub
             </a>
           </div>
@@ -851,19 +1055,19 @@
       </section>
 
       <!-- System Requirements Section -->
-      <section
-        id="requirements"
-        class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 py-16 sm:py-24 border-t border-gray-100 bg-white overflow-hidden"
-      >
+      <section id="requirements" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 py-16 sm:py-24 border-t border-gray-100 bg-white overflow-hidden">
         <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div class="grid grid-cols-1 xl:grid-cols-[1.05fr_0.95fr] gap-8 xl:gap-16 items-end mb-12 sm:mb-16">
             <div>
               <p class="text-[11px] uppercase tracking-[0.2em] text-gray-500 mb-3">System Requirements</p>
-              <h2 class="text-3xl sm:text-5xl lg:text-6xl font-bold font-sans tracking-tight text-gray-900 max-w-4xl">Yantr is lightweight enough to run almost anywhere Docker can run.</h2>
+              <h2 class="text-3xl sm:text-5xl lg:text-6xl font-bold font-sans tracking-tight text-gray-900 max-w-4xl">
+                Yantr is lightweight enough to run almost anywhere Docker can run.
+              </h2>
             </div>
             <div>
               <p class="text-base sm:text-lg text-gray-600 leading-relaxed font-sans max-w-2xl">
-                You do not need a dedicated server rack or expensive hardware. Yantr is designed to run on modest machines, while still scaling up cleanly when you want to host more apps or heavier workloads.
+                You do not need a dedicated server rack or expensive hardware. Yantr is designed to run on modest machines, while still scaling up cleanly when
+                you want to host more apps or heavier workloads.
               </p>
               <div class="mt-6 flex flex-wrap gap-6 text-sm text-gray-500">
                 <div>
@@ -889,7 +1093,7 @@
                   <div class="flex items-center gap-4">
                     <div class="flex h-14 w-14 items-center justify-center rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 shrink-0">
                       <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 12h14M12 5v14"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 12h14M12 5v14" />
                       </svg>
                     </div>
                     <div>
@@ -897,7 +1101,10 @@
                       <h3 class="text-2xl font-bold tracking-tight text-gray-900">Minimum</h3>
                     </div>
                   </div>
-                  <span class="inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-gray-600">Gets Yantr running</span>
+                  <span
+                    class="inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-gray-600"
+                    >Gets Yantr running</span
+                  >
                 </div>
 
                 <div class="space-y-4 text-sm text-gray-600">
@@ -925,7 +1132,7 @@
                   <div class="flex items-center gap-4">
                     <div class="flex h-14 w-14 items-center justify-center rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 shrink-0">
                       <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 15l4-4 4 4 8-8"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 15l4-4 4 4 8-8" />
                       </svg>
                     </div>
                     <div>
@@ -933,7 +1140,10 @@
                       <h3 class="text-2xl font-bold tracking-tight text-gray-900">Recommended</h3>
                     </div>
                   </div>
-                  <span class="inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-gray-600">Comfortable headroom</span>
+                  <span
+                    class="inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-gray-600"
+                    >Comfortable headroom</span
+                  >
                 </div>
 
                 <div class="space-y-4 text-sm text-gray-600">
@@ -970,7 +1180,8 @@
                 <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">Why this matters</p>
                 <p class="text-lg font-bold tracking-tight">The barrier to self-hosting should be curiosity, not hardware budget.</p>
                 <p class="mt-3 text-sm text-gray-300 leading-relaxed">
-                  Low requirements mean you can experiment early, scale later, and avoid the usual trap of overbuilding before you even know what apps you want to run.
+                  Low requirements mean you can experiment early, scale later, and avoid the usual trap of overbuilding before you even know what apps you want
+                  to run.
                 </p>
               </div>
             </div>
@@ -987,11 +1198,14 @@
           <div class="grid grid-cols-1 xl:grid-cols-[1.1fr_0.9fr] gap-8 xl:gap-16 mb-12 sm:mb-16 items-end">
             <div>
               <p class="text-[11px] uppercase tracking-[0.2em] text-gray-500 mb-3">Remote Access</p>
-              <h2 class="text-3xl sm:text-5xl lg:text-6xl font-bold font-sans tracking-tight text-gray-900 max-w-4xl">Make self-hosting reachable without making it fragile.</h2>
+              <h2 class="text-3xl sm:text-5xl lg:text-6xl font-bold font-sans tracking-tight text-gray-900 max-w-4xl">
+                Make self-hosting reachable without making it fragile.
+              </h2>
             </div>
             <div class="xl:pb-2">
               <p class="text-base sm:text-lg text-gray-600 leading-relaxed font-sans max-w-2xl">
-                The hard part is not running the app. The hard part is reaching it safely from outside your home network. Yantr bundles the three pieces most homelabs miss: private access, public ingress, and an auth layer in front of everything.
+                The hard part is not running the app. The hard part is reaching it safely from outside your home network. Yantr bundles the three pieces most
+                homelabs miss: private access, public ingress, and an auth layer in front of everything.
               </p>
               <div class="mt-6 flex flex-wrap gap-6 text-sm text-gray-500">
                 <div>
@@ -1011,208 +1225,243 @@
           </div>
 
           <div class="grid grid-cols-1 xl:grid-cols-[360px_minmax(0,1fr)] gap-8 xl:gap-12 items-start">
-              <div class="xl:pr-2">
-                <div class="flex items-center justify-between gap-4 mb-6">
-                  <div>
-                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">Pick the job</p>
-                    <p class="text-sm text-gray-500 mt-1">Each tool solves a different remote-access problem.</p>
-                  </div>
-                  <div class="hidden sm:flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1 text-xs text-gray-500">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                    Interactive guide
-                  </div>
+            <div class="xl:pr-2">
+              <div class="flex items-center justify-between gap-4 mb-6">
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400">Pick the job</p>
+                  <p class="text-sm text-gray-500 mt-1">Each tool solves a different remote-access problem.</p>
                 </div>
-
-                <div id="remote-access-tabs" class="grid grid-cols-1 gap-3">
-                  <button
-                    type="button"
-                    data-remote-scenario="tailscale"
-                    class="group text-left rounded-2xl border border-gray-200 bg-white px-5 py-4 transition-all duration-200 hover:border-gray-300 hover:shadow-sm"
-                  >
-                    <div class="flex items-start justify-between gap-4">
-                      <div>
-                        <p class="text-xs uppercase tracking-[0.18em] text-gray-400 mb-1">Private access</p>
-                        <p class="text-base font-bold text-gray-900">Tailscale</p>
-                        <p class="text-sm text-gray-500 mt-1">Reach your apps from your own devices without exposing them publicly.</p>
-                      </div>
-                      <span class="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gray-100 text-gray-700 group-hover:bg-gray-900 group-hover:text-white transition-colors">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
-                        </svg>
-                      </span>
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    data-remote-scenario="cloudflared"
-                    class="group text-left rounded-2xl border border-gray-200 bg-white px-5 py-4 transition-all duration-200 hover:border-gray-300 hover:shadow-sm"
-                  >
-                    <div class="flex items-start justify-between gap-4">
-                      <div>
-                        <p class="text-xs uppercase tracking-[0.18em] text-gray-400 mb-1">Public access</p>
-                        <p class="text-base font-bold text-gray-900">Cloudflare Tunnel</p>
-                        <p class="text-sm text-gray-500 mt-1">Publish a service securely without opening ports or renting a VPS.</p>
-                      </div>
-                      <span class="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gray-100 text-gray-700 group-hover:bg-gray-900 group-hover:text-white transition-colors">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
-                        </svg>
-                      </span>
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    data-remote-scenario="caddy"
-                    class="group text-left rounded-2xl border border-gray-200 bg-white px-5 py-4 transition-all duration-200 hover:border-gray-300 hover:shadow-sm"
-                  >
-                    <div class="flex items-start justify-between gap-4">
-                      <div>
-                        <p class="text-xs uppercase tracking-[0.18em] text-gray-400 mb-1">Protection layer</p>
-                        <p class="text-base font-bold text-gray-900">Caddy Auth Proxy</p>
-                        <p class="text-sm text-gray-500 mt-1">Put a login wall and HTTPS in front of apps that were never designed for the open internet.</p>
-                      </div>
-                      <span class="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gray-100 text-gray-700 group-hover:bg-gray-900 group-hover:text-white transition-colors">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                        </svg>
-                      </span>
-                    </div>
-                  </button>
-                </div>
-
-                <div class="mt-8 rounded-2xl border border-gray-200 bg-white p-5">
-                  <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">What this replaces</p>
-                  <div class="flex flex-wrap gap-2">
-                    <span class="rounded-full border border-gray-200 bg-white px-3 py-1 text-sm text-gray-600">Port forwarding</span>
-                    <span class="rounded-full border border-gray-200 bg-white px-3 py-1 text-sm text-gray-600">Dynamic DNS</span>
-                    <span class="rounded-full border border-gray-200 bg-white px-3 py-1 text-sm text-gray-600">Reverse proxy babysitting</span>
-                    <span class="rounded-full border border-gray-200 bg-white px-3 py-1 text-sm text-gray-600">Manual SSL renewals</span>
-                    <span class="rounded-full border border-gray-200 bg-white px-3 py-1 text-sm text-gray-600">One-off VPN servers</span>
-                  </div>
+                <div class="hidden sm:flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1 text-xs text-gray-500">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  Interactive guide
                 </div>
               </div>
 
-              <div class="rounded-3xl border border-gray-200 bg-white p-6 sm:p-8 lg:p-10 xl:p-12 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.16)]">
-                <div id="remote-access-panel" class="remote-panel-swap">
-                  <div class="flex items-start justify-between gap-4 flex-wrap mb-6">
+              <div id="remote-access-tabs" class="grid grid-cols-1 gap-3">
+                <button
+                  type="button"
+                  data-remote-scenario="tailscale"
+                  class="group text-left rounded-2xl border border-gray-200 bg-white px-5 py-4 transition-all duration-200 hover:border-gray-300 hover:shadow-sm"
+                >
+                  <div class="flex items-start justify-between gap-4">
                     <div>
-                      <p id="remote-panel-kicker" class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400 mb-2">Private access</p>
-                      <h3 id="remote-panel-title" class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-gray-900 max-w-3xl">Reach your homelab like it lives on your own LAN.</h3>
+                      <p class="text-xs uppercase tracking-[0.18em] text-gray-400 mb-1">Private access</p>
+                      <p class="text-base font-bold text-gray-900">Tailscale</p>
+                      <p class="text-sm text-gray-500 mt-1">Reach your apps from your own devices without exposing them publicly.</p>
                     </div>
-                    <span id="remote-panel-badge" class="inline-flex items-center rounded-full bg-gray-900 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-white">Tailscale</span>
+                    <span
+                      class="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gray-100 text-gray-700 group-hover:bg-gray-900 group-hover:text-white transition-colors"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"
+                        />
+                      </svg>
+                    </span>
                   </div>
+                </button>
 
-                  <p id="remote-panel-summary" class="text-base sm:text-lg text-gray-600 leading-relaxed max-w-3xl">
-                    Instead of exposing services publicly, create a private encrypted network between your laptop, phone, and server. The service stays private, but still feels local.
-                  </p>
-
-                  <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-8">
-                    <div class="rounded-2xl border border-gray-200 bg-white p-5">
-                      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">Without it</p>
-                      <ul id="remote-panel-before" class="space-y-3 text-sm text-gray-600"></ul>
+                <button
+                  type="button"
+                  data-remote-scenario="cloudflared"
+                  class="group text-left rounded-2xl border border-gray-200 bg-white px-5 py-4 transition-all duration-200 hover:border-gray-300 hover:shadow-sm"
+                >
+                  <div class="flex items-start justify-between gap-4">
+                    <div>
+                      <p class="text-xs uppercase tracking-[0.18em] text-gray-400 mb-1">Public access</p>
+                      <p class="text-base font-bold text-gray-900">Cloudflare Tunnel</p>
+                      <p class="text-sm text-gray-500 mt-1">Publish a service securely without opening ports or renting a VPS.</p>
                     </div>
-                    <div class="rounded-2xl border border-gray-900 bg-gray-900 p-5 text-white shadow-lg shadow-gray-900/10">
-                      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">With Yantr</p>
-                      <ul id="remote-panel-after" class="space-y-3 text-sm text-gray-100"></ul>
-                    </div>
+                    <span
+                      class="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gray-100 text-gray-700 group-hover:bg-gray-900 group-hover:text-white transition-colors"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+                        />
+                      </svg>
+                    </span>
                   </div>
+                </button>
 
-                  <div class="grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] gap-4 mt-4">
-                    <div class="rounded-2xl border border-gray-200 bg-white p-5">
-                      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">Why it matters</p>
-                      <ul id="remote-panel-importance" class="space-y-3 text-sm text-gray-600"></ul>
+                <button
+                  type="button"
+                  data-remote-scenario="caddy"
+                  class="group text-left rounded-2xl border border-gray-200 bg-white px-5 py-4 transition-all duration-200 hover:border-gray-300 hover:shadow-sm"
+                >
+                  <div class="flex items-start justify-between gap-4">
+                    <div>
+                      <p class="text-xs uppercase tracking-[0.18em] text-gray-400 mb-1">Protection layer</p>
+                      <p class="text-base font-bold text-gray-900">Caddy Auth Proxy</p>
+                      <p class="text-sm text-gray-500 mt-1">Put a login wall and HTTPS in front of apps that were never designed for the open internet.</p>
                     </div>
-                    <div class="rounded-2xl border border-gray-200 bg-white p-5">
-                      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">Best for</p>
-                      <ul id="remote-panel-bestfor" class="space-y-3 text-sm text-gray-600"></ul>
-                    </div>
+                    <span
+                      class="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-gray-100 text-gray-700 group-hover:bg-gray-900 group-hover:text-white transition-colors"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                        />
+                      </svg>
+                    </span>
                   </div>
+                </button>
+              </div>
+
+              <div class="mt-8 rounded-2xl border border-gray-200 bg-white p-5">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">What this replaces</p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="rounded-full border border-gray-200 bg-white px-3 py-1 text-sm text-gray-600">Port forwarding</span>
+                  <span class="rounded-full border border-gray-200 bg-white px-3 py-1 text-sm text-gray-600">Dynamic DNS</span>
+                  <span class="rounded-full border border-gray-200 bg-white px-3 py-1 text-sm text-gray-600">Reverse proxy babysitting</span>
+                  <span class="rounded-full border border-gray-200 bg-white px-3 py-1 text-sm text-gray-600">Manual SSL renewals</span>
+                  <span class="rounded-full border border-gray-200 bg-white px-3 py-1 text-sm text-gray-600">One-off VPN servers</span>
                 </div>
               </div>
             </div>
 
-            <div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1.2fr)_360px] gap-6 mt-12 pt-10 border-t border-gray-200/80">
-              <div class="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400 mb-4">How they fit together</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div class="flex gap-4">
-                    <div class="flex flex-col items-center">
-                      <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-white border border-gray-200 text-sm font-bold text-gray-900">1</span>
-                      <span class="mt-2 h-full w-px bg-gray-200 md:hidden"></span>
-                    </div>
-                    <div>
-                      <p class="text-sm font-semibold text-gray-900">Use Tailscale for private operator access</p>
-                      <p class="text-sm text-gray-600 mt-1">Admin dashboards, SSH, and internal tools stay off the public internet entirely.</p>
-                    </div>
+            <div class="rounded-3xl border border-gray-200 bg-white p-6 sm:p-8 lg:p-10 xl:p-12 shadow-[0_20px_60px_-45px_rgba(15,23,42,0.16)]">
+              <div id="remote-access-panel" class="remote-panel-swap">
+                <div class="flex items-start justify-between gap-4 flex-wrap mb-6">
+                  <div>
+                    <p id="remote-panel-kicker" class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400 mb-2">Private access</p>
+                    <h3 id="remote-panel-title" class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-gray-900 max-w-3xl">
+                      Reach your homelab like it lives on your own LAN.
+                    </h3>
                   </div>
-                  <div class="flex gap-4">
-                    <div class="flex flex-col items-center">
-                      <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-white border border-gray-200 text-sm font-bold text-gray-900">2</span>
-                      <span class="mt-2 h-full w-px bg-gray-200 md:hidden"></span>
-                    </div>
-                    <div>
-                      <p class="text-sm font-semibold text-gray-900">Use Cloudflare Tunnel when something must be public</p>
-                      <p class="text-sm text-gray-600 mt-1">Share a site, webhook endpoint, or client portal without touching router rules or ISP constraints.</p>
-                    </div>
+                  <span
+                    id="remote-panel-badge"
+                    class="inline-flex items-center rounded-full bg-gray-900 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-white"
+                    >Tailscale</span
+                  >
+                </div>
+
+                <p id="remote-panel-summary" class="text-base sm:text-lg text-gray-600 leading-relaxed max-w-3xl">
+                  Instead of exposing services publicly, create a private encrypted network between your laptop, phone, and server. The service stays private,
+                  but still feels local.
+                </p>
+
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-8">
+                  <div class="rounded-2xl border border-gray-200 bg-white p-5">
+                    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">Without it</p>
+                    <ul id="remote-panel-before" class="space-y-3 text-sm text-gray-600"></ul>
                   </div>
-                  <div class="flex gap-4">
-                    <div class="flex items-start gap-4">
-                      <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-white border border-gray-200 text-sm font-bold text-gray-900">3</span>
-                    </div>
-                    <div>
-                      <p class="text-sm font-semibold text-gray-900">Use Caddy Auth as the safety net</p>
-                      <p class="text-sm text-gray-600 mt-1">Anything not meant to be public gets a login wall, HTTPS, and a clean single entry point.</p>
-                    </div>
+                  <div class="rounded-2xl border border-gray-900 bg-gray-900 p-5 text-white shadow-lg shadow-gray-900/10">
+                    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">With Yantr</p>
+                    <ul id="remote-panel-after" class="space-y-3 text-sm text-gray-100"></ul>
                   </div>
                 </div>
-              </div>
 
-              <div class="rounded-2xl border border-gray-200 bg-white p-6">
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400 mb-4">Outcome</p>
-                <div class="space-y-4">
-                  <div class="rounded-2xl bg-gray-900 p-4 text-white">
-                    <p class="text-sm font-semibold">You stop treating remote access like ad-hoc infrastructure work.</p>
-                    <p class="text-sm text-gray-300 mt-2">It becomes part of the product: installed, understandable, and safe by default.</p>
+                <div class="grid grid-cols-1 md:grid-cols-[1.2fr_0.8fr] gap-4 mt-4">
+                  <div class="rounded-2xl border border-gray-200 bg-white p-5">
+                    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">Why it matters</p>
+                    <ul id="remote-panel-importance" class="space-y-3 text-sm text-gray-600"></ul>
                   </div>
-                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
-                      <p class="text-2xl font-bold text-gray-900">0</p>
-                      <p class="text-sm text-gray-500 mt-1">ports you need to expose for private access</p>
-                    </div>
-                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
-                      <p class="text-2xl font-bold text-gray-900">1</p>
-                      <p class="text-sm text-gray-500 mt-1">place to enforce auth and HTTPS</p>
-                    </div>
-                    <div class="rounded-2xl border border-gray-200 bg-white p-4">
-                      <p class="text-2xl font-bold text-gray-900">3</p>
-                      <p class="text-sm text-gray-500 mt-1">tools covering the full remote-access stack</p>
-                    </div>
+                  <div class="rounded-2xl border border-gray-200 bg-white p-5">
+                    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">Best for</p>
+                    <ul id="remote-panel-bestfor" class="space-y-3 text-sm text-gray-600"></ul>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1.2fr)_360px] gap-6 mt-12 pt-10 border-t border-gray-200/80">
+            <div class="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400 mb-4">How they fit together</p>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="flex gap-4">
+                  <div class="flex flex-col items-center">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-white border border-gray-200 text-sm font-bold text-gray-900"
+                      >1</span
+                    >
+                    <span class="mt-2 h-full w-px bg-gray-200 md:hidden"></span>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-gray-900">Use Tailscale for private operator access</p>
+                    <p class="text-sm text-gray-600 mt-1">Admin dashboards, SSH, and internal tools stay off the public internet entirely.</p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="flex flex-col items-center">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-white border border-gray-200 text-sm font-bold text-gray-900"
+                      >2</span
+                    >
+                    <span class="mt-2 h-full w-px bg-gray-200 md:hidden"></span>
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-gray-900">Use Cloudflare Tunnel when something must be public</p>
+                    <p class="text-sm text-gray-600 mt-1">Share a site, webhook endpoint, or client portal without touching router rules or ISP constraints.</p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="flex items-start gap-4">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-white border border-gray-200 text-sm font-bold text-gray-900"
+                      >3</span
+                    >
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-gray-900">Use Caddy Auth as the safety net</p>
+                    <p class="text-sm text-gray-600 mt-1">Anything not meant to be public gets a login wall, HTTPS, and a clean single entry point.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-2xl border border-gray-200 bg-white p-6">
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400 mb-4">Outcome</p>
+              <div class="space-y-4">
+                <div class="rounded-2xl bg-gray-900 p-4 text-white">
+                  <p class="text-sm font-semibold">You stop treating remote access like ad-hoc infrastructure work.</p>
+                  <p class="text-sm text-gray-300 mt-2">It becomes part of the product: installed, understandable, and safe by default.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                    <p class="text-2xl font-bold text-gray-900">0</p>
+                    <p class="text-sm text-gray-500 mt-1">ports you need to expose for private access</p>
+                  </div>
+                  <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                    <p class="text-2xl font-bold text-gray-900">1</p>
+                    <p class="text-sm text-gray-500 mt-1">place to enforce auth and HTTPS</p>
+                  </div>
+                  <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                    <p class="text-2xl font-bold text-gray-900">3</p>
+                    <p class="text-sm text-gray-500 mt-1">tools covering the full remote-access stack</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- Unlimited Linux Boxes Section -->
-      <section
-        id="linux-boxes"
-        class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 py-16 sm:py-24 border-t border-gray-100 bg-white overflow-hidden"
-      >
+      <section id="linux-boxes" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 py-16 sm:py-24 border-t border-gray-100 bg-white overflow-hidden">
         <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           <div class="grid grid-cols-1 xl:grid-cols-[1.05fr_0.95fr] gap-10 xl:gap-16 items-end mb-12 sm:mb-16">
             <div>
               <p class="text-[11px] uppercase tracking-[0.2em] text-gray-500 mb-3">Unlimited Linux Boxes</p>
-              <h2 class="text-3xl sm:text-5xl lg:text-6xl font-bold font-sans tracking-tight text-gray-900 max-w-4xl">Deploy Debian or Alpine in one click. SSH into it whenever you want.</h2>
+              <h2 class="text-3xl sm:text-5xl lg:text-6xl font-bold font-sans tracking-tight text-gray-900 max-w-4xl">
+                Deploy Debian or Alpine in one click. SSH into it whenever you want.
+              </h2>
             </div>
             <div>
               <p class="text-base sm:text-lg text-gray-600 leading-relaxed font-sans max-w-2xl">
-                Most people do not need a full provisioning workflow just to get a clean Linux machine. Yantr gives you instant Debian and Alpine environments with SSH built in, so a fresh box is always one click away.
+                Most people do not need a full provisioning workflow just to get a clean Linux machine. Yantr gives you instant Debian and Alpine environments
+                with SSH built in, so a fresh box is always one click away.
               </p>
               <p class="mt-4 text-sm text-gray-500 max-w-2xl">
-                On your laptop, on your homelab, or from anywhere through Yantr's remote-access stack, the shell is ready when you need it. If you install extra software later, open more ports afterwards with normal Docker syntax like 8080:8080 or 8080 for auto-assignment.
+                On your laptop, on your homelab, or from anywhere through Yantr's remote-access stack, the shell is ready when you need it. If you install extra
+                software later, open more ports afterwards with normal Docker syntax like 8080:8080 or 8080 for auto-assignment.
               </p>
             </div>
           </div>
@@ -1225,26 +1474,58 @@
                     <div class="flex items-center gap-4">
                       <div class="flex h-14 w-14 items-center justify-center rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 shrink-0">
                         <svg class="h-8 w-8" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                          <path d="M24 8C16.5 8 11 14.1 11 21.6c0 8.6 7.4 12.5 11.2 16.8.9 1.1 2.7 1.1 3.6 0C29.6 34.1 37 30.2 37 21.6 37 14.1 31.5 8 24 8Z" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M24 14.5c-4.7 0-8.5 3.8-8.5 8.5 0 5.1 4.3 7.8 7 10.7.8.8 2.2.8 3 0 2.7-2.9 7-5.6 7-10.7 0-4.7-3.8-8.5-8.5-8.5Z" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M20 22.5c1.3-2.2 4.2-3.4 7-2.8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+                          <path
+                            d="M24 8C16.5 8 11 14.1 11 21.6c0 8.6 7.4 12.5 11.2 16.8.9 1.1 2.7 1.1 3.6 0C29.6 34.1 37 30.2 37 21.6 37 14.1 31.5 8 24 8Z"
+                            stroke="currentColor"
+                            stroke-width="2.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path
+                            d="M24 14.5c-4.7 0-8.5 3.8-8.5 8.5 0 5.1 4.3 7.8 7 10.7.8.8 2.2.8 3 0 2.7-2.9 7-5.6 7-10.7 0-4.7-3.8-8.5-8.5-8.5Z"
+                            stroke="currentColor"
+                            stroke-width="2.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path d="M20 22.5c1.3-2.2 4.2-3.4 7-2.8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
                         </svg>
                       </div>
                       <div>
-                      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-2">One-click box</p>
-                      <h3 class="text-2xl font-bold tracking-tight text-gray-900">Debian Linux</h3>
+                        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-2">One-click box</p>
+                        <h3 class="text-2xl font-bold tracking-tight text-gray-900">Debian Linux</h3>
                       </div>
                     </div>
-                    <span class="inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-gray-600">SSH Ready</span>
+                    <span
+                      class="inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-gray-600"
+                      >SSH Ready</span
+                    >
                   </div>
                   <p class="text-sm text-gray-600 leading-relaxed mb-6">
-                    A clean Debian environment with SSH built in. Good for scripts, testing packages, running tools, or keeping a remote shell ready without setting up a separate machine first.
+                    A clean Debian environment with SSH built in. Good for scripts, testing packages, running tools, or keeping a remote shell ready without
+                    setting up a separate machine first.
                   </p>
                   <ul class="space-y-3 text-sm text-gray-600">
-                    <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0">✓</span><span>Deploy in one click from the Yantr catalog</span></li>
-                    <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0">✓</span><span>Connect with any SSH client using your mapped port</span></li>
-                    <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0">✓</span><span>Use it as a sandbox, toolbox, or permanent remote shell</span></li>
-                    <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0">✓</span><span>Open extra ports later with Docker-style mappings after you install more software</span></li>
+                    <li class="flex items-start gap-3">
+                      <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0"
+                        >✓</span
+                      ><span>Deploy in one click from the Yantr catalog</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0"
+                        >✓</span
+                      ><span>Connect with any SSH client using your mapped port</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0"
+                        >✓</span
+                      ><span>Use it as a sandbox, toolbox, or permanent remote shell</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0"
+                        >✓</span
+                      ><span>Open extra ports later with Docker-style mappings after you install more software</span>
+                    </li>
                   </ul>
                 </div>
 
@@ -1253,27 +1534,53 @@
                     <div class="flex items-center gap-4">
                       <div class="flex h-14 w-14 items-center justify-center rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 shrink-0">
                         <svg class="h-8 w-8" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                          <path d="M8 33 18.5 14.5 24 24l5.5-7.5L40 33" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M13.5 33h21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-                          <path d="M18 29.5h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-                          <path d="M23 18.5h2" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+                          <path
+                            d="M8 33 18.5 14.5 24 24l5.5-7.5L40 33"
+                            stroke="currentColor"
+                            stroke-width="2.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                          <path d="M13.5 33h21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+                          <path d="M18 29.5h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+                          <path d="M23 18.5h2" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
                         </svg>
                       </div>
                       <div>
-                      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-2">Minimal footprint</p>
-                      <h3 class="text-2xl font-bold tracking-tight text-gray-900">Alpine Linux</h3>
+                        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-2">Minimal footprint</p>
+                        <h3 class="text-2xl font-bold tracking-tight text-gray-900">Alpine Linux</h3>
                       </div>
                     </div>
-                    <span class="inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-gray-600">SSH Ready</span>
+                    <span
+                      class="inline-flex items-center rounded-full border border-gray-200 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-gray-600"
+                      >SSH Ready</span
+                    >
                   </div>
                   <p class="text-sm text-gray-600 leading-relaxed mb-6">
-                    A tiny Linux environment you can spin up fast and throw away just as fast. Perfect for quick tasks, debugging, experiments, and lightweight automation.
+                    A tiny Linux environment you can spin up fast and throw away just as fast. Perfect for quick tasks, debugging, experiments, and lightweight
+                    automation.
                   </p>
                   <ul class="space-y-3 text-sm text-gray-600">
-                    <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0">✓</span><span>Minimal overhead for disposable Linux workspaces</span></li>
-                    <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0">✓</span><span>Fast enough to create whenever you need a clean shell</span></li>
-                    <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0">✓</span><span>Ideal for scripts, troubleshooting, and isolated tasks</span></li>
-                    <li class="flex items-start gap-3"><span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0">✓</span><span>Publish another app later with 3000:3000 or let Docker choose a host port with 3000</span></li>
+                    <li class="flex items-start gap-3">
+                      <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0"
+                        >✓</span
+                      ><span>Minimal overhead for disposable Linux workspaces</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0"
+                        >✓</span
+                      ><span>Fast enough to create whenever you need a clean shell</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0"
+                        >✓</span
+                      ><span>Ideal for scripts, troubleshooting, and isolated tasks</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                      <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-gray-700 text-[11px] font-bold shrink-0"
+                        >✓</span
+                      ><span>Publish another app later with 3000:3000 or let Docker choose a host port with 3000</span>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -1282,27 +1589,39 @@
                 <div class="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-8 lg:gap-10 items-start">
                   <div>
                     <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-3">Why this is a big deal</p>
-                    <h3 class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">You stop treating a fresh Linux machine like an infrastructure project.</h3>
+                    <h3 class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
+                      You stop treating a fresh Linux machine like an infrastructure project.
+                    </h3>
                     <p class="mt-4 text-sm sm:text-base text-gray-600 leading-relaxed">
-                      Normally, getting a new Linux environment means renting something, imaging something, or hand-rolling a container and wiring access yourself. Yantr collapses all of that into a button: deploy, get a port, SSH in, and start working.
+                      Normally, getting a new Linux environment means renting something, imaging something, or hand-rolling a container and wiring access
+                      yourself. Yantr collapses all of that into a button: deploy, get a port, SSH in, and start working.
                     </p>
                   </div>
                   <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div class="rounded-2xl border border-gray-200 p-5">
                       <p class="text-sm font-semibold text-gray-900">Disposable by default</p>
-                      <p class="mt-2 text-sm text-gray-600">Need a clean place to test a script, package, or config? Create one instantly instead of polluting your main machine.</p>
+                      <p class="mt-2 text-sm text-gray-600">
+                        Need a clean place to test a script, package, or config? Create one instantly instead of polluting your main machine.
+                      </p>
                     </div>
                     <div class="rounded-2xl border border-gray-200 p-5">
                       <p class="text-sm font-semibold text-gray-900">Reachable from anywhere</p>
-                      <p class="mt-2 text-sm text-gray-600">Pair it with Tailscale or Cloudflare Tunnel and your shell is no longer tied to your local network.</p>
+                      <p class="mt-2 text-sm text-gray-600">
+                        Pair it with Tailscale or Cloudflare Tunnel and your shell is no longer tied to your local network.
+                      </p>
                     </div>
                     <div class="rounded-2xl border border-gray-200 p-5">
                       <p class="text-sm font-semibold text-gray-900">Zero setup tax</p>
-                      <p class="mt-2 text-sm text-gray-600">No ISO, no VM wizard, no manual SSH configuration. Yantr handles the boring parts so the box is ready when you are.</p>
+                      <p class="mt-2 text-sm text-gray-600">
+                        No ISO, no VM wizard, no manual SSH configuration. Yantr handles the boring parts so the box is ready when you are.
+                      </p>
                     </div>
                     <div class="rounded-2xl border border-gray-200 p-5 sm:col-span-3">
                       <p class="text-sm font-semibold text-gray-900">Not locked to the first port</p>
-                      <p class="mt-2 text-sm text-gray-600">Debian and Alpine start with SSH exposed, but you can publish more services later from the stack page using the same syntax Docker uses: 8080:8080 for a fixed host port or 8080 to let Docker assign one.</p>
+                      <p class="mt-2 text-sm text-gray-600">
+                        Debian and Alpine start with SSH exposed, but you can publish more services later from the stack page using the same syntax Docker uses:
+                        8080:8080 for a fixed host port or 8080 to let Docker assign one.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -1327,7 +1646,8 @@
                 <p class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-400 mb-4">Powered by Yantr</p>
                 <p class="text-lg font-bold tracking-tight">A fresh Linux box becomes another app you can deploy on demand.</p>
                 <p class="mt-3 text-sm text-gray-300 leading-relaxed">
-                  That is the real shift: Linux environments stop being rare, precious machines and become cheap, repeatable tools you can spin up whenever a job needs one.
+                  That is the real shift: Linux environments stop being rare, precious machines and become cheap, repeatable tools you can spin up whenever a
+                  job needs one.
                 </p>
               </div>
             </div>
@@ -1526,8 +1846,6 @@
         }
       }
 
-
-
       function loadRandomScreenshot() {
         const gifs = [
           {
@@ -1643,356 +1961,327 @@
         initRemoteAccessSection();
       });
 
-    function initRemoteAccessSection() {
-      const root = document.getElementById("remote-access");
-      if (!root) return;
+      function initRemoteAccessSection() {
+        const root = document.getElementById("remote-access");
+        if (!root) return;
 
-      const scenarios = {
-        tailscale: {
-          kicker: "Private access",
-          title: "Reach your homelab like it lives on your own LAN.",
-          badge: "Tailscale",
-          summary: "Instead of exposing services publicly, create a private encrypted network between your laptop, phone, and server. The service stays private, but still feels local.",
-          before: [
-            "Run your own VPN server or expose SSH to the internet.",
-            "Fight NAT, CGNAT, or hotel and mobile network restrictions.",
-            "Remember IPs, forward ports, and trust brittle home-router rules.",
-          ],
-          after: [
-            "Each trusted device gets secure access with no router changes.",
-            "MagicDNS makes services feel local instead of memorizing IP addresses.",
-            "Admin panels and internal tools stay private by default.",
-          ],
-          importance: [
-            "Most self-hosted apps are safer when they are not publicly reachable at all.",
-            "Private access removes the pressure to harden every dashboard like a public SaaS product.",
-            "It gives you remote control without turning your home network into perimeter infrastructure.",
-          ],
-          bestFor: [
-            "Admin dashboards",
-            "SSH and file access",
-            "Private AI or media apps",
-          ],
-        },
-        cloudflared: {
-          kicker: "Public access",
-          title: "Publish one service without turning your router into a project.",
-          badge: "Cloudflare Tunnel",
-          summary: "When something must be reachable on the public internet, tunnel outbound to Cloudflare instead of opening inbound ports. You get a cleaner, safer public entry point.",
-          before: [
-            "Open ports on your router and hope your ISP allows inbound traffic.",
-            "Maintain dynamic DNS, reverse proxy config, and certificate renewal jobs.",
-            "Rent a small VPS just to forward traffic back home.",
-          ],
-          after: [
-            "The tunnel connects out from your server, so no public port exposure is required.",
-            "Automatic TLS and Cloudflare edge protection reduce setup and risk.",
-            "CGNAT and changing home IPs stop being blockers for publishing apps.",
-          ],
-          importance: [
-            "This is the difference between 'I can access it at home' and 'I can share it reliably with someone else.'",
-            "It removes the most failure-prone part of self-hosting: inbound networking on residential internet.",
-            "You can publish selectively instead of making your entire homelab publicly reachable.",
-          ],
-          bestFor: [
-            "A public site or dashboard",
-            "Webhook endpoints",
-            "Client-facing or shared services",
-          ],
-        },
-        caddy: {
-          kicker: "Protection layer",
-          title: "Add HTTPS and a login wall to apps that were never built for exposure.",
-          badge: "Caddy Auth",
-          summary: "A lot of self-hosted software assumes a trusted local network. Caddy gives those apps a modern front door: TLS, auth, and a single clean entry point.",
-          before: [
-            "Expose apps directly even when they lack proper auth or session controls.",
-            "Manage nginx config, htpasswd files, OAuth glue, and certificate automation yourself.",
-            "Repeat the same security work app by app.",
-          ],
-          after: [
-            "Put one consistent auth and HTTPS layer in front of multiple services.",
-            "Automatic certificate management removes routine operational drift.",
-            "Apps with weak or missing auth stop being immediate public-risk candidates.",
-          ],
-          importance: [
-            "Self-hosted apps often solve product problems well but security ergonomics poorly.",
-            "A shared auth layer lets you standardize access instead of trusting every app equally.",
-            "This is what turns 'reachable' into 'safe enough to keep online.'",
-          ],
-          bestFor: [
-            "Apps with weak auth",
-            "Single-domain routing",
-            "Consistent HTTPS everywhere",
-          ],
-        },
-      };
+        const scenarios = {
+          tailscale: {
+            kicker: "Private access",
+            title: "Reach your homelab like it lives on your own LAN.",
+            badge: "Tailscale",
+            summary:
+              "Instead of exposing services publicly, create a private encrypted network between your laptop, phone, and server. The service stays private, but still feels local.",
+            before: [
+              "Run your own VPN server or expose SSH to the internet.",
+              "Fight NAT, CGNAT, or hotel and mobile network restrictions.",
+              "Remember IPs, forward ports, and trust brittle home-router rules.",
+            ],
+            after: [
+              "Each trusted device gets secure access with no router changes.",
+              "MagicDNS makes services feel local instead of memorizing IP addresses.",
+              "Admin panels and internal tools stay private by default.",
+            ],
+            importance: [
+              "Most self-hosted apps are safer when they are not publicly reachable at all.",
+              "Private access removes the pressure to harden every dashboard like a public SaaS product.",
+              "It gives you remote control without turning your home network into perimeter infrastructure.",
+            ],
+            bestFor: ["Admin dashboards", "SSH and file access", "Private AI or media apps"],
+          },
+          cloudflared: {
+            kicker: "Public access",
+            title: "Publish one service without turning your router into a project.",
+            badge: "Cloudflare Tunnel",
+            summary:
+              "When something must be reachable on the public internet, tunnel outbound to Cloudflare instead of opening inbound ports. You get a cleaner, safer public entry point.",
+            before: [
+              "Open ports on your router and hope your ISP allows inbound traffic.",
+              "Maintain dynamic DNS, reverse proxy config, and certificate renewal jobs.",
+              "Rent a small VPS just to forward traffic back home.",
+            ],
+            after: [
+              "The tunnel connects out from your server, so no public port exposure is required.",
+              "Automatic TLS and Cloudflare edge protection reduce setup and risk.",
+              "CGNAT and changing home IPs stop being blockers for publishing apps.",
+            ],
+            importance: [
+              "This is the difference between 'I can access it at home' and 'I can share it reliably with someone else.'",
+              "It removes the most failure-prone part of self-hosting: inbound networking on residential internet.",
+              "You can publish selectively instead of making your entire homelab publicly reachable.",
+            ],
+            bestFor: ["A public site or dashboard", "Webhook endpoints", "Client-facing or shared services"],
+          },
+          caddy: {
+            kicker: "Protection layer",
+            title: "Add HTTPS and a login wall to apps that were never built for exposure.",
+            badge: "Caddy Auth",
+            summary:
+              "A lot of self-hosted software assumes a trusted local network. Caddy gives those apps a modern front door: TLS, auth, and a single clean entry point.",
+            before: [
+              "Expose apps directly even when they lack proper auth or session controls.",
+              "Manage nginx config, htpasswd files, OAuth glue, and certificate automation yourself.",
+              "Repeat the same security work app by app.",
+            ],
+            after: [
+              "Put one consistent auth and HTTPS layer in front of multiple services.",
+              "Automatic certificate management removes routine operational drift.",
+              "Apps with weak or missing auth stop being immediate public-risk candidates.",
+            ],
+            importance: [
+              "Self-hosted apps often solve product problems well but security ergonomics poorly.",
+              "A shared auth layer lets you standardize access instead of trusting every app equally.",
+              "This is what turns 'reachable' into 'safe enough to keep online.'",
+            ],
+            bestFor: ["Apps with weak auth", "Single-domain routing", "Consistent HTTPS everywhere"],
+          },
+        };
 
-      const buttons = Array.from(root.querySelectorAll("[data-remote-scenario]"));
-      const panel = document.getElementById("remote-access-panel");
-      const kicker = document.getElementById("remote-panel-kicker");
-      const title = document.getElementById("remote-panel-title");
-      const badge = document.getElementById("remote-panel-badge");
-      const summary = document.getElementById("remote-panel-summary");
-      const before = document.getElementById("remote-panel-before");
-      const after = document.getElementById("remote-panel-after");
-      const importance = document.getElementById("remote-panel-importance");
-      const bestFor = document.getElementById("remote-panel-bestfor");
+        const buttons = Array.from(root.querySelectorAll("[data-remote-scenario]"));
+        const panel = document.getElementById("remote-access-panel");
+        const kicker = document.getElementById("remote-panel-kicker");
+        const title = document.getElementById("remote-panel-title");
+        const badge = document.getElementById("remote-panel-badge");
+        const summary = document.getElementById("remote-panel-summary");
+        const before = document.getElementById("remote-panel-before");
+        const after = document.getElementById("remote-panel-after");
+        const importance = document.getElementById("remote-panel-importance");
+        const bestFor = document.getElementById("remote-panel-bestfor");
 
-      function renderList(items, dark = false, compact = false) {
-        return items.map(item => `
+        function renderList(items, dark = false, compact = false) {
+          return items
+            .map(
+              (item) => `
           <li class="flex items-start gap-3">
             <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full ${dark ? "bg-white/10 text-white" : "bg-gray-100 text-gray-700"} text-[11px] font-bold shrink-0">${compact ? "•" : "✓"}</span>
             <span>${item}</span>
           </li>
-        `).join("");
-      }
+        `,
+            )
+            .join("");
+        }
 
-      function setActive(id) {
-        const scenario = scenarios[id];
-        if (!scenario) return;
+        function setActive(id) {
+          const scenario = scenarios[id];
+          if (!scenario) return;
 
-        buttons.forEach(button => {
-          const isActive = button.dataset.remoteScenario === id;
-          button.setAttribute("aria-pressed", String(isActive));
-          button.classList.toggle("border-gray-900", isActive);
-          button.classList.toggle("bg-gray-50", isActive);
-          button.classList.toggle("shadow-lg", isActive);
-          button.classList.toggle("shadow-gray-900/10", isActive);
-          button.classList.toggle("-translate-y-0.5", isActive);
-          button.classList.toggle("border-gray-200", !isActive);
-          button.classList.toggle("bg-white", !isActive);
+          buttons.forEach((button) => {
+            const isActive = button.dataset.remoteScenario === id;
+            button.setAttribute("aria-pressed", String(isActive));
+            button.classList.toggle("border-gray-900", isActive);
+            button.classList.toggle("bg-gray-50", isActive);
+            button.classList.toggle("shadow-lg", isActive);
+            button.classList.toggle("shadow-gray-900/10", isActive);
+            button.classList.toggle("-translate-y-0.5", isActive);
+            button.classList.toggle("border-gray-200", !isActive);
+            button.classList.toggle("bg-white", !isActive);
 
-          const icon = button.querySelector("span.inline-flex");
-          const eyebrow = button.querySelector("p.text-xs");
-          const heading = button.querySelector("p.text-base");
-          const desc = button.querySelector("p.text-sm");
-          if (icon) {
-            icon.classList.toggle("bg-gray-900", isActive);
-            icon.classList.toggle("text-white", isActive);
-            icon.classList.toggle("bg-gray-100", !isActive);
-            icon.classList.toggle("text-gray-700", !isActive);
-          }
-          if (eyebrow) eyebrow.classList.toggle("text-gray-400", !isActive);
-          if (eyebrow) eyebrow.classList.toggle("text-gray-500", isActive);
-          if (heading) heading.classList.toggle("text-gray-900", true);
-          if (heading) heading.classList.remove("text-white");
-          if (desc) desc.classList.toggle("text-gray-500", !isActive);
-          if (desc) desc.classList.toggle("text-gray-600", isActive);
-          if (desc) desc.classList.remove("text-gray-300");
+            const icon = button.querySelector("span.inline-flex");
+            const eyebrow = button.querySelector("p.text-xs");
+            const heading = button.querySelector("p.text-base");
+            const desc = button.querySelector("p.text-sm");
+            if (icon) {
+              icon.classList.toggle("bg-gray-900", isActive);
+              icon.classList.toggle("text-white", isActive);
+              icon.classList.toggle("bg-gray-100", !isActive);
+              icon.classList.toggle("text-gray-700", !isActive);
+            }
+            if (eyebrow) eyebrow.classList.toggle("text-gray-400", !isActive);
+            if (eyebrow) eyebrow.classList.toggle("text-gray-500", isActive);
+            if (heading) heading.classList.toggle("text-gray-900", true);
+            if (heading) heading.classList.remove("text-white");
+            if (desc) desc.classList.toggle("text-gray-500", !isActive);
+            if (desc) desc.classList.toggle("text-gray-600", isActive);
+            if (desc) desc.classList.remove("text-gray-300");
+          });
+
+          panel.classList.remove("remote-panel-swap");
+          void panel.offsetWidth;
+          panel.classList.add("remote-panel-swap");
+
+          kicker.textContent = scenario.kicker;
+          title.textContent = scenario.title;
+          badge.textContent = scenario.badge;
+          summary.textContent = scenario.summary;
+          before.innerHTML = renderList(scenario.before);
+          after.innerHTML = renderList(scenario.after, true);
+          importance.innerHTML = renderList(scenario.importance);
+          bestFor.innerHTML = renderList(scenario.bestFor, false, true);
+        }
+
+        buttons.forEach((button) => {
+          button.addEventListener("click", () => setActive(button.dataset.remoteScenario));
         });
 
-        panel.classList.remove("remote-panel-swap");
-        void panel.offsetWidth;
-        panel.classList.add("remote-panel-swap");
-
-        kicker.textContent = scenario.kicker;
-        title.textContent = scenario.title;
-        badge.textContent = scenario.badge;
-        summary.textContent = scenario.summary;
-        before.innerHTML = renderList(scenario.before);
-        after.innerHTML = renderList(scenario.after, true);
-        importance.innerHTML = renderList(scenario.importance);
-        bestFor.innerHTML = renderList(scenario.bestFor, false, true);
+        setActive("tailscale");
       }
 
-      buttons.forEach(button => {
-        button.addEventListener("click", () => setActive(button.dataset.remoteScenario));
-      });
+      // ── Interactive Architecture Diagram ──────────────────────────
+      function initArchDiagram() {
+        const wrap = document.getElementById("arch-wrap");
+        const svg = document.getElementById("arch-svg");
+        if (!wrap || !svg) return;
 
-      setActive("tailscale");
-    }
+        const NODES = [
+          {
+            id: "daemon",
+            icon: "🕷️",
+            label: "YANTR Daemon",
+            tag: "Core · Node.js",
+            color: "#000000",
+            textColor: "#ffffff",
+            px: 50,
+            py: 48,
+            desc: "The heart of Yantr — a lightweight Node.js process (~67 MB RAM) that runs 24/7. It orchestrates every container operation, serves the Web UI, and exposes the REST API.",
+            bullets: ["~67 MB RAM at idle", "Runs as a single Docker container", "Communicates with Docker via unix socket", "Handles all lifecycle events"],
+          },
+          {
+            id: "docker",
+            icon: "🐳",
+            label: "Docker Engine",
+            tag: "Runtime · docker.sock",
+            color: "#3b82f6",
+            textColor: "#ffffff",
+            px: 50,
+            py: 8,
+            desc: "Direct socket-level communication with Docker. Yantr never shells out — all container operations use the Docker API for deterministic, auditable control.",
+            bullets: ["Reads /var/run/docker.sock", "Create, start, stop, remove containers", "Real-time log streaming", "Container health monitoring"],
+          },
+          {
+            id: "catalog",
+            icon: "📦",
+            label: "App Catalog",
+            tag: "Templates · 100+ apps",
+            color: "#6366f1",
+            textColor: "#ffffff",
+            px: 82,
+            py: 18,
+            desc: "100+ curated Docker Compose templates covering media, AI, finance, networking, databases, and dev tools. Always updated to the latest upstream versions.",
+            bullets: [
+              "100+ maintained compose.yml files",
+              "Always ships latest app versions",
+              "Versioned in Git — full audit history",
+              "Categories: AI, media, finance, infra…",
+            ],
+          },
+          {
+            id: "api",
+            icon: "⚡",
+            label: "REST API",
+            tag: "Interface · Express.js",
+            color: "#10b981",
+            textColor: "#ffffff",
+            px: 84,
+            py: 56,
+            desc: "An Express.js HTTP server on port 3000 that exposes every Yantr operation as a clean JSON endpoint — installs, removals, logs, backups, and status checks.",
+            bullets: ["JSON endpoints at :3000", "Install / remove / status / logs", "Auth token supported", "Used by both Web UI and CLI"],
+          },
+          {
+            id: "webui",
+            icon: "🖥️",
+            label: "Web UI",
+            tag: "Frontend · Vue 3",
+            color: "#8b5cf6",
+            textColor: "#ffffff",
+            px: 70,
+            py: 87,
+            desc: "A Vue 3 + Vite single-page app served directly by the daemon. Zero separate web server needed. Connects to the REST API for all operations.",
+            bullets: ["Vue 3 + Vite build", "Served by the daemon itself", "Dark mode support", "Real-time container status"],
+          },
+          {
+            id: "cli",
+            icon: "⌨️",
+            label: "CLI / Scripts",
+            tag: "Interface · HTTP client",
+            color: "#374151",
+            textColor: "#ffffff",
+            px: 30,
+            py: 87,
+            desc: "Any HTTP client or shell script can talk to the REST API. Use curl, wget, or the built-in CLI for headless servers, cron jobs, and automation pipelines.",
+            bullets: ["curl-friendly REST endpoints", "Ideal for cron / systemd", "Scriptable installs & backups", "Works over SSH tunnels"],
+          },
+          {
+            id: "network",
+            icon: "🌐",
+            label: "Network Manager",
+            tag: "Networking · Port alloc",
+            color: "#a855f7",
+            textColor: "#ffffff",
+            px: 16,
+            py: 56,
+            desc: "Tracks all allocated ports to prevent collisions. Assigns unique host ports per app, and manages internal Docker network routing between services.",
+            bullets: ["Auto port conflict detection", "Unique port per deployed app", "Internal bridge network isolation", "Service-to-service DNS routing"],
+          },
+          {
+            id: "volumes",
+            icon: "💾",
+            label: "Volume Manager",
+            tag: "Storage · Atomic ops",
+            color: "#f59e0b",
+            textColor: "#ffffff",
+            px: 18,
+            py: 18,
+            desc: "Manages all persistent data directories for installed apps. Performs atomic filesystem operations — ensuring that installs and removals never leave orphaned data.",
+            bullets: ["Per-app data isolation", "Atomic install / remove ops", "Clean removal — zero orphans", "Mount point registry"],
+          },
+          {
+            id: "backup",
+            icon: "🔒",
+            label: "Backup Engine",
+            tag: "Storage · Restic",
+            color: "#f97316",
+            textColor: "#ffffff",
+            px: 50,
+            py: 87,
+            desc: "Restic-powered scheduled backups for any app's data volume. Supports local paths, S3-compatible, and Backblaze B2 as destinations. Point-in-time restore included.",
+            bullets: [
+              "Restic deduplication & encryption",
+              "Scheduled via cron expressions",
+              "Destinations: local, S3, B2",
+              "One-command restore to any snapshot",
+            ],
+          },
+        ];
 
-    // ── Interactive Architecture Diagram ──────────────────────────
-    function initArchDiagram() {
-      const wrap = document.getElementById("arch-wrap");
-      const svg  = document.getElementById("arch-svg");
-      if (!wrap || !svg) return;
+        const EDGES = [
+          { from: "daemon", to: "docker", label: "docker.sock" },
+          { from: "daemon", to: "catalog", label: "template resolution" },
+          { from: "daemon", to: "api", label: "serves API" },
+          { from: "daemon", to: "network", label: "port allocation" },
+          { from: "daemon", to: "volumes", label: "data ops" },
+          { from: "api", to: "webui", label: "JSON polling" },
+          { from: "api", to: "cli", label: "REST calls" },
+          { from: "volumes", to: "backup", label: "backup trigger" },
+        ];
 
-      const NODES = [
-        {
-          id: "daemon",
-          icon: "🕷️",
-          label: "YANTR Daemon",
-          tag: "Core · Node.js",
-          color: "#000000",
-          textColor: "#ffffff",
-          px: 50, py: 48,
-          desc: "The heart of Yantr — a lightweight Node.js process (~67 MB RAM) that runs 24/7. It orchestrates every container operation, serves the Web UI, and exposes the REST API.",
-          bullets: [
-            "~67 MB RAM at idle",
-            "Runs as a single Docker container",
-            "Communicates with Docker via unix socket",
-            "Handles all lifecycle events",
-          ],
-        },
-        {
-          id: "docker",
-          icon: "🐳",
-          label: "Docker Engine",
-          tag: "Runtime · docker.sock",
-          color: "#3b82f6",
-          textColor: "#ffffff",
-          px: 50, py: 8,
-          desc: "Direct socket-level communication with Docker. Yantr never shells out — all container operations use the Docker API for deterministic, auditable control.",
-          bullets: [
-            "Reads /var/run/docker.sock",
-            "Create, start, stop, remove containers",
-            "Real-time log streaming",
-            "Container health monitoring",
-          ],
-        },
-        {
-          id: "catalog",
-          icon: "📦",
-          label: "App Catalog",
-          tag: "Templates · 100+ apps",
-          color: "#6366f1",
-          textColor: "#ffffff",
-          px: 82, py: 18,
-          desc: "100+ curated Docker Compose templates covering media, AI, finance, networking, databases, and dev tools. Always updated to the latest upstream versions.",
-          bullets: [
-            "100+ maintained compose.yml files",
-            "Always ships latest app versions",
-            "Versioned in Git — full audit history",
-            "Categories: AI, media, finance, infra…",
-          ],
-        },
-        {
-          id: "api",
-          icon: "⚡",
-          label: "REST API",
-          tag: "Interface · Express.js",
-          color: "#10b981",
-          textColor: "#ffffff",
-          px: 84, py: 56,
-          desc: "An Express.js HTTP server on port 3000 that exposes every Yantr operation as a clean JSON endpoint — installs, removals, logs, backups, and status checks.",
-          bullets: [
-            "JSON endpoints at :3000",
-            "Install / remove / status / logs",
-            "Auth token supported",
-            "Used by both Web UI and CLI",
-          ],
-        },
-        {
-          id: "webui",
-          icon: "🖥️",
-          label: "Web UI",
-          tag: "Frontend · Vue 3",
-          color: "#8b5cf6",
-          textColor: "#ffffff",
-          px: 70, py: 87,
-          desc: "A Vue 3 + Vite single-page app served directly by the daemon. Zero separate web server needed. Connects to the REST API for all operations.",
-          bullets: [
-            "Vue 3 + Vite build",
-            "Served by the daemon itself",
-            "Dark mode support",
-            "Real-time container status",
-          ],
-        },
-        {
-          id: "cli",
-          icon: "⌨️",
-          label: "CLI / Scripts",
-          tag: "Interface · HTTP client",
-          color: "#374151",
-          textColor: "#ffffff",
-          px: 30, py: 87,
-          desc: "Any HTTP client or shell script can talk to the REST API. Use curl, wget, or the built-in CLI for headless servers, cron jobs, and automation pipelines.",
-          bullets: [
-            "curl-friendly REST endpoints",
-            "Ideal for cron / systemd",
-            "Scriptable installs & backups",
-            "Works over SSH tunnels",
-          ],
-        },
-        {
-          id: "network",
-          icon: "🌐",
-          label: "Network Manager",
-          tag: "Networking · Port alloc",
-          color: "#a855f7",
-          textColor: "#ffffff",
-          px: 16, py: 56,
-          desc: "Tracks all allocated ports to prevent collisions. Assigns unique host ports per app, and manages internal Docker network routing between services.",
-          bullets: [
-            "Auto port conflict detection",
-            "Unique port per deployed app",
-            "Internal bridge network isolation",
-            "Service-to-service DNS routing",
-          ],
-        },
-        {
-          id: "volumes",
-          icon: "💾",
-          label: "Volume Manager",
-          tag: "Storage · Atomic ops",
-          color: "#f59e0b",
-          textColor: "#ffffff",
-          px: 18, py: 18,
-          desc: "Manages all persistent data directories for installed apps. Performs atomic filesystem operations — ensuring that installs and removals never leave orphaned data.",
-          bullets: [
-            "Per-app data isolation",
-            "Atomic install / remove ops",
-            "Clean removal — zero orphans",
-            "Mount point registry",
-          ],
-        },
-        {
-          id: "backup",
-          icon: "🔒",
-          label: "Backup Engine",
-          tag: "Storage · Restic",
-          color: "#f97316",
-          textColor: "#ffffff",
-          px: 50, py: 87,
-          desc: "Restic-powered scheduled backups for any app's data volume. Supports local paths, S3-compatible, and Backblaze B2 as destinations. Point-in-time restore included.",
-          bullets: [
-            "Restic deduplication & encryption",
-            "Scheduled via cron expressions",
-            "Destinations: local, S3, B2",
-            "One-command restore to any snapshot",
-          ],
-        },
-      ];
+        // Node size
+        const NW = 96,
+          NH = 78; // px — keep in sync with node template
+        let positions = {}; // id → {x, y} in px (center of node)
 
-      const EDGES = [
-        { from: "daemon", to: "docker",  label: "docker.sock" },
-        { from: "daemon", to: "catalog", label: "template resolution" },
-        { from: "daemon", to: "api",     label: "serves API" },
-        { from: "daemon", to: "network", label: "port allocation" },
-        { from: "daemon", to: "volumes", label: "data ops" },
-        { from: "api",    to: "webui",   label: "JSON polling" },
-        { from: "api",    to: "cli",     label: "REST calls" },
-        { from: "volumes",to: "backup",  label: "backup trigger" },
-      ];
+        // ─── Build initial pixel positions ───────────────────────────
+        function initPositions() {
+          const W = wrap.clientWidth,
+            H = wrap.clientHeight;
+          NODES.forEach((n) => {
+            positions[n.id] = { x: (n.px / 100) * W, y: (n.py / 100) * H };
+          });
+        }
 
-      // Node size
-      const NW = 96, NH = 78; // px — keep in sync with node template
-      let positions = {}; // id → {x, y} in px (center of node)
-
-      // ─── Build initial pixel positions ───────────────────────────
-      function initPositions() {
-        const W = wrap.clientWidth, H = wrap.clientHeight;
-        NODES.forEach(n => {
-          positions[n.id] = { x: n.px / 100 * W, y: n.py / 100 * H };
-        });
-      }
-
-      // ─── Create DOM nodes ─────────────────────────────────────────
-      function buildNodes() {
-        // Remove old
-        wrap.querySelectorAll(".arch-node").forEach(e => e.remove());
-        NODES.forEach(n => {
-          const el = document.createElement("div");
-          el.className = "arch-node";
-          el.dataset.id = n.id;
-          el.style.cssText = `
+        // ─── Create DOM nodes ─────────────────────────────────────────
+        function buildNodes() {
+          // Remove old
+          wrap.querySelectorAll(".arch-node").forEach((e) => e.remove());
+          NODES.forEach((n) => {
+            const el = document.createElement("div");
+            el.className = "arch-node";
+            el.dataset.id = n.id;
+            el.style.cssText = `
             position:absolute; width:${NW}px; z-index:10; cursor:grab;
             display:flex; flex-direction:column; align-items:center; gap:4px;
             transition: filter 0.2s, transform 0.15s;
           `;
-          el.innerHTML = `
+            el.innerHTML = `
             <div style="
               width:${NW}px; height:${NW - 16}px;
               background:${n.color};
@@ -2008,236 +2297,277 @@
               <span style="font-size:10px; font-weight:700; color:${n.textColor}; text-align:center; opacity:0.95; padding:0 6px; letter-spacing:0.01em; line-height:1.2;">${n.label}</span>
             </div>
           `;
-          positionNode(el, n.id);
-          wrap.appendChild(el);
-          attachNodeEvents(el, n);
-        });
-      }
+            positionNode(el, n.id);
+            wrap.appendChild(el);
+            attachNodeEvents(el, n);
+          });
+        }
 
-      function positionNode(el, id) {
-        const p = positions[id];
-        el.style.left = (p.x - NW / 2) + "px";
-        el.style.top  = (p.y - (NW - 16) / 2) + "px";
-      }
+        function positionNode(el, id) {
+          const p = positions[id];
+          el.style.left = p.x - NW / 2 + "px";
+          el.style.top = p.y - (NW - 16) / 2 + "px";
+        }
 
-      // ─── SVG edges ────────────────────────────────────────────────
-      let edgeEls = {};
-      let dotEls  = {};
-      let dotAnimStates = {};
+        // ─── SVG edges ────────────────────────────────────────────────
+        let edgeEls = {};
+        let dotEls = {};
+        let dotAnimStates = {};
 
-      function buildEdges() {
-        svg.innerHTML = "";
-        edgeEls = {}; dotEls = {};
-        // defs for arrow marker
-        const defs = document.createElementNS("http://www.w3.org/2000/svg","defs");
-        EDGES.forEach((e, i) => {
-          const fromNode = NODES.find(n => n.id === e.from);
-          const marker = document.createElementNS("http://www.w3.org/2000/svg","marker");
-          marker.setAttribute("id", `arrow-${i}`);
-          marker.setAttribute("viewBox","0 0 6 6");
-          marker.setAttribute("refX","5");
-          marker.setAttribute("refY","3");
-          marker.setAttribute("markerWidth","6");
-          marker.setAttribute("markerHeight","6");
-          marker.setAttribute("orient","auto-start-reverse");
-          const path = document.createElementNS("http://www.w3.org/2000/svg","path");
-          path.setAttribute("d","M 0 0 L 6 3 L 0 6 z");
-          path.setAttribute("fill", fromNode.color);
-          path.setAttribute("opacity","0.5");
-          marker.appendChild(path);
-          defs.appendChild(marker);
-        });
-        svg.appendChild(defs);
+        function buildEdges() {
+          svg.innerHTML = "";
+          edgeEls = {};
+          dotEls = {};
+          // defs for arrow marker
+          const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+          EDGES.forEach((e, i) => {
+            const fromNode = NODES.find((n) => n.id === e.from);
+            const marker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+            marker.setAttribute("id", `arrow-${i}`);
+            marker.setAttribute("viewBox", "0 0 6 6");
+            marker.setAttribute("refX", "5");
+            marker.setAttribute("refY", "3");
+            marker.setAttribute("markerWidth", "6");
+            marker.setAttribute("markerHeight", "6");
+            marker.setAttribute("orient", "auto-start-reverse");
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", "M 0 0 L 6 3 L 0 6 z");
+            path.setAttribute("fill", fromNode.color);
+            path.setAttribute("opacity", "0.5");
+            marker.appendChild(path);
+            defs.appendChild(marker);
+          });
+          svg.appendChild(defs);
 
-        EDGES.forEach((e, i) => {
-          const fromNode = NODES.find(n => n.id === e.from);
-          // Edge line
-          const line = document.createElementNS("http://www.w3.org/2000/svg","line");
-          line.setAttribute("stroke", fromNode.color);
-          line.setAttribute("stroke-width","1.5");
-          line.setAttribute("stroke-opacity","0.25");
-          line.setAttribute("stroke-dasharray","5 4");
-          line.setAttribute("marker-end", `url(#arrow-${i})`);
-          svg.appendChild(line);
-          edgeEls[`${e.from}-${e.to}`] = line;
+          EDGES.forEach((e, i) => {
+            const fromNode = NODES.find((n) => n.id === e.from);
+            // Edge line
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("stroke", fromNode.color);
+            line.setAttribute("stroke-width", "1.5");
+            line.setAttribute("stroke-opacity", "0.25");
+            line.setAttribute("stroke-dasharray", "5 4");
+            line.setAttribute("marker-end", `url(#arrow-${i})`);
+            svg.appendChild(line);
+            edgeEls[`${e.from}-${e.to}`] = line;
 
-          // Flowing dot
-          const dot = document.createElementNS("http://www.w3.org/2000/svg","circle");
-          dot.setAttribute("r","3.5");
-          dot.setAttribute("fill", fromNode.color);
-          dot.setAttribute("opacity","0.8");
-          svg.appendChild(dot);
-          dotEls[`${e.from}-${e.to}`] = dot;
-          dotAnimStates[`${e.from}-${e.to}`] = Math.random(); // stagger start
-        });
-        updateEdges();
-      }
+            // Flowing dot
+            const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            dot.setAttribute("r", "3.5");
+            dot.setAttribute("fill", fromNode.color);
+            dot.setAttribute("opacity", "0.8");
+            svg.appendChild(dot);
+            dotEls[`${e.from}-${e.to}`] = dot;
+            dotAnimStates[`${e.from}-${e.to}`] = Math.random(); // stagger start
+          });
+          updateEdges();
+        }
 
-      function updateEdges() {
-        EDGES.forEach(e => {
-          const key = `${e.from}-${e.to}`;
-          const line = edgeEls[key];
-          const fp = positions[e.from], tp = positions[e.to];
-          if (!fp || !tp || !line) return;
-          // Shorten line by node radius so it doesn't overlap the box
-          const dx = tp.x - fp.x, dy = tp.y - fp.y;
-          const len = Math.sqrt(dx*dx + dy*dy) || 1;
-          const pad = 44;
-          const x1 = fp.x + dx/len*pad, y1 = fp.y + dy/len*pad;
-          const x2 = tp.x - dx/len*pad, y2 = tp.y - dy/len*pad;
-          line.setAttribute("x1", x1); line.setAttribute("y1", y1);
-          line.setAttribute("x2", x2); line.setAttribute("y2", y2);
-        });
-      }
+        function updateEdges() {
+          EDGES.forEach((e) => {
+            const key = `${e.from}-${e.to}`;
+            const line = edgeEls[key];
+            const fp = positions[e.from],
+              tp = positions[e.to];
+            if (!fp || !tp || !line) return;
+            // Shorten line by node radius so it doesn't overlap the box
+            const dx = tp.x - fp.x,
+              dy = tp.y - fp.y;
+            const len = Math.sqrt(dx * dx + dy * dy) || 1;
+            const pad = 44;
+            const x1 = fp.x + (dx / len) * pad,
+              y1 = fp.y + (dy / len) * pad;
+            const x2 = tp.x - (dx / len) * pad,
+              y2 = tp.y - (dy / len) * pad;
+            line.setAttribute("x1", x1);
+            line.setAttribute("y1", y1);
+            line.setAttribute("x2", x2);
+            line.setAttribute("y2", y2);
+          });
+        }
 
-      function animateDots(ts) {
-        const SPEED = 0.00025; // fraction of edge per ms
-        EDGES.forEach(e => {
-          const key = `${e.from}-${e.to}`;
-          const dot  = dotEls[key];
-          const line = edgeEls[key];
-          if (!dot || !line) return;
-          let t = dotAnimStates[key] + SPEED * ts;
-          if (t > 1) t -= 1;
-          dotAnimStates[key] = t;
-          const x1 = parseFloat(line.getAttribute("x1")), y1 = parseFloat(line.getAttribute("y1"));
-          const x2 = parseFloat(line.getAttribute("x2")), y2 = parseFloat(line.getAttribute("y2"));
-          dot.setAttribute("cx", x1 + (x2-x1)*t);
-          dot.setAttribute("cy", y1 + (y2-y1)*t);
-        });
-        requestAnimationFrame(animateDots);
-      }
+        function animateDots(ts) {
+          const SPEED = 0.00025; // fraction of edge per ms
+          EDGES.forEach((e) => {
+            const key = `${e.from}-${e.to}`;
+            const dot = dotEls[key];
+            const line = edgeEls[key];
+            if (!dot || !line) return;
+            let t = dotAnimStates[key] + SPEED * ts;
+            if (t > 1) t -= 1;
+            dotAnimStates[key] = t;
+            const x1 = parseFloat(line.getAttribute("x1")),
+              y1 = parseFloat(line.getAttribute("y1"));
+            const x2 = parseFloat(line.getAttribute("x2")),
+              y2 = parseFloat(line.getAttribute("y2"));
+            dot.setAttribute("cx", x1 + (x2 - x1) * t);
+            dot.setAttribute("cy", y1 + (y2 - y1) * t);
+          });
+          requestAnimationFrame(animateDots);
+        }
 
-      // ─── Detail panel ─────────────────────────────────────────────
-      let selectedId = null;
-      function showDetail(n) {
-        selectedId = n.id;
-        document.getElementById("arch-detail-default").classList.add("hidden");
-        const content = document.getElementById("arch-detail-content");
-        content.classList.remove("hidden");
-        document.getElementById("arch-detail-icon").textContent = n.icon;
-        document.getElementById("arch-detail-label").textContent = n.label;
-        document.getElementById("arch-detail-tag").textContent = n.tag;
-        document.getElementById("arch-detail-desc").textContent = n.desc;
-        const ul = document.getElementById("arch-detail-bullets");
-        ul.innerHTML = n.bullets.map(b =>
-          `<li class="flex items-start gap-2 text-xs text-gray-600">
+        // ─── Detail panel ─────────────────────────────────────────────
+        let selectedId = null;
+        function showDetail(n) {
+          selectedId = n.id;
+          document.getElementById("arch-detail-default").classList.add("hidden");
+          const content = document.getElementById("arch-detail-content");
+          content.classList.remove("hidden");
+          document.getElementById("arch-detail-icon").textContent = n.icon;
+          document.getElementById("arch-detail-label").textContent = n.label;
+          document.getElementById("arch-detail-tag").textContent = n.tag;
+          document.getElementById("arch-detail-desc").textContent = n.desc;
+          const ul = document.getElementById("arch-detail-bullets");
+          ul.innerHTML = n.bullets
+            .map(
+              (b) =>
+                `<li class="flex items-start gap-2 text-xs text-gray-600">
             <span style="color:${n.color}; margin-top:2px; flex-shrink:0;">▸</span>
             <span>${b}</span>
-          </li>`
-        ).join("");
-        // Highlight selected node
-        wrap.querySelectorAll(".arch-node-inner").forEach(el => {
-          el.style.border = "2px solid transparent";
-        });
-        const selEl = wrap.querySelector(`.arch-node[data-id="${n.id}"] .arch-node-inner`);
-        if (selEl) selEl.style.border = `2px solid ${n.color}`;
-      }
+          </li>`,
+            )
+            .join("");
+          // Highlight selected node
+          wrap.querySelectorAll(".arch-node-inner").forEach((el) => {
+            el.style.border = "2px solid transparent";
+          });
+          const selEl = wrap.querySelector(`.arch-node[data-id="${n.id}"] .arch-node-inner`);
+          if (selEl) selEl.style.border = `2px solid ${n.color}`;
+        }
 
-      // ─── Drag ─────────────────────────────────────────────────────
-      let dragging = null, dragOff = {x:0,y:0}, didDrag = false;
-
-      function attachNodeEvents(el, n) {
-        el.addEventListener("pointerdown", e => {
-          e.preventDefault();
-          dragging = n.id;
+        // ─── Drag ─────────────────────────────────────────────────────
+        let dragging = null,
+          dragOff = { x: 0, y: 0 },
           didDrag = false;
-          const p = positions[n.id];
-          const rect = wrap.getBoundingClientRect();
-          dragOff = { x: e.clientX - rect.left - p.x, y: e.clientY - rect.top - p.y };
-          el.setPointerCapture(e.pointerId);
-          el.style.cursor = "grabbing";
-          el.style.zIndex = 30;
-          el.style.filter = "drop-shadow(0 8px 20px rgba(0,0,0,0.18))";
-        });
-        el.addEventListener("pointermove", e => {
-          if (dragging !== n.id) return;
-          didDrag = true;
-          const rect = wrap.getBoundingClientRect();
-          const nx = e.clientX - rect.left - dragOff.x;
-          const ny = e.clientY - rect.top  - dragOff.y;
-          positions[n.id] = {
-            x: Math.max(NW/2, Math.min(rect.width  - NW/2, nx)),
-            y: Math.max((NW-16)/2, Math.min(rect.height - (NW-16)/2, ny)),
-          };
-          positionNode(el, n.id);
-          updateEdges();
-        });
-        el.addEventListener("pointerup", e => {
-          if (dragging !== n.id) return;
-          dragging = null;
-          el.style.cursor = "grab";
-          el.style.zIndex = 10;
-          el.style.filter = "";
-          if (!didDrag) showDetail(n);
-        });
-        el.addEventListener("mouseenter", () => {
-          if (!dragging) el.querySelector(".arch-node-inner").style.transform = "scale(1.06)";
-        });
-        el.addEventListener("mouseleave", () => {
-          el.querySelector(".arch-node-inner").style.transform = "";
+
+        function attachNodeEvents(el, n) {
+          el.addEventListener("pointerdown", (e) => {
+            e.preventDefault();
+            dragging = n.id;
+            didDrag = false;
+            const p = positions[n.id];
+            const rect = wrap.getBoundingClientRect();
+            dragOff = { x: e.clientX - rect.left - p.x, y: e.clientY - rect.top - p.y };
+            el.setPointerCapture(e.pointerId);
+            el.style.cursor = "grabbing";
+            el.style.zIndex = 30;
+            el.style.filter = "drop-shadow(0 8px 20px rgba(0,0,0,0.18))";
+          });
+          el.addEventListener("pointermove", (e) => {
+            if (dragging !== n.id) return;
+            didDrag = true;
+            const rect = wrap.getBoundingClientRect();
+            const nx = e.clientX - rect.left - dragOff.x;
+            const ny = e.clientY - rect.top - dragOff.y;
+            positions[n.id] = {
+              x: Math.max(NW / 2, Math.min(rect.width - NW / 2, nx)),
+              y: Math.max((NW - 16) / 2, Math.min(rect.height - (NW - 16) / 2, ny)),
+            };
+            positionNode(el, n.id);
+            updateEdges();
+          });
+          el.addEventListener("pointerup", (e) => {
+            if (dragging !== n.id) return;
+            dragging = null;
+            el.style.cursor = "grab";
+            el.style.zIndex = 10;
+            el.style.filter = "";
+            if (!didDrag) showDetail(n);
+          });
+          el.addEventListener("mouseenter", () => {
+            if (!dragging) el.querySelector(".arch-node-inner").style.transform = "scale(1.06)";
+          });
+          el.addEventListener("mouseleave", () => {
+            el.querySelector(".arch-node-inner").style.transform = "";
+          });
+        }
+
+        // ─── Init ─────────────────────────────────────────────────────
+        initPositions();
+        buildNodes();
+        buildEdges();
+        requestAnimationFrame(animateDots);
+
+        // Re-layout on resize
+        let resizeTimer;
+        window.addEventListener("resize", () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(() => {
+            initPositions();
+            wrap.querySelectorAll(".arch-node").forEach((el) => positionNode(el, el.dataset.id));
+            updateEdges();
+          }, 120);
         });
       }
 
-      // ─── Init ─────────────────────────────────────────────────────
-      initPositions();
-      buildNodes();
-      buildEdges();
-      requestAnimationFrame(animateDots);
+      // ── Hero Features Scroller ──────────────────────────────────────
+      (function heroFeaturesCarousel() {
+        const features = [
+          {
+            emoji: "🫧",
+            title: "Zero OS Footprint",
+            desc: "Never touches your host filesystem — everything runs in isolated Docker containers and virtual volumes.",
+          },
+          {
+            emoji: "⚡",
+            title: "No Dependency Hell",
+            desc: "Run AI models, media servers and databases side by side. Zero Python, Node, or CUDA conflicts — ever.",
+          },
+          {
+            emoji: "🗑️",
+            title: "Install, Use, Destroy",
+            desc: "Delete any app and it's completely gone — no leftover services, registry keys, or hidden config files.",
+          },
+          {
+            emoji: "🚀",
+            title: "One-Command Deploy",
+            desc: "A single docker run gets Yantr running in under 30 seconds. Open http://localhost and you're done.",
+          },
+          { emoji: "🤖", title: "AI Agent Suite", desc: "First platform to ship isolated AI agents: Ollama, Open WebUI, Perplexica, OpenCode, and more." },
+          { emoji: "🧬", title: "Cross-Platform", desc: "Runs identically on Linux, macOS, and Windows (WSL2). Use whatever hardware you already own." },
+          { emoji: "🌍", title: "Remote Access Ready", desc: "Works seamlessly with Tailscale or Cloudflare Tunnels for secure, zero-config remote access." },
+          {
+            emoji: "🆕",
+            title: "Always Latest Apps",
+            desc: "Ships the newest app releases by default — no waiting for a platform update to get new versions.",
+          },
+          { emoji: "🎛️", title: "On-Demand Resources", desc: "Nothing runs unless you start it. Only consume RAM and CPU for apps you're actually using." },
+          {
+            emoji: "📦",
+            title: "100% Docker Compose",
+            desc: "Generates standard Compose files you can take anywhere. No proprietary format or vendor lock-in.",
+          },
+          {
+            emoji: "🔐",
+            title: "Proxy Authentication",
+            desc: "Add bcrypt-secured HTTP basic auth to any app in one click — Caddy wraps it with a login wall, no code changes needed.",
+          },
+        ];
 
-      // Re-layout on resize
-      let resizeTimer;
-      window.addEventListener("resize", () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          initPositions();
-          wrap.querySelectorAll(".arch-node").forEach(el => positionNode(el, el.dataset.id));
-          updateEdges();
-        }, 120);
-      });
-    }
+        const track1 = document.getElementById("hero-fc-track-1");
+        const track2 = document.getElementById("hero-fc-track-2");
+        if (!track1 || !track2) return;
 
-    // ── Hero Features Scroller ──────────────────────────────────────
-    (function heroFeaturesCarousel() {
-      const features = [
-        { emoji: "🫧", title: "Zero OS Footprint",      desc: "Never touches your host filesystem — everything runs in isolated Docker containers and virtual volumes." },
-        { emoji: "⚡", title: "No Dependency Hell",     desc: "Run AI models, media servers and databases side by side. Zero Python, Node, or CUDA conflicts — ever." },
-        { emoji: "🗑️", title: "Install, Use, Destroy",  desc: "Delete any app and it's completely gone — no leftover services, registry keys, or hidden config files." },
-        { emoji: "🚀", title: "One-Command Deploy",     desc: "A single docker run gets Yantr running in under 30 seconds. Open http://localhost and you're done." },
-        { emoji: "🤖", title: "AI Agent Suite",         desc: "First platform to ship isolated AI agents: Ollama, Open WebUI, Perplexica, OpenCode, and more." },
-        { emoji: "🧬", title: "Cross-Platform",         desc: "Runs identically on Linux, macOS, and Windows (WSL2). Use whatever hardware you already own." },
-        { emoji: "🌍", title: "Remote Access Ready",    desc: "Works seamlessly with Tailscale or Cloudflare Tunnels for secure, zero-config remote access." },
-        { emoji: "🆕", title: "Always Latest Apps",     desc: "Ships the newest app releases by default — no waiting for a platform update to get new versions." },
-        { emoji: "🎛️", title: "On-Demand Resources",    desc: "Nothing runs unless you start it. Only consume RAM and CPU for apps you're actually using." },
-        { emoji: "📦", title: "100% Docker Compose",    desc: "Generates standard Compose files you can take anywhere. No proprietary format or vendor lock-in." },
-        { emoji: "🔐", title: "Proxy Authentication",   desc: "Add bcrypt-secured HTTP basic auth to any app in one click — Caddy wraps it with a login wall, no code changes needed." },
-      ];
-
-      const track1 = document.getElementById("hero-fc-track-1");
-      const track2 = document.getElementById("hero-fc-track-2");
-      if (!track1 || !track2) return;
-
-      function buildCard(f) {
-        return `<article class="hero-pillar group flex w-[280px] sm:w-[320px] lg:w-[360px] shrink-0 flex-col items-center text-center rounded-2xl border border-gray-200 bg-white px-5 py-5 cursor-default hover:border-gray-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+        function buildCard(f) {
+          return `<article class="hero-pillar group flex w-[280px] sm:w-[320px] lg:w-[360px] shrink-0 flex-col items-center text-center rounded-2xl border border-gray-200 bg-white px-5 py-5 cursor-default hover:border-gray-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
           <span class="text-2xl shrink-0 mb-3">${f.emoji}</span>
           <div>
             <span class="text-xs font-bold uppercase tracking-[0.18em] text-gray-900 group-hover:text-black transition-colors">${f.title}</span>
             <p class="text-sm text-gray-500 mt-2 leading-relaxed group-hover:text-gray-600 transition-colors">${f.desc}</p>
           </div>
         </article>`;
-      }
+        }
 
-      const half = Math.ceil(features.length / 2);
-      const row1Features = features.slice(0, half);
-      const row2Features = features.slice(half);
+        const half = Math.ceil(features.length / 2);
+        const row1Features = features.slice(0, half);
+        const row2Features = features.slice(half);
 
-      const cards1 = row1Features.map(buildCard).join("");
-      const cards2 = row2Features.map(buildCard).join("");
+        const cards1 = row1Features.map(buildCard).join("");
+        const cards2 = row2Features.map(buildCard).join("");
 
-      track1.innerHTML = cards1 + cards1;
-      track2.innerHTML = cards2 + cards2;
-    })();
-
+        track1.innerHTML = cards1 + cards1;
+        track2.innerHTML = cards2 + cards2;
+      })();
     </script>
   </body>
 </html>
