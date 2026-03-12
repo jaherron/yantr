@@ -179,6 +179,9 @@ const volumeBackups = ref({});
 const backingUp = ref(false);
 const showRestoreMenu = ref({});
 
+// Tabs for port options
+const activePortTab = ref('list'); // 'list' | 'add' | 'caddy'
+
 // Build a port-number → {label, protocol} lookup from the info.json ports array
 function buildPortLabels(ports) {
   const labels = {};
@@ -617,410 +620,433 @@ onUnmounted(() => {
     </div>
 
     <!-- Content -->
-    <div v-else-if="stack" class="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-8">
+    <div v-else-if="stack" class="max-w-6xl mx-auto px-6 sm:px-12 py-10 sm:py-16 space-y-12 animate-fadeIn">
 
       <!-- ── Identity card ─────────────────────────────────────────────────── -->
-      <div class="group relative bg-white dark:bg-[#0A0A0A] rounded-xl border border-gray-200 dark:border-zinc-800 p-6 flex flex-col sm:flex-row sm:items-center gap-6 hover:border-gray-300 dark:hover:border-zinc-700 transition-all duration-300">
-        <!-- Glow Accent -->
-        <div class="absolute top-0 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <div class="group relative bg-white dark:bg-[#0A0A0A] rounded-3xl border border-gray-200 dark:border-zinc-800 p-10 flex flex-col sm:flex-row sm:items-center gap-8 hover:-translate-y-2 hover:shadow-xl hover:border-blue-400 dark:hover:border-blue-500/50 transition-all duration-500 ease-out">
+        <!-- Solid Accent -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-3xl"></div>
 
         <!-- Logo -->
-        <div class="w-20 h-20 shrink-0 rounded-xl bg-gray-50 dark:bg-zinc-900 flex items-center justify-center overflow-hidden border border-gray-100 dark:border-zinc-800 shadow-sm transition-transform duration-500 group-hover:scale-105">
+        <div class="w-28 h-28 shrink-0 rounded-2xl bg-gray-50 dark:bg-zinc-900 flex items-center justify-center overflow-hidden border border-gray-100 dark:border-zinc-800 shadow-sm transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3">
           <img
             v-if="stack.app?.logo"
             :src="stack.app.logo"
             :alt="stack.app.name"
             loading="lazy"
-            class="w-12 h-12 object-contain filter dark:brightness-90 group-hover:brightness-100 transition-all"
+            class="w-16 h-16 object-contain filter dark:brightness-90 group-hover:brightness-100 transition-all duration-500"
           />
-          <Bot v-else :size="28" class="text-gray-400 dark:text-zinc-600" />
+          <Bot v-else :size="36" class="text-gray-400 dark:text-zinc-600 transition-colors duration-500 group-hover:text-blue-500" />
         </div>
 
         <!-- Info -->
-        <div class="flex-1 min-w-0 space-y-2">
-          <div class="flex items-center gap-3 flex-wrap">
-            <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <div class="flex-1 min-w-0 space-y-4">
+          <div class="flex items-center gap-4 flex-wrap">
+            <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white transition-colors duration-500 group-hover:text-blue-600 dark:group-hover:text-blue-400">
               {{ stack.app?.name || stack.appId }}
             </h1>
             <!-- Project ID badge -->
-            <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-md bg-gray-100 dark:bg-zinc-900 text-gray-500 dark:text-zinc-400 border border-gray-200 dark:border-zinc-800">
+            <span class="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 text-gray-500 dark:text-zinc-400 border border-gray-200 dark:border-zinc-800 hover:scale-105 transition-transform duration-300">
               {{ stack.projectId }}
             </span>
           </div>
 
-          <p v-if="stack.app?.short_description" class="text-sm text-gray-500 dark:text-zinc-400">
+          <p v-if="stack.app?.short_description" class="text-lg text-gray-500 dark:text-zinc-400 leading-relaxed max-w-3xl">
             {{ stack.app.short_description }}
           </p>
 
-          <div class="flex flex-wrap gap-2 pt-1">
+          <div class="flex flex-wrap gap-3 pt-2">
             <span
-              v-for="tag in (stack.app?.tags || []).slice(0, 6)"
+              v-for="(tag, index) in (stack.app?.tags || []).slice(0, 6)"
               :key="tag"
-              class="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded-md bg-gray-50 dark:bg-zinc-900/50 text-gray-600 dark:text-zinc-400 border border-gray-200 dark:border-zinc-800"
+              class="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-lg bg-gray-50 dark:bg-zinc-900/50 text-gray-600 dark:text-zinc-400 border border-gray-200 dark:border-zinc-800 hover:scale-110 hover:-translate-y-1 transition-all duration-300"
+              :style="{ transitionDelay: `${index * 50}ms` }"
             >{{ tag }}</span>
           </div>
         </div>
 
         <!-- Actions -->
-        <div class="flex flex-row sm:flex-col gap-2 sm:gap-2.5 shrink-0 flex-wrap">
+        <div class="flex flex-row sm:flex-col gap-4 shrink-0 flex-wrap">
           <a
             v-if="stack.app?.website"
             :href="stack.app.website"
             target="_blank"
-            class="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-gray-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all"
+            class="inline-flex items-center justify-center gap-3 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-gray-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-800 hover:-translate-y-1 hover:shadow-md transition-all duration-300 active:scale-95"
           >
-            <Globe :size="12" />
+            <Globe :size="16" class="group-hover:animate-spin" />
             {{ t('stackView.website') }}
           </a>
           <button
             v-if="stack.app"
             @click="router.push(`/apps/${stack.appId}`)"
-            class="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-gray-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all"
+            class="inline-flex items-center justify-center gap-3 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-gray-700 dark:text-zinc-300 hover:bg-gray-100 dark:hover:bg-zinc-800 hover:-translate-y-1 hover:shadow-md transition-all duration-300 active:scale-95 group/btn"
           >
-            <ExternalLink :size="12" />
+            <ExternalLink :size="16" class="group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5 transition-transform" />
             {{ t('stackView.appPage') }}
           </button>
           <div
             v-if="stack.app?.customapp"
-            class="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-purple-200 dark:border-purple-500/20 bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 cursor-default"
+            class="inline-flex items-center justify-center gap-3 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider border border-purple-200 dark:border-purple-500/20 bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 cursor-default hover:scale-105 transition-transform duration-300"
             :title="t('stackView.customAppNoUpdate')"
           >
-            <Bot :size="12" />
+            <Bot :size="16" class="animate-bounce" />
             {{ t('stackView.builtByYantr') }}
           </div>
           <button
             v-else
             @click="updateStack"
             :disabled="updating"
-            class="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-blue-200 dark:border-blue-500/20 bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-500/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            class="inline-flex items-center justify-center gap-3 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider border border-blue-200 dark:border-blue-500/20 bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-500/20 hover:-translate-y-1 hover:shadow-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:-translate-y-0 active:scale-95 group/update"
           >
-            <RotateCcw :size="12" :class="updating ? 'animate-spin' : ''" />
+            <RotateCcw :size="16" :class="updating ? 'animate-spin' : 'group-hover/update:-rotate-90 transition-transform duration-500'" />
             {{ updating ? t('stackView.updating') : t('stackView.updateStack') }}
           </button>
           <button
             @click="removeStack"
             :disabled="removing"
-            class="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-white dark:bg-[#0A0A0A] border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            class="inline-flex items-center justify-center gap-3 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-wider bg-white dark:bg-[#0A0A0A] border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 hover:-translate-y-1 hover:shadow-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:-translate-y-0 active:scale-95 group/rm"
           >
-            <Trash2 :size="12" />
+            <Trash2 :size="16" class="group-hover/rm:scale-110 group-hover/rm:-rotate-12 transition-transform duration-300" />
             {{ removing ? t('stackView.removing') : t('stackView.removeStack') }}
           </button>
         </div>
       </div>
 
-      <!-- ── Published Ports ────────────────────────────────────────────────── -->
-      <div class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-500 flex items-center gap-2">
-            <Network :size="12" />
-            {{ t('stackView.networkAccess') }}
+      <!-- ── Published Ports and Authentication ────────────────────────────────────────────────── -->
+      <div class="space-y-6 animate-fadeIn">
+        <div class="flex items-center justify-between pb-2">
+          <h2 class="text-sm font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-500 flex items-center gap-3 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-300">
+            <Network :size="18" class="animate-pulse" />
+            <span v-if="activePortTab === 'caddy'" class="flex items-center gap-2"><ShieldCheck :size="16" class="text-purple-500" /> {{ t('stackView.caddyAuthTitle') }}</span>
+            <span v-else>{{ t('stackView.networkAccess') }}</span>
           </h2>
-          <!-- Toggle only shown when there are described ports -->
-          <div v-if="hasDescribedPorts" class="flex items-center gap-1 rounded-lg bg-gray-100 dark:bg-zinc-900 p-1">
+          <!-- Tab navigation -->
+          <div class="flex items-center gap-2 rounded-xl bg-gray-100 dark:bg-zinc-900 p-1.5 hover:shadow-inner transition-shadow duration-300">
             <button
-              @click="showOnlyDescribedPorts = false"
-              :class="!showOnlyDescribedPorts ? 'bg-white dark:bg-zinc-800 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700 dark:hover:text-zinc-300'"
-              class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md transition-all"
-            >{{ t('stackView.allPorts') }}</button>
+              @click="activePortTab = 'list'"
+              :class="activePortTab === 'list' ? 'bg-white dark:bg-zinc-800 text-gray-900 dark:text-white shadow-lg scale-105' : 'text-gray-500 hover:text-gray-700 dark:hover:text-zinc-300 hover:scale-105'"
+              class="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300"
+            >{{ t('stackView.ports') || 'PORTS' }}</button>
             <button
-              @click="showOnlyDescribedPorts = true"
-              :class="showOnlyDescribedPorts ? 'bg-white dark:bg-zinc-800 text-gray-900 dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700 dark:hover:text-zinc-300'"
-              class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md transition-all"
-            >{{ t('stackView.described') }}</button>
+              @click="activePortTab = 'add'"
+              :class="activePortTab === 'add' ? 'bg-white dark:bg-zinc-800 text-gray-900 dark:text-white shadow-lg scale-105' : 'text-gray-500 hover:text-gray-700 dark:hover:text-zinc-300 hover:scale-105'"
+              class="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 flex items-center gap-1.5"
+            ><Plus :size="12" />{{ t('stackView.openAnotherPort') || 'OPEN PORT' }}</button>
+            <button
+              v-if="stack.appId !== 'caddy-yantr'"
+              @click="activePortTab = 'caddy'"
+              :class="activePortTab === 'caddy' ? 'bg-white dark:bg-zinc-800 text-gray-900 dark:text-white shadow-lg scale-105' : 'text-gray-500 hover:text-gray-700 dark:hover:text-zinc-300 hover:scale-105'"
+              class="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300 flex items-center gap-1.5"
+            ><ShieldCheck :size="12" />{{ t('stackView.auth') || 'AUTH' }}</button>
           </div>
         </div>
 
-        <div class="bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-zinc-800 rounded-xl p-4 sm:p-5 space-y-4">
-          <div class="flex items-start justify-between gap-4">
+        <div v-show="activePortTab === 'add'" class="bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-zinc-800 rounded-3xl p-8 sm:p-10 space-y-6 hover:shadow-lg hover:border-gray-300 dark:hover:border-zinc-700 transition-all duration-500 ease-out transform group">
+          <div class="flex items-start justify-between gap-6">
             <div>
-              <div class="text-[11px] font-bold uppercase tracking-wider text-gray-700 dark:text-zinc-300">{{ t('stackView.openAnotherPort') }}</div>
-              <p class="mt-1 text-xs text-gray-500 dark:text-zinc-400">{{ t('stackView.openAnotherPortHint') }}</p>
+              <div class="text-sm font-bold uppercase tracking-wider text-gray-700 dark:text-zinc-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ t('stackView.openAnotherPort') }}</div>
+              <p class="mt-2 text-sm text-gray-500 dark:text-zinc-400">{{ t('stackView.openAnotherPortHint') }}</p>
             </div>
-            <div class="hidden sm:flex items-center justify-center w-9 h-9 rounded-lg bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 text-gray-500 dark:text-zinc-400">
-              <Plus :size="16" />
+            <div class="hidden sm:flex items-center justify-center w-12 h-12 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 text-gray-500 dark:text-zinc-400 group-hover:scale-110 group-hover:-rotate-90 transition-transform duration-500">
+              <Plus :size="20" />
             </div>
           </div>
 
-          <div :class="needsPortServiceSelection ? 'grid grid-cols-1 sm:grid-cols-2 gap-3' : 'grid grid-cols-1 gap-3'">
-            <label v-if="needsPortServiceSelection" class="space-y-1.5">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-zinc-500">{{ t('stackView.service') }}</span>
-              <select v-model="newPort.serviceName" class="w-full px-3 py-2.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/30">
+          <div :class="needsPortServiceSelection ? 'grid grid-cols-1 sm:grid-cols-2 gap-6' : 'grid grid-cols-1 gap-6'">
+            <label v-if="needsPortServiceSelection" class="space-y-3">
+              <span class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-zinc-500">{{ t('stackView.service') }}</span>
+              <select v-model="newPort.serviceName" class="w-full px-5 py-4 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-base text-gray-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-blue-500/30 transition-shadow duration-300 hover:border-blue-300">
                 <option v-for="service in portServices" :key="service.value" :value="service.value">{{ service.label }}</option>
               </select>
             </label>
 
-            <label class="space-y-1.5">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-zinc-500">{{ t('stackView.portMappingLabel') }}</span>
-              <input v-model="newPort.mapping" placeholder="9000:9000 or 9000 or 53:53/udp" class="w-full px-3 py-2.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/30 font-mono" />
-              <p class="text-[11px] text-gray-500 dark:text-zinc-400">{{ t('stackView.portMappingHint') }}</p>
+            <label class="space-y-3">
+              <span class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-zinc-500">{{ t('stackView.portMappingLabel') }}</span>
+              <input v-model="newPort.mapping" placeholder="9000:9000 or 9000 or 53:53/udp" class="w-full px-5 py-4 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-base text-gray-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-blue-500/30 font-mono transition-shadow duration-300 hover:border-blue-300" />
+              <p class="text-xs text-gray-500 dark:text-zinc-400">{{ t('stackView.portMappingHint') }}</p>
             </label>
           </div>
 
-          <div class="flex justify-end">
+          <div class="flex justify-end pt-2">
             <button
               @click="openPort"
               :disabled="openingPort || portServices.length === 0"
-              class="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-blue-200 dark:border-blue-500/20 bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-500/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              class="inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-xs font-bold uppercase tracking-wider border border-blue-200 dark:border-blue-500/20 bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-500/30 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed group/btn"
             >
-              <Plus :size="12" />
+              <Plus :size="16" class="group-hover/btn:rotate-180 transition-transform duration-500" />
               {{ openingPort ? t('stackView.openingPortAction') : t('stackView.openPortAction') }}
             </button>
           </div>
         </div>
 
-        <div v-if="enrichedPorts.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div
-            v-for="(p, i) in visiblePorts"
-            :key="i"
-            class="group bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-zinc-800 rounded-xl p-5 hover:border-gray-300 dark:hover:border-zinc-600 transition-all duration-300"
-          >
-            <div class="flex items-start gap-3.5 mb-5">
-              <div class="w-10 h-10 rounded-lg bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-gray-600 dark:text-zinc-400 shrink-0 shadow-sm group-hover:text-purple-500 transition-colors">
-                <Network :size="18" />
-              </div>
-              <div class="min-w-0 flex-1">
-                <div class="flex items-center gap-2 mb-1.5">
-                  <span class="font-mono text-[10px] font-bold uppercase text-gray-900 dark:text-white">{{ p.protocol }}</span>
-                  <span v-if="p.labeledProtocol" class="text-[9px] px-1.5 py-0.5 bg-gray-100 dark:bg-zinc-800 text-gray-500 dark:text-zinc-400 rounded-md uppercase font-bold tracking-widest border border-gray-200 dark:border-zinc-700">{{ p.labeledProtocol }}</span>
-                </div>
-                <div class="text-[11px] text-gray-500 dark:text-zinc-400 truncate">
-                  {{ p.label || p.service }}
-                </div>
-              </div>
-            </div>
-
-            <div class="space-y-2 mb-5">
-              <div class="flex items-center justify-between text-[11px]">
-                <span class="text-gray-500 dark:text-zinc-500 uppercase font-bold tracking-wider">{{ t('stackView.hostPort') }}</span>
-                <span class="font-mono font-bold text-gray-900 dark:text-white">{{ p.hostPort }}</span>
-              </div>
-              <div class="flex items-center justify-between text-[11px]">
-                <span class="text-gray-500 dark:text-zinc-500 uppercase font-bold tracking-wider">{{ t('stackView.containerPort') }}</span>
-                <span class="font-mono font-medium text-gray-700 dark:text-zinc-300">{{ p.containerPort }}</span>
-              </div>
-              <div class="flex items-center justify-between text-[11px]">
-                <span class="text-gray-500 dark:text-zinc-500 uppercase font-bold tracking-wider">{{ t('stackView.service') }}</span>
-                <span class="font-mono text-gray-500 dark:text-zinc-400">{{ p.service }}</span>
-              </div>
-            </div>
-
-            <a
-              v-if="p.protocol === 'tcp'"
-              :href="appUrl(p.hostPort, p.labeledProtocol || 'http')"
-              target="_blank"
-              class="w-full flex items-center justify-center gap-2 px-3 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-all text-[11px] font-bold uppercase tracking-wider"
+        <div v-show="activePortTab === 'list' && enrichedPorts.length > 0">
+           <div class="flex items-center justify-end mb-4">
+             <!-- Toggle only shown when there are described ports -->
+             <div v-if="hasDescribedPorts" class="flex items-center gap-2 rounded-xl bg-gray-100 dark:bg-zinc-900 p-1.5 hover:shadow-inner transition-shadow duration-300">
+               <button
+                 @click="showOnlyDescribedPorts = false"
+                 :class="!showOnlyDescribedPorts ? 'bg-white dark:bg-zinc-800 text-gray-900 dark:text-white shadow-lg scale-105' : 'text-gray-500 hover:text-gray-700 dark:hover:text-zinc-300 hover:scale-105'"
+                 class="px-5 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300"
+               >{{ t('stackView.allPorts') }}</button>
+               <button
+                 @click="showOnlyDescribedPorts = true"
+                 :class="showOnlyDescribedPorts ? 'bg-white dark:bg-zinc-800 text-gray-900 dark:text-white shadow-lg scale-105' : 'text-gray-500 hover:text-gray-700 dark:hover:text-zinc-300 hover:scale-105'"
+                 class="px-5 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-all duration-300"
+               >{{ t('stackView.described') }}</button>
+             </div>
+           </div>
+           
+           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div
+              v-for="(p, i) in visiblePorts"
+              :key="i"
+              class="group bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-zinc-800 rounded-3xl p-8 hover:-translate-y-2 hover:shadow-xl hover:border-purple-300 dark:hover:border-purple-500/50 transition-all duration-500 ease-out"
+              :style="{ animationDelay: `${i * 100}ms` }"
             >
-              <ExternalLink :size="12" />
-              {{ t('stackView.open') }}
-            </a>
-            <div v-else class="w-full flex items-center justify-center px-3 py-2 bg-gray-50 dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 text-gray-400 dark:text-zinc-500 rounded-lg text-[11px] font-bold uppercase tracking-wider">
-              {{ p.protocol.toUpperCase() }} {{ t('stackView.port') }}
+              <div class="flex items-start gap-5 mb-8">
+                <div class="w-14 h-14 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-gray-600 dark:text-zinc-400 shrink-0 shadow-sm group-hover:text-purple-500 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500">
+                  <Network :size="24" />
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-3 mb-2">
+                    <span class="font-mono text-xs font-bold uppercase text-gray-900 dark:text-white">{{ p.protocol }}</span>
+                    <span v-if="p.labeledProtocol" class="text-xs px-2.5 py-1 bg-gray-100 dark:bg-zinc-800 text-gray-500 dark:text-zinc-400 rounded-lg uppercase font-bold tracking-widest border border-gray-200 dark:border-zinc-700 hover:scale-105 transition-transform">{{ p.labeledProtocol }}</span>
+                  </div>
+                  <div class="text-sm text-gray-500 dark:text-zinc-400 truncate group-hover:text-gray-800 dark:group-hover:text-zinc-200 transition-colors duration-300">
+                    {{ p.label || p.service }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-4 mb-8">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-gray-500 dark:text-zinc-500 uppercase font-bold tracking-wider">{{ t('stackView.hostPort') }}</span>
+                  <span class="font-mono font-bold text-gray-900 dark:text-white group-hover:scale-110 transition-transform origin-right">{{ p.hostPort }}</span>
+                </div>
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-gray-500 dark:text-zinc-500 uppercase font-bold tracking-wider">{{ t('stackView.containerPort') }}</span>
+                  <span class="font-mono font-medium text-gray-700 dark:text-zinc-300 group-hover:scale-110 transition-transform origin-right">{{ p.containerPort }}</span>
+                </div>
+                <div class="flex items-center justify-between text-xs">
+                  <span class="text-gray-500 dark:text-zinc-500 uppercase font-bold tracking-wider">{{ t('stackView.service') }}</span>
+                  <span class="font-mono text-gray-500 dark:text-zinc-400 truncate max-w-[120px]">{{ p.service }}</span>
+                </div>
+              </div>
+
+              <a
+                v-if="p.protocol === 'tcp'"
+                :href="appUrl(p.hostPort, p.labeledProtocol || 'http')"
+                target="_blank"
+                class="w-full flex items-center justify-center gap-3 px-6 py-4 bg-black dark:bg-white text-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 text-xs font-bold uppercase tracking-wider active:scale-95 group/link"
+              >
+                <ExternalLink :size="16" class="group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
+                {{ t('stackView.open') }}
+              </a>
+              <div v-else class="w-full flex items-center justify-center px-6 py-4 bg-gray-50 dark:bg-zinc-900/50 border border-gray-200 dark:border-zinc-800 text-gray-400 dark:text-zinc-500 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors duration-300">
+                {{ p.protocol.toUpperCase() }} {{ t('stackView.port') }}
+              </div>
             </div>
           </div>
         </div>
 
-        <div v-else class="bg-gray-50 dark:bg-zinc-900/40 border border-dashed border-gray-200 dark:border-zinc-800 rounded-xl px-6 py-5 flex items-center gap-3 text-gray-400 dark:text-zinc-500">
-          <Network :size="16" class="shrink-0" />
-          <span class="text-xs font-medium">{{ t('stackView.noPortsPublished') }}</span>
-        </div>
-      </div>
-
-      <!-- ── Caddy Auth Proxy ──────────────────────────────────────────────── -->
-      <div v-if="stack.appId !== 'caddy-yantr'" class="space-y-4">
-        <h2 class="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-500 flex items-center gap-2">
-          <ShieldCheck :size="12" />
-          {{ t('stackView.caddyAuthTitle') }}
-        </h2>
-
-        <!-- Active proxy badges -->
-        <div v-if="caddyProxies.length > 0" class="space-y-2">
-          <div class="text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-zinc-500 mb-1">{{ t('stackView.caddyProxiesRunning') }}</div>
-          <div
-            v-for="proxy in caddyProxies"
-            :key="proxy.servePort"
-            class="flex items-center justify-between gap-3 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 rounded-xl px-4 py-3"
-          >
-            <div class="flex items-center gap-2 min-w-0">
-              <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></div>
-              <span class="text-xs font-semibold text-emerald-700 dark:text-emerald-400 font-mono">
-                :{{ proxy.servePort }} → localhost:{{ proxy.targetPort }}
-              </span>
-              <span v-if="proxy.authEnabled" class="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-purple-100 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-500/30">
-                {{ proxy.authUser }}
-              </span>
-            </div>
-            <button
-              @click="disableCaddyAuth"
-              :disabled="disablingCaddy"
-              class="text-[9px] font-bold uppercase tracking-wider px-2 py-1 rounded border border-red-200 dark:border-red-500/20 bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-500/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-            >{{ disablingCaddy ? '…' : t('stackView.caddyAuthDisable') }}</button>
-          </div>
+        <div v-show="activePortTab === 'list' && enrichedPorts.length === 0" class="bg-gray-50 dark:bg-zinc-900/40 border border-dashed border-gray-200 dark:border-zinc-800 rounded-3xl p-10 flex flex-col items-center justify-center gap-6 text-gray-400 dark:text-zinc-500 hover:bg-gray-100 dark:hover:bg-zinc-800/60 transition-colors duration-500">
+          <Network :size="32" class="shrink-0 opacity-50 mb-2" />
+          <span class="text-sm font-bold uppercase tracking-widest">{{ t('stackView.noPortsPublished') }}</span>
         </div>
 
-        <div class="bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-zinc-800 rounded-xl p-4 sm:p-5 space-y-4">
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <div class="text-[11px] font-bold uppercase tracking-wider text-gray-700 dark:text-zinc-300">{{ t('stackView.caddyAuthHeading') }}</div>
-              <p class="mt-1 text-xs text-gray-500 dark:text-zinc-400">{{ t('stackView.caddyAuthHint') }}</p>
-            </div>
-            <div class="hidden sm:flex items-center justify-center w-9 h-9 rounded-lg bg-purple-50 dark:bg-purple-500/10 border border-purple-100 dark:border-purple-500/20 text-purple-500 dark:text-purple-400 shrink-0">
-              <ShieldCheck :size="16" />
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <label class="space-y-1.5">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-zinc-500">{{ t('stackView.caddyAuthTargetPort') }}</span>
-              <input
-                v-model="caddyAuth.targetPort"
-                type="number"
-                min="1"
-                max="65535"
-                placeholder="e.g. 8096"
-                class="w-full px-3 py-2.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500/30 font-mono"
-              />
-              <p class="text-[11px] text-gray-500 dark:text-zinc-400">{{ t('stackView.caddyAuthTargetHint') }}</p>
-            </label>
-            <label class="space-y-1.5">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-zinc-500">{{ t('stackView.caddyAuthServePort') }}</span>
-              <input
-                v-model="caddyAuth.servePort"
-                type="number"
-                min="1024"
-                max="65535"
-                placeholder="e.g. 9096"
-                class="w-full px-3 py-2.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500/30 font-mono"
-              />
-              <p class="text-[11px] text-gray-500 dark:text-zinc-400">{{ t('stackView.caddyAuthServeHint') }}</p>
-            </label>
-            <label class="space-y-1.5">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-zinc-500">{{ t('stackView.caddyAuthUser') }}</span>
-              <input
-                v-model="caddyAuth.user"
-                type="text"
-                placeholder="admin"
-                class="w-full px-3 py-2.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500/30 font-mono"
-              />
-            </label>
-            <label class="space-y-1.5">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-zinc-500">{{ t('stackView.caddyAuthPass') }}</span>
-              <input
-                v-model="caddyAuth.pass"
-                type="password"
-                placeholder="••••••••"
-                class="w-full px-3 py-2.5 rounded-lg border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500/30 font-mono"
-              />
-              <p class="text-[11px] text-gray-500 dark:text-zinc-400">{{ t('stackView.caddyAuthPassHint') }}</p>
-            </label>
-          </div>
-
-          <div class="flex justify-end">
-            <button
-              @click="deployCaddyAuth"
-              :disabled="deployingCaddy || !caddyAuth.servePort || !caddyAuth.targetPort"
-              class="inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-[10px] font-bold uppercase tracking-wider border border-purple-200 dark:border-purple-500/20 bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-500/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        <!-- ── Caddy Auth Proxy ──────────────────────────────────────────────── -->
+        <div v-show="activePortTab === 'caddy' && stack.appId !== 'caddy-yantr'" class="space-y-6">
+          <!-- Active proxy badges -->
+          <div v-if="caddyProxies.length > 0" class="space-y-4">
+            <div class="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-zinc-500 mb-2 ml-1">{{ t('stackView.caddyProxiesRunning') }}</div>
+            <div
+              v-for="proxy in caddyProxies"
+              :key="proxy.servePort"
+              class="group/proxy flex items-center justify-between gap-6 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 rounded-2xl px-6 py-5 hover:-translate-y-1 hover:shadow-md transition-all duration-300"
             >
-              <ShieldCheck :size="12" :class="deployingCaddy ? 'animate-pulse' : ''" />
-              {{ deployingCaddy ? t('stackView.caddyAuthDeploying') : t('stackView.caddyAuthDeploy') }}
-            </button>
+              <div class="flex items-center gap-4 min-w-0">
+                <div class="w-3 h-3 rounded-full bg-emerald-500 shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.5)] animate-pulse"></div>
+                <span class="text-sm font-bold text-emerald-700 dark:text-emerald-400 font-mono tracking-tight group-hover/proxy:scale-105 transition-transform origin-left">
+                  :{{ proxy.servePort }} → localhost:{{ proxy.targetPort }}
+                </span>
+                <span v-if="proxy.authEnabled" class="text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-lg bg-purple-100 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-500/30 hover:scale-110 transition-transform">
+                  {{ proxy.authUser }}
+                </span>
+              </div>
+              <button
+                @click="disableCaddyAuth"
+                :disabled="disablingCaddy"
+                class="text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-xl border border-red-200 dark:border-red-500/20 bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-500/30 hover:-translate-y-0.5 hover:shadow-sm transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              >{{ disablingCaddy ? '…' : t('stackView.caddyAuthDisable') }}</button>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-zinc-800 rounded-3xl p-8 sm:p-10 space-y-8 hover:shadow-lg hover:border-purple-300 dark:hover:border-purple-500/40 transition-all duration-500 ease-out group">
+            <div class="flex items-start justify-between gap-6">
+              <div>
+                <div class="text-sm font-bold uppercase tracking-wider text-gray-700 dark:text-zinc-300 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">{{ t('stackView.caddyAuthHeading') }}</div>
+                <p class="mt-2 text-sm text-gray-500 dark:text-zinc-400">{{ t('stackView.caddyAuthHint') }}</p>
+              </div>
+              <div class="hidden sm:flex items-center justify-center w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-500/10 border border-purple-100 dark:border-purple-500/20 text-purple-500 dark:text-purple-400 shrink-0 group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500">
+                <ShieldCheck :size="20" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <label class="space-y-3">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-zinc-500">{{ t('stackView.caddyAuthTargetPort') }}</span>
+                <input
+                  v-model="caddyAuth.targetPort"
+                  type="number"
+                  min="1"
+                  max="65535"
+                  placeholder="e.g. 8096"
+                  class="w-full px-5 py-4 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-base text-gray-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-purple-500/30 font-mono transition-shadow duration-300 hover:border-purple-300"
+                />
+                <p class="text-xs text-gray-500 dark:text-zinc-400">{{ t('stackView.caddyAuthTargetHint') }}</p>
+              </label>
+              <label class="space-y-3">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-zinc-500">{{ t('stackView.caddyAuthServePort') }}</span>
+                <input
+                  v-model="caddyAuth.servePort"
+                  type="number"
+                  min="1024"
+                  max="65535"
+                  placeholder="e.g. 9096"
+                  class="w-full px-5 py-4 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-base text-gray-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-purple-500/30 font-mono transition-shadow duration-300 hover:border-purple-300"
+                />
+                <p class="text-xs text-gray-500 dark:text-zinc-400">{{ t('stackView.caddyAuthServeHint') }}</p>
+              </label>
+              <label class="space-y-3">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-zinc-500">{{ t('stackView.caddyAuthUser') }}</span>
+                <input
+                  v-model="caddyAuth.user"
+                  type="text"
+                  placeholder="admin"
+                  class="w-full px-5 py-4 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-base text-gray-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-purple-500/30 font-mono transition-shadow duration-300 hover:border-purple-300"
+                />
+              </label>
+              <label class="space-y-3">
+                <span class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-zinc-500">{{ t('stackView.caddyAuthPass') }}</span>
+                <input
+                  v-model="caddyAuth.pass"
+                  type="password"
+                  placeholder="••••••••"
+                  class="w-full px-5 py-4 rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-base text-gray-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-purple-500/30 font-mono transition-shadow duration-300 hover:border-purple-300"
+                />
+                <p class="text-xs text-gray-500 dark:text-zinc-400">{{ t('stackView.caddyAuthPassHint') }}</p>
+              </label>
+            </div>
+
+            <div class="flex justify-end pt-2">
+              <button
+                @click="deployCaddyAuth"
+                :disabled="deployingCaddy || !caddyAuth.servePort || !caddyAuth.targetPort"
+                class="inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl text-xs font-bold uppercase tracking-wider border border-purple-200 dark:border-purple-500/20 bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-500/30 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed group/btn2"
+              >
+                <ShieldCheck :size="16" :class="deployingCaddy ? 'animate-ping' : 'group-hover/btn2:scale-110 group-hover/btn2:rotate-3 transition-transform duration-300'" />
+                {{ deployingCaddy ? t('stackView.caddyAuthDeploying') : t('stackView.caddyAuthDeploy') }}
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- ── Storage (Named Volumes) ────────────────────────────────────── -->
-      <div v-if="namedVolumes.length > 0" class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-500 flex items-center gap-2">
-            <HardDrive :size="12" />
+      <div v-if="namedVolumes.length > 0" class="space-y-6 animate-fadeIn">
+        <div class="flex items-center justify-between pb-2">
+          <h2 class="text-sm font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-500 flex items-center gap-3 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-300">
+            <HardDrive :size="18" class="animate-pulse" style="animation-duration: 2.5s;" />
             {{ t('stackView.storageVolumes') }}
           </h2>
           <button
             v-if="s3Configured && namedVolumes.length > 0"
             @click="backupAll"
             :disabled="backingUp"
-            class="text-[10px] uppercase tracking-wider px-3 py-1.5 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-bold"
+            class="text-xs uppercase tracking-wider px-5 py-2.5 bg-black dark:bg-white text-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 hover:-translate-y-1 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 font-bold"
           >{{ backingUp ? t('stackView.backingUp') : t('stackView.backupAll') }}</button>
         </div>
 
         <!-- S3 warning -->
-        <div v-if="!s3Configured" class="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-xl p-4 flex items-start gap-3">
-          <AlertCircle :size="14" class="text-amber-600 dark:text-amber-500 shrink-0 mt-0.5" />
-          <p class="text-xs text-amber-900 dark:text-amber-200">
+        <div v-if="!s3Configured" class="bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-3xl p-6 sm:p-8 flex items-start gap-4 hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+          <AlertCircle :size="20" class="text-amber-600 dark:text-amber-500 shrink-0 mt-0.5 animate-bounce" style="animation-duration: 2s;" />
+          <p class="text-sm text-amber-900 dark:text-amber-200 leading-relaxed">
             <span class="font-bold">{{ t('stackView.s3NotConfigured') }}</span>
-            <router-link to="/backup-config" class="underline hover:text-amber-700 font-semibold ml-1">{{ t('stackView.configureNow') }}</router-link> {{ t('stackView.toEnableBackups') }}
+            <router-link to="/backup-config" class="underline hover:text-amber-700 font-extrabold ml-1 transition-colors">{{ t('stackView.configureNow') }}</router-link> {{ t('stackView.toEnableBackups') }}
           </p>
         </div>
 
-        <div class="grid gap-4">
+        <div class="grid gap-6">
           <div
-            v-for="vol in namedVolumes"
+            v-for="(vol, i) in namedVolumes"
             :key="vol.name"
-            class="group bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-zinc-800 rounded-xl p-5 hover:border-gray-300 dark:hover:border-zinc-600 transition-all duration-300"
+            class="group bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-zinc-800 rounded-3xl p-8 sm:p-10 hover:-translate-y-2 hover:shadow-xl hover:border-blue-300 dark:hover:border-zinc-600 transition-all duration-500 ease-out"
+            :style="{ animationDelay: `${i * 100}ms` }"
           >
-            <div class="flex items-start gap-4 mb-5">
-              <div class="w-10 h-10 rounded-lg bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-gray-500 dark:text-zinc-400 shrink-0 shadow-sm group-hover:text-blue-500 transition-colors">
-                <HardDrive :size="18" />
+            <div class="flex items-start gap-6 mb-8">
+              <div class="w-16 h-16 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center text-gray-500 dark:text-zinc-400 shrink-0 shadow-sm group-hover:text-blue-500 group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                <HardDrive :size="28" />
               </div>
               <div class="min-w-0 flex-1">
-                <div class="font-bold text-sm text-gray-900 dark:text-white truncate tracking-tight" :title="vol.name">{{ vol.name }}</div>
-                <div class="text-[11px] text-gray-500 dark:text-zinc-400 font-mono truncate mt-1">{{ vol.destination }}</div>
-                <div class="text-[10px] text-gray-400 dark:text-zinc-500 mt-2 font-bold uppercase tracking-wider">
-                  {{ t('stackView.serviceLabel') }} <span class="font-medium text-gray-600 dark:text-zinc-300">{{ vol.svcName }}</span>
-                  <span v-if="s3Configured" class="ml-3">{{ t('stackView.backupLabel') }} <span class="font-medium text-gray-600 dark:text-zinc-300">{{ getLatestBackupAge(vol.name) }}</span></span>
+                <div class="font-extrabold text-lg text-gray-900 dark:text-white truncate tracking-tight group-hover:text-blue-600 transition-colors duration-300" :title="vol.name">{{ vol.name }}</div>
+                <div class="text-xs text-gray-500 dark:text-zinc-400 font-mono truncate mt-2 group-hover:translate-x-1 transition-transform duration-300">{{ vol.destination }}</div>
+                <div class="text-xs text-gray-400 dark:text-zinc-500 mt-4 font-bold uppercase tracking-wider">
+                  {{ t('stackView.serviceLabel') }} <span class="font-extrabold text-gray-600 dark:text-zinc-300 ml-1 bg-gray-100 dark:bg-zinc-800 px-2 py-1 rounded-md">{{ vol.svcName }}</span>
+                  <span v-if="s3Configured" class="ml-5">{{ t('stackView.backupLabel') }} <span class="font-extrabold text-gray-600 dark:text-zinc-300 ml-1 bg-gray-100 dark:bg-zinc-800 px-2 py-1 rounded-md">{{ getLatestBackupAge(vol.name) }}</span></span>
                 </div>
               </div>
             </div>
 
-            <div class="flex items-center gap-2 flex-wrap pt-4 border-t border-gray-100 dark:border-zinc-800">
+            <div class="flex items-center gap-4 flex-wrap pt-6 border-t border-gray-100 dark:border-zinc-800">
               <!-- Browse -->
-              <div v-if="browsingVolume[vol.name]" class="text-[10px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 animate-pulse px-3 py-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 rounded-lg">
+              <div v-if="browsingVolume[vol.name]" class="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 animate-pulse px-5 py-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 rounded-xl">
                 {{ t('stackView.startingWebDAV') }}
               </div>
               <button
                 v-else-if="!showVolumeMenu[vol.name]"
                 @click="showVolumeMenu[vol.name] = true"
-                class="flex items-center gap-1.5 px-3.5 py-2 text-[10px] font-bold uppercase tracking-wider border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-gray-700 dark:text-zinc-300 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all"
+                class="flex items-center gap-2.5 px-5 py-3 text-xs font-bold uppercase tracking-wider border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-gray-700 dark:text-zinc-300 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-800 hover:-translate-y-1 hover:shadow-md active:scale-95 transition-all duration-300 group/browse"
               >
-                <FolderOpen :size="12" />
+                <FolderOpen :size="16" class="group-hover/browse:scale-110 group-hover/browse:-rotate-6 transition-transform" />
                 {{ t('stackView.browseFiles') }}
               </button>
-              <div v-else class="flex items-center gap-1.5">
-                <button @click="browseVolume(vol.name, 60)" class="px-3 py-2 text-[10px] font-bold uppercase tracking-wider bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-all" :title="t('stackView.oneHourAccess')">1H</button>
-                <button @click="browseVolume(vol.name, 0)" class="px-3 py-2 text-[10px] font-bold uppercase tracking-wider bg-gray-200 dark:bg-zinc-800 text-gray-800 dark:text-zinc-200 rounded-lg hover:bg-gray-300 dark:hover:bg-zinc-700 transition-all" :title="t('stackView.permanentAccess')">Perm</button>
+              <div v-else class="flex items-center gap-2">
+                <button @click="browseVolume(vol.name, 60)" class="px-5 py-3 text-xs font-bold uppercase tracking-wider bg-black dark:bg-white text-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 hover:-translate-y-1 hover:shadow-md active:scale-95 transition-all duration-300" :title="t('stackView.oneHourAccess')">1H</button>
+                <button @click="browseVolume(vol.name, 0)" class="px-5 py-3 text-xs font-bold uppercase tracking-wider bg-gray-200 dark:bg-zinc-800 text-gray-800 dark:text-zinc-200 rounded-xl hover:bg-gray-300 dark:hover:bg-zinc-700 hover:-translate-y-1 hover:shadow-md active:scale-95 transition-all duration-300" :title="t('stackView.permanentAccess')">Perm</button>
               </div>
               <!-- Backup -->
               <button
                 @click="backupVolume(vol.svcId)"
                 :disabled="backingUp || !s3Configured"
-                class="flex items-center gap-1.5 px-3.5 py-2 text-[10px] font-bold uppercase tracking-wider bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                class="flex items-center gap-2.5 px-5 py-3 text-xs font-bold uppercase tracking-wider bg-black dark:bg-white text-white dark:text-black rounded-xl hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-40 disabled:cursor-not-allowed hover:-translate-y-1 hover:shadow-md active:scale-95 transition-all duration-300"
               >{{ t('stackView.backup') }}</button>
               <!-- Restore -->
               <button
                 @click="toggleRestoreMenu(vol.name)"
                 :disabled="!hasBackups(vol.name) || !s3Configured"
-                class="flex items-center gap-1.5 px-3.5 py-2 text-[10px] font-bold uppercase tracking-wider border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-gray-700 dark:text-zinc-300 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                class="flex items-center gap-2.5 px-5 py-3 text-xs font-bold uppercase tracking-wider border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-gray-700 dark:text-zinc-300 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-800 disabled:opacity-30 disabled:cursor-not-allowed hover:-translate-y-1 hover:shadow-md active:scale-95 transition-all duration-300"
               >{{ t('stackView.restore') }}</button>
             </div>
 
             <!-- Restore dropdown -->
             <div
               v-if="showRestoreMenu[vol.name] && hasBackups(vol.name)"
-              class="mt-4 pt-4 border-t border-gray-200 dark:border-zinc-800"
+              class="mt-6 pt-6 border-t border-gray-200 dark:border-zinc-800 animate-fadeIn"
             >
-              <div class="text-[10px] font-bold uppercase tracking-widest text-gray-400 dark:text-zinc-500 mb-3">{{ t('stackView.availableBackups') }}</div>
-              <div class="space-y-2 max-h-40 overflow-y-auto scrollbar-thin">
+              <div class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-zinc-500 mb-4">{{ t('stackView.availableBackups') }}</div>
+              <div class="space-y-3 max-h-60 overflow-y-auto scrollbar-thin rounded-xl p-2 bg-gray-50 dark:bg-black/20">
                 <div
                    v-for="backup in volumeBackups[vol.name]"
                    :key="backup.snapshotId"
-                   class="flex items-center justify-between py-2.5 px-3 bg-gray-50 dark:bg-zinc-900/50 hover:bg-gray-100 dark:hover:bg-zinc-900 rounded-lg border border-gray-200 dark:border-zinc-800 transition-all"
+                   class="flex items-center justify-between py-4 px-5 bg-white dark:bg-zinc-900/80 hover:bg-gray-50 dark:hover:bg-zinc-800 rounded-xl border border-gray-200 dark:border-zinc-700 transition-all duration-300 hover:-translate-x-1 hover:shadow-sm"
                  >
                    <div class="flex-1 min-w-0">
-                     <div class="font-mono text-[11px] font-medium text-gray-900 dark:text-white">{{ formatBackupDate(backup.timestamp) }}</div>
-                     <div class="text-gray-500 dark:text-zinc-400 text-[10px] mt-0.5 font-bold uppercase tracking-wider">{{ backup.sizeMB != null ? backup.sizeMB + ' MB' : '' }}</div>
+                     <div class="font-mono text-xs font-bold text-gray-900 dark:text-white">{{ formatBackupDate(backup.timestamp) }}</div>
+                     <div class="text-gray-500 dark:text-zinc-400 text-xs mt-1.5 font-bold uppercase tracking-wider">{{ backup.sizeMB != null ? backup.sizeMB + ' MB' : '' }}</div>
                    </div>
-                   <div class="flex gap-2 ml-3">
-                     <button @click="restoreBackup(vol.name, backup.snapshotId)" class="px-2.5 py-1.5 border border-gray-300 dark:border-zinc-700 text-gray-700 dark:text-zinc-300 bg-white dark:bg-[#0A0A0A] rounded-md hover:bg-gray-50 dark:hover:bg-zinc-800 transition-all text-[10px] font-bold uppercase tracking-wider">{{ t('stackView.restore') }}</button>
-                     <button @click="deleteBackupFile(vol.name, backup.snapshotId)" class="px-2.5 py-1.5 border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-500 bg-red-50 dark:bg-red-500/10 rounded-md hover:bg-red-100 dark:hover:bg-red-500/20 transition-all text-[10px] font-bold uppercase tracking-wider">{{ t('common.delete') }}</button>
+                   <div class="flex gap-3 ml-4">
+                     <button @click="restoreBackup(vol.name, backup.snapshotId)" class="px-4 py-2 border border-gray-300 dark:border-zinc-600 text-gray-700 dark:text-zinc-300 bg-white dark:bg-[#0A0A0A] rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 hover:scale-105 active:scale-95 transition-all duration-300 text-xs font-bold uppercase tracking-wider">{{ t('stackView.restore') }}</button>
+                     <button @click="deleteBackupFile(vol.name, backup.snapshotId)" class="px-4 py-2 border border-red-200 dark:border-red-500/20 text-red-600 dark:text-red-500 bg-red-50 dark:bg-red-500/10 rounded-lg hover:bg-red-100 dark:hover:bg-red-500/30 hover:scale-105 active:scale-95 transition-all duration-300 text-xs font-bold uppercase tracking-wider">{{ t('common.delete') }}</button>
                    </div>
                  </div>
               </div>
@@ -1030,29 +1056,29 @@ onUnmounted(() => {
       </div>
 
       <!-- Bind / tmpfs mounts compact list -->
-      <div v-if="otherMounts.length > 0" class="space-y-4">
-        <h2 class="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-500 flex items-center gap-2">
-          <HardDrive :size="12" />
+      <div v-if="otherMounts.length > 0" class="space-y-6 animate-fadeIn">
+        <h2 class="text-sm font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-500 flex items-center gap-3 pb-2">
+          <HardDrive :size="18" class="animate-pulse" style="animation-duration: 3s;" />
           {{ t('stackView.bindMounts') }}
         </h2>
-        <div class="overflow-x-auto bg-white dark:bg-[#0A0A0A] rounded-xl border border-gray-200 dark:border-zinc-800">
+        <div class="overflow-x-auto bg-white dark:bg-[#0A0A0A] rounded-3xl border border-gray-200 dark:border-zinc-800 shadow-sm hover:shadow-lg transition-shadow duration-500">
           <table class="w-full text-left min-w-120">
             <thead>
               <tr class="bg-gray-50 dark:bg-zinc-900 border-b border-gray-200 dark:border-zinc-800">
-                <th class="px-5 py-3 text-[9px] font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-400">{{ t('stackView.type') }}</th>
-                <th class="px-5 py-3 text-[9px] font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-400">{{ t('stackView.hostPath') }}</th>
-                <th class="px-5 py-3 text-[9px] font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-400">{{ t('stackView.containerPath') }}</th>
+                <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-400">{{ t('stackView.type') }}</th>
+                <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-400">{{ t('stackView.hostPath') }}</th>
+                <th class="px-8 py-5 text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-400">{{ t('stackView.containerPath') }}</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-100 dark:divide-zinc-800">
-              <tr v-for="(m, i) in otherMounts" :key="i" class="hover:bg-gray-50 dark:hover:bg-zinc-900/50 transition-colors">
-                <td class="px-5 py-3">
-                  <span class="text-[9px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-md border"
+              <tr v-for="(m, i) in otherMounts" :key="i" class="hover:bg-gray-50 dark:hover:bg-zinc-900/50 transition-colors duration-300 group/row">
+                <td class="px-8 py-5">
+                  <span class="text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-lg border inline-block group-hover/row:scale-105 transition-transform"
                     :class="m.type === 'bind' ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-500/20' : 'bg-gray-100 dark:bg-zinc-800 text-gray-500 dark:text-zinc-400 border-gray-200 dark:border-zinc-700'"
                   >{{ m.type }}</span>
                 </td>
-                <td class="px-5 py-3 font-mono text-[11px] text-gray-700 dark:text-zinc-300 break-all max-w-xs">{{ m.source || '—' }}</td>
-                <td class="px-5 py-3 font-mono text-[11px] text-gray-500 dark:text-zinc-400 break-all max-w-xs">{{ m.destination }}</td>
+                <td class="px-8 py-5 font-mono text-xs text-gray-700 dark:text-zinc-300 break-all max-w-sm group-hover/row:text-gray-900 dark:group-hover/row:text-white transition-colors">{{ m.source || '—' }}</td>
+                <td class="px-8 py-5 font-mono text-xs text-gray-500 dark:text-zinc-400 break-all max-w-sm group-hover/row:text-gray-700 dark:group-hover/row:text-zinc-300 transition-colors">{{ m.destination }}</td>
               </tr>
             </tbody>
           </table>
@@ -1060,85 +1086,88 @@ onUnmounted(() => {
       </div>
 
       <!-- ── Containers ─────────────────────────────────────────────────────── -->
-      <div class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-500 flex items-center gap-2">
-            <Server :size="12" />
+      <div class="space-y-6 animate-fadeIn">
+        <div class="flex items-center justify-between pb-2">
+          <h2 class="text-sm font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-500 flex items-center gap-3">
+            <Server :size="18" class="animate-bounce" style="animation-duration: 2.5s;" />
             {{ t('stackView.containers') }}
           </h2>
-          <span class="text-[10px] font-mono text-gray-500 bg-gray-100 dark:bg-zinc-800 px-2 py-0.5 rounded">
+          <span class="text-xs font-mono font-bold text-gray-500 bg-gray-100 dark:bg-zinc-800 px-3 py-1 rounded-lg hover:scale-110 transition-transform cursor-default">
             {{ stack.services.length }}
           </span>
         </div>
 
-        <div class="grid gap-4">
+        <div class="grid gap-6">
           <div
-            v-for="svc in stack.services"
+            v-for="(svc, i) in stack.services"
             :key="svc.id"
             @click="router.push(`/containers/${svc.id}`)"
-            class="group cursor-pointer bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-zinc-800 rounded-xl p-5 hover:border-blue-300 dark:hover:border-blue-500/40 hover:shadow-sm transition-all duration-200"
+            class="group cursor-pointer bg-white dark:bg-[#0A0A0A] border border-gray-200 dark:border-zinc-800 rounded-3xl p-8 sm:p-10 hover:border-blue-400 dark:hover:border-blue-500/60 hover:-translate-y-2 hover:shadow-xl transition-all duration-500 ease-out"
+            :style="{ animationDelay: `${i * 100}ms` }"
           >
             <!-- Top row: icon + name/image + uptime -->
-            <div class="flex items-start gap-4 mb-5">
+            <div class="flex items-start gap-6 mb-8">
               <!-- State icon -->
               <div
-                class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 shadow-sm relative transition-colors"
+                class="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 shadow-sm relative transition-all duration-500 group-hover:scale-110 group-hover:rotate-6"
                 :class="svc.state === 'running'
                   ? 'bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/20 text-green-600 dark:text-green-500'
                   : 'bg-gray-50 dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 text-gray-400 dark:text-zinc-500'"
               >
-                <Server :size="18" />
+                <Server :size="28" />
                 <!-- Ping indicator for running -->
                 <span
                   v-if="svc.state === 'running'"
-                  class="absolute -top-1 -right-1 flex h-2.5 w-2.5"
+                  class="absolute -top-1.5 -right-1.5 flex h-4 w-4"
                 >
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500 border border-white dark:border-[#0A0A0A]"></span>
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 duration-1000"></span>
+                  <span class="relative inline-flex rounded-full h-4 w-4 bg-green-500 border-2 border-white dark:border-[#0A0A0A]"></span>
                 </span>
               </div>
 
               <!-- Name + image + badges -->
               <div class="min-w-0 flex-1">
-                <div class="flex items-center gap-2.5 flex-wrap mb-1">
-                  <span class="font-bold text-gray-900 dark:text-white text-sm tracking-tight">{{ svc.service }}</span>
+                <div class="flex items-center gap-4 flex-wrap mb-2">
+                  <span class="font-extrabold text-gray-900 dark:text-white text-lg tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">{{ svc.service }}</span>
                   <span
-                    class="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded-md border"
+                    class="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-lg border hover:scale-105 transition-transform"
                     :class="svc.state === 'running'
-                      ? 'bg-green-50 dark:bg-green-500/10 text-green-600 dark:text-green-500 border-green-200 dark:border-green-500/20'
+                      ? 'bg-green-50 dark:bg-green-500/10 text-green-600 dark:text-green-500 border-green-200 dark:border-green-500/20 shadow-[0_0_10px_rgba(16,185,129,0.1)]'
                       : 'bg-gray-100 dark:bg-zinc-800 text-gray-500 dark:text-zinc-400 border-gray-200 dark:border-zinc-700'"
                   >{{ svc.state }}</span>
                   <span
                     v-if="svc.hasYantrLabel"
-                    class="text-[9px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded-md border bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-500/20"
+                    class="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-lg border bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-500/20 hover:scale-105 transition-transform"
                   >{{ t('stackView.primary') }}</span>
                 </div>
-                <div class="font-mono text-[11px] text-gray-500 dark:text-zinc-400 truncate" :title="svc.image">{{ svc.image }}</div>
+                <div class="font-mono text-sm text-gray-500 dark:text-zinc-400 truncate group-hover:translate-x-1 transition-transform duration-300" :title="svc.image">{{ svc.image }}</div>
               </div>
 
               <!-- Uptime + nav hint -->
-              <div class="flex items-center gap-2 shrink-0">
-                <div v-if="formatUptime(svc)" class="text-right hidden sm:block">
-                  <div class="text-[9px] uppercase font-bold text-gray-400 dark:text-zinc-500 tracking-wider mb-0.5">{{ t('stackView.uptime') }}</div>
-                  <div class="font-mono font-medium text-xs tabular-nums text-gray-700 dark:text-zinc-300">{{ formatUptime(svc) }}</div>
+              <div class="flex items-center gap-4 shrink-0">
+                <div v-if="formatUptime(svc)" class="text-right hidden sm:block group-hover:scale-105 transition-transform duration-300">
+                  <div class="text-xs uppercase font-bold text-gray-400 dark:text-zinc-500 tracking-widest mb-1">{{ t('stackView.uptime') }}</div>
+                  <div class="font-mono font-extrabold text-sm tabular-nums text-gray-700 dark:text-zinc-300">{{ formatUptime(svc) }}</div>
                 </div>
-                <div v-else-if="svc.state !== 'running'" class="text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-zinc-600 hidden sm:block self-center">{{ t('stackView.stopped') }}</div>
-                <ChevronRight :size="16" class="text-gray-300 dark:text-zinc-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-200" />
+                <div v-else-if="svc.state !== 'running'" class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-zinc-600 hidden sm:block self-center">{{ t('stackView.stopped') }}</div>
+                <div class="w-10 h-10 rounded-full bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center group-hover:bg-blue-50 dark:group-hover:bg-blue-900/30 group-hover:border-blue-200 dark:group-hover:border-blue-800/50 transition-colors duration-300">
+                  <ChevronRight :size="20" class="text-gray-400 dark:text-zinc-500 group-hover:text-blue-500 group-hover:translate-x-1 transition-all duration-300" />
+                </div>
               </div>
             </div>
 
             <!-- Bottom row: ports + hover hint -->
-            <div class="flex items-center justify-between gap-3 flex-wrap pt-4 border-t border-gray-100 dark:border-zinc-800">
+            <div class="flex items-center justify-between gap-4 flex-wrap pt-6 border-t border-gray-100 dark:border-zinc-800">
               <!-- Ports -->
-              <div class="flex items-center gap-2 flex-wrap">
+              <div class="flex items-center gap-3 flex-wrap">
                 <!-- Published ports -->
                 <template v-if="svc.rawPorts.filter(p => p.PublicPort).length > 0">
                   <span
                     v-for="p in [...new Map(svc.rawPorts.filter(rp => rp.PublicPort).map(rp => [`${rp.PublicPort}:${rp.PrivatePort}:${rp.Type}`, rp])).values()]"
                     :key="`${p.PublicPort}-${p.Type}`"
-                    class="inline-flex items-center gap-1.5 text-[10px] font-mono px-2 py-1 rounded-md bg-green-50 dark:bg-green-500/10 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-500/20"
+                    class="inline-flex items-center gap-2 text-xs font-mono font-bold px-3 py-1.5 rounded-lg bg-green-50 dark:bg-green-500/10 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-500/20 hover:scale-105 transition-transform"
                   >
-                    <Network :size="10" />
+                    <Network :size="14" />
                     :{{ p.PublicPort }} → {{ p.PrivatePort }}
                   </span>
                 </template>
@@ -1147,18 +1176,18 @@ onUnmounted(() => {
                   <span
                     v-for="p in [...new Map(svc.rawPorts.map(rp => [`${rp.PrivatePort}:${rp.Type}`, rp])).values()]"
                     :key="`internal-${p.PrivatePort}-${p.Type}`"
-                    class="inline-flex items-center gap-1.5 text-[10px] font-mono px-2 py-1 rounded-md bg-gray-50 dark:bg-zinc-900 text-gray-500 dark:text-zinc-400 border border-gray-200 dark:border-zinc-800"
+                    class="inline-flex items-center gap-2 text-xs font-mono font-bold px-3 py-1.5 rounded-lg bg-gray-50 dark:bg-zinc-900 text-gray-500 dark:text-zinc-400 border border-gray-200 dark:border-zinc-800 hover:scale-105 transition-transform"
                     :title="t('stackView.internalPort')"
                   >
-                    <Network :size="10" />
+                    <Network :size="14" />
                     {{ p.PrivatePort }}/{{ p.Type }}
                   </span>
                 </template>
               </div>
 
               <!-- Hover hint (visible on hover, acts as affordance for mobile too) -->
-              <span class="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-blue-500 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0 select-none">
-                <Terminal :size="11" />
+              <span class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-500 dark:text-blue-400 opacity-0 group-hover:opacity-100 group-hover:-translate-x-2 transition-all duration-300 shrink-0 select-none">
+                <Terminal :size="14" class="animate-bounce" style="animation-duration: 2s;" />
                 {{ t('stackView.logs') }}
               </span>
             </div>
@@ -1167,45 +1196,46 @@ onUnmounted(() => {
       </div>
 
       <!-- ── Configuration (Env Vars) ───────────────────────────────────────── -->
-      <div v-if="stackEnvVars.length > 0" class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-500 flex items-center gap-2">
-            <Settings2 :size="12" />
+      <div v-if="stackEnvVars.length > 0" class="space-y-6 animate-fadeIn mb-16">
+        <div class="flex items-center justify-between pb-2">
+          <h2 class="text-sm font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-500 flex items-center gap-3">
+            <Settings2 :size="18" class="animate-spin-slow" />
             {{ t('stackView.configurationVariables') }}
           </h2>
-          <span class="text-[10px] font-mono text-gray-500 bg-gray-100 dark:bg-zinc-800 px-2 py-0.5 rounded">{{ stackEnvVars.length }}</span>
+          <span class="text-xs font-mono font-bold text-gray-500 bg-gray-100 dark:bg-zinc-800 px-3 py-1 rounded-lg cursor-default hover:scale-110 transition-transform">{{ stackEnvVars.length }}</span>
         </div>
 
-        <div class="bg-white dark:bg-[#0A0A0A] rounded-xl border border-gray-200 dark:border-zinc-800 overflow-hidden divide-y divide-gray-100 dark:divide-zinc-800">
+        <div class="bg-white dark:bg-[#0A0A0A] rounded-3xl border border-gray-200 dark:border-zinc-800 overflow-hidden divide-y divide-gray-100 dark:divide-zinc-800 shadow-sm hover:shadow-lg transition-shadow duration-500">
           <div
-            v-for="v in stackEnvVars"
+            v-for="(v, i) in stackEnvVars"
             :key="v.key"
-            class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 px-5 py-3.5 hover:bg-gray-50 dark:hover:bg-zinc-900/50 transition-colors"
+            class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 px-8 py-5 hover:bg-gray-50 dark:hover:bg-zinc-900/50 transition-colors duration-300 group/env"
+            :style="{ animationDelay: `${i * 30}ms` }"
           >
             <!-- Key -->
-            <div class="sm:w-64 shrink-0 min-w-0">
-              <span class="font-mono text-[11px] font-bold text-gray-700 dark:text-zinc-300 truncate block" :title="v.key">{{ v.key }}</span>
+            <div class="sm:w-80 shrink-0 min-w-0">
+              <span class="font-mono text-sm font-extrabold text-gray-700 dark:text-zinc-300 truncate block group-hover/env:text-blue-600 dark:group-hover/env:text-blue-400 transition-colors duration-300" :title="v.key">{{ v.key }}</span>
               <span v-if="stackEnvVars.some(x => x.key === v.key && x.service !== v.service) || stack.services.length > 1"
-                class="text-[9px] font-bold uppercase tracking-widest text-gray-400 dark:text-zinc-500 mt-0.5 block">{{ v.service }}</span>
+                class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-zinc-500 mt-1.5 block group-hover/env:translate-x-1 transition-transform">{{ v.service }}</span>
             </div>
 
             <!-- Value -->
-            <div class="flex-1 min-w-0 flex items-center justify-between gap-3">
+            <div class="flex-1 min-w-0 flex items-center justify-between gap-4">
               <span
                 v-if="!isSensitive(v.key) || revealedVars.has(v.key)"
-                class="font-mono text-[11px] text-gray-900 dark:text-zinc-100 break-all select-all"
+                class="font-mono text-sm text-gray-900 dark:text-zinc-100 break-all select-all group-hover/env:bg-blue-50 dark:group-hover/env:bg-blue-900/20 px-2 py-1 -ml-2 rounded-md transition-colors duration-300"
               >{{ v.value || '—' }}</span>
-              <span v-else class="font-mono text-[11px] text-gray-400 dark:text-zinc-600 tracking-widest select-none mt-1">••••••••</span>
+              <span v-else class="font-mono text-sm text-gray-400 dark:text-zinc-600 tracking-widest select-none mt-1">••••••••</span>
               
               <!-- Reveal toggle for sensitive vars -->
               <button
                 v-if="isSensitive(v.key)"
                 @click="toggleReveal(v.key)"
-                class="shrink-0 p-1.5 rounded-md text-gray-400 hover:text-gray-700 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all"
+                class="shrink-0 p-2.5 rounded-xl text-gray-400 bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 hover:text-gray-700 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-zinc-800 hover:scale-110 active:scale-95 transition-all duration-300 shadow-sm"
                 :title="revealedVars.has(v.key) ? t('stackView.hide') : t('stackView.show')"
               >
-                <EyeOff v-if="revealedVars.has(v.key)" :size="14" />
-                <Eye v-else :size="14" />
+                <EyeOff v-if="revealedVars.has(v.key)" :size="16" class="animate-pulse" />
+                <Eye v-else :size="16" />
               </button>
             </div>
 
