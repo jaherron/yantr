@@ -208,7 +208,7 @@ const backingUp = ref(false);
 const showRestoreMenu = ref({});
 
 // Tabs for port options
-const activePortTab = ref("list"); // 'list' | 'add' | 'caddy'
+const activePortTab = ref("add"); // 'add' | 'caddy'
 
 // Top-level section navigation
 const activeSection = ref("network"); // 'network' | 'containers' | 'storage' | 'config'
@@ -713,6 +713,57 @@ onUnmounted(() => {
         </div>
       </div>
 
+      <!-- ── Ports Overview ─────────────────────────────────────────────────────────── -->
+      <div class="space-y-4 animate-fadeIn">
+        <div class="flex items-center justify-between gap-3 mb-1">
+          <div class="text-xs font-bold uppercase tracking-widest" style="color: var(--text-secondary)">
+            {{ t("stackView.ports") || "Ports" }}
+          </div>
+          <div v-if="hasDescribedPorts" class="flex gap-0.5 p-0.5 rounded-lg" style="background: var(--surface-muted)">
+            <button @click="showOnlyDescribedPorts = false" :class="!showOnlyDescribedPorts ? 'bg-white dark:bg-zinc-800 smooth-shadow' : 'hover:bg-white/60 dark:hover:bg-zinc-800/60'" :style="!showOnlyDescribedPorts ? 'color: var(--text-primary)' : 'color: var(--text-secondary)'" class="px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-md transition-all hover:scale-[1.02]">{{ t("stackView.allPorts") }}</button>
+            <button @click="showOnlyDescribedPorts = true" :class="showOnlyDescribedPorts ? 'bg-white dark:bg-zinc-800 smooth-shadow' : 'hover:bg-white/60 dark:hover:bg-zinc-800/60'" :style="showOnlyDescribedPorts ? 'color: var(--text-primary)' : 'color: var(--text-secondary)'" class="px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-md transition-all hover:scale-[1.02]">{{ t("stackView.described") }}</button>
+          </div>
+        </div>
+
+        <div v-if="enrichedPorts.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div
+            v-for="(p, i) in visiblePorts"
+            :key="i"
+            class="rounded-2xl p-5 border border-gray-100 dark:border-zinc-800 smooth-shadow hover:smooth-shadow-lg hover:-translate-y-1 transition-all duration-300 group"
+            style="background: var(--surface)"
+          >
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center border border-gray-100 dark:border-zinc-800 group-hover:scale-110 group-hover:-rotate-6 transition-all shrink-0" style="background: var(--surface-muted)">
+                <Network :size="16" class="text-gray-500 dark:text-zinc-400 group-hover:text-blue-500 transition-colors" />
+              </div>
+              <div class="min-w-0">
+                <div class="text-xs font-bold truncate" style="color: var(--text-primary)">{{ p.label || p.service }}</div>
+                <div class="text-[10px] font-bold uppercase tracking-widest mt-0.5" style="color: var(--text-secondary)">{{ p.protocol }}{{ p.labeledProtocol ? ` / ${p.labeledProtocol}` : "" }}</div>
+              </div>
+            </div>
+            <div class="space-y-2 mb-4">
+              <div class="flex justify-between text-xs">
+                <span class="font-bold uppercase tracking-wider" style="color: var(--text-secondary)">{{ t("stackView.hostPort") }}</span>
+                <span class="font-mono font-bold" style="color: var(--text-primary)">{{ p.hostPort }}</span>
+              </div>
+              <div class="flex justify-between text-xs">
+                <span class="font-bold uppercase tracking-wider" style="color: var(--text-secondary)">{{ t("stackView.containerPort") }}</span>
+                <span class="font-mono" style="color: var(--text-secondary)">{{ p.containerPort }}</span>
+              </div>
+            </div>
+            <a v-if="p.protocol === 'tcp'" :href="appUrl(p.hostPort, p.labeledProtocol || 'http')" target="_blank" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-gray-900 dark:bg-zinc-100 text-white dark:text-gray-900 hover:opacity-90 hover:scale-[1.02] active:scale-95 transition-all">
+              <ExternalLink :size="13" />{{ t("stackView.open") }}
+            </a>
+            <div v-else class="flex items-center justify-center w-full py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider border border-gray-200 dark:border-zinc-800" style="color: var(--text-secondary)">{{ p.protocol.toUpperCase() }} {{ t("stackView.port") }}</div>
+          </div>
+        </div>
+
+        <div v-else class="rounded-2xl p-10 flex flex-col items-center justify-center gap-3 border-2 border-dashed border-gray-200 dark:border-zinc-800">
+          <Network :size="28" class="text-gray-300 dark:text-zinc-700" />
+          <span class="text-xs font-bold uppercase tracking-widest" style="color: var(--text-secondary)">{{ t("stackView.noPortsPublished") }}</span>
+        </div>
+      </div>
+
       <!-- ── Section Navigation ───────────────────────────────────────────────────────── -->
       <div class="flex gap-1 p-1 rounded-xl" style="background: var(--surface-muted)">
         <button
@@ -819,12 +870,6 @@ onUnmounted(() => {
       <div v-show="activeSection === 'network'" class="space-y-4 animate-fadeIn">
         <div class="flex gap-1 p-1 rounded-lg w-fit" style="background: var(--surface-muted)">
           <button
-            @click="activePortTab = 'list'"
-            :class="activePortTab === 'list' ? 'bg-white dark:bg-zinc-800 smooth-shadow' : 'hover:bg-white/60 dark:hover:bg-zinc-800/60'"
-            :style="activePortTab === 'list' ? 'color: var(--text-primary)' : 'color: var(--text-secondary)'"
-            class="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-md transition-all hover:scale-[1.02]"
-          >{{ t("stackView.ports") || "Ports" }}</button>
-          <button
             @click="activePortTab = 'add'"
             :class="activePortTab === 'add' ? 'bg-white dark:bg-zinc-800 smooth-shadow' : 'hover:bg-white/60 dark:hover:bg-zinc-800/60'"
             :style="activePortTab === 'add' ? 'color: var(--text-primary)' : 'color: var(--text-secondary)'"
@@ -837,52 +882,6 @@ onUnmounted(() => {
             :style="activePortTab === 'caddy' ? 'color: var(--text-primary)' : 'color: var(--text-secondary)'"
             class="flex items-center gap-1.5 px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-md transition-all hover:scale-[1.02]"
           ><ShieldCheck :size="11" />{{ t("stackView.auth") || "Auth" }}</button>
-        </div>
-
-        <!-- Port list -->
-        <div v-show="activePortTab === 'list'">
-          <div v-if="hasDescribedPorts" class="flex justify-end mb-3">
-            <div class="flex gap-0.5 p-0.5 rounded-lg" style="background: var(--surface-muted)">
-              <button @click="showOnlyDescribedPorts = false" :class="!showOnlyDescribedPorts ? 'bg-white dark:bg-zinc-800 smooth-shadow' : 'hover:bg-white/60 dark:hover:bg-zinc-800/60'" :style="!showOnlyDescribedPorts ? 'color: var(--text-primary)' : 'color: var(--text-secondary)'" class="px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-md transition-all hover:scale-[1.02]">{{ t("stackView.allPorts") }}</button>
-              <button @click="showOnlyDescribedPorts = true" :class="showOnlyDescribedPorts ? 'bg-white dark:bg-zinc-800 smooth-shadow' : 'hover:bg-white/60 dark:hover:bg-zinc-800/60'" :style="showOnlyDescribedPorts ? 'color: var(--text-primary)' : 'color: var(--text-secondary)'" class="px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-md transition-all hover:scale-[1.02]">{{ t("stackView.described") }}</button>
-            </div>
-          </div>
-          <div v-if="enrichedPorts.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            <div
-              v-for="(p, i) in visiblePorts"
-              :key="i"
-              class="rounded-2xl p-5 border border-gray-100 dark:border-zinc-800 smooth-shadow hover:smooth-shadow-lg hover:-translate-y-1 transition-all duration-300 group"
-              style="background: var(--surface)"
-            >
-              <div class="flex items-center gap-3 mb-4">
-                <div class="w-10 h-10 rounded-xl flex items-center justify-center border border-gray-100 dark:border-zinc-800 group-hover:scale-110 group-hover:-rotate-6 transition-all shrink-0" style="background: var(--surface-muted)">
-                  <Network :size="16" class="text-gray-500 dark:text-zinc-400 group-hover:text-blue-500 transition-colors" />
-                </div>
-                <div class="min-w-0">
-                  <div class="text-xs font-bold truncate" style="color: var(--text-primary)">{{ p.label || p.service }}</div>
-                  <div class="text-[10px] font-bold uppercase tracking-widest mt-0.5" style="color: var(--text-secondary)">{{ p.protocol }}{{ p.labeledProtocol ? ` / ${p.labeledProtocol}` : "" }}</div>
-                </div>
-              </div>
-              <div class="space-y-2 mb-4">
-                <div class="flex justify-between text-xs">
-                  <span class="font-bold uppercase tracking-wider" style="color: var(--text-secondary)">{{ t("stackView.hostPort") }}</span>
-                  <span class="font-mono font-bold" style="color: var(--text-primary)">{{ p.hostPort }}</span>
-                </div>
-                <div class="flex justify-between text-xs">
-                  <span class="font-bold uppercase tracking-wider" style="color: var(--text-secondary)">{{ t("stackView.containerPort") }}</span>
-                  <span class="font-mono" style="color: var(--text-secondary)">{{ p.containerPort }}</span>
-                </div>
-              </div>
-              <a v-if="p.protocol === 'tcp'" :href="appUrl(p.hostPort, p.labeledProtocol || 'http')" target="_blank" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-gray-900 dark:bg-zinc-100 text-white dark:text-gray-900 hover:opacity-90 hover:scale-[1.02] active:scale-95 transition-all">
-                <ExternalLink :size="13" />{{ t("stackView.open") }}
-              </a>
-              <div v-else class="flex items-center justify-center w-full py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider border border-gray-200 dark:border-zinc-800" style="color: var(--text-secondary)">{{ p.protocol.toUpperCase() }} {{ t("stackView.port") }}</div>
-            </div>
-          </div>
-          <div v-else class="rounded-2xl p-10 flex flex-col items-center justify-center gap-3 border-2 border-dashed border-gray-200 dark:border-zinc-800">
-            <Network :size="28" class="text-gray-300 dark:text-zinc-700" />
-            <span class="text-xs font-bold uppercase tracking-widest" style="color: var(--text-secondary)">{{ t("stackView.noPortsPublished") }}</span>
-          </div>
         </div>
 
         <!-- Open Port form -->
