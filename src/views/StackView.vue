@@ -768,9 +768,9 @@ onUnmounted(() => {
       <div class="flex gap-1 p-1 rounded-xl" style="background: var(--surface-muted)">
         <button
           v-for="sec in [
+              ...(namedVolumes.length > 0 || otherMounts.length > 0 ? [{ id: 'storage', label: t('stackView.storageVolumes'), icon: HardDrive }] : []),
             { id: 'network', label: t('stackView.networkAccess'), icon: Network },
             { id: 'containers', label: t('stackView.containers'), icon: Server },
-            ...(namedVolumes.length > 0 || otherMounts.length > 0 ? [{ id: 'storage', label: t('stackView.storageVolumes'), icon: HardDrive }] : []),
             ...(stackEnvVars.length > 0 ? [{ id: 'config', label: t('stackView.configurationVariables'), icon: Settings2 }] : []),
           ]"
           :key="sec.id"
