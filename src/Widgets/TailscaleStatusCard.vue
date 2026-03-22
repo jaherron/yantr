@@ -134,8 +134,8 @@ async function deploy() {
 
 <template>
   <!-- Setup state: no tailscale container found -->
-  <div v-if="!tailscaleContainer" class="relative group h-full flex flex-col bg-white dark:bg-[#0A0A0A] rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-black/5 dark:hover:shadow-black/40 hover:-translate-y-0.5">
-    <div class="absolute top-0 left-0 w-full h-0.5 bg-violet-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+  <div v-if="!tailscaleContainer" class="relative group h-full flex flex-col rounded-xl bg-white dark:bg-[#0A0A0A] overflow-hidden transition-all duration-400 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-black/5 dark:hover:shadow-black/40">
+    <div class="absolute top-0 left-0 h-0.5 w-full bg-blue-500 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
 
     <transition
       enter-active-class="transition-all duration-500 ease-out"
@@ -153,14 +153,14 @@ async function deploy() {
       </div>
     </transition>
 
-    <div class="relative z-10 p-6 flex flex-col h-full gap-5">
-      <div class="flex items-center justify-between gap-4">
+    <div class="relative z-10 flex h-full flex-col p-6">
+      <div class="flex items-start justify-between gap-4">
         <div class="flex items-center gap-3 min-w-0">
-          <div class="w-10 h-10 rounded-lg bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center shrink-0 group-hover:scale-105 transition-all duration-500">
-            <Shield class="w-5 h-5 text-violet-500" />
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-gray-100 bg-gray-50 transition-all duration-500 group-hover:border-zinc-700 dark:border-zinc-800 dark:bg-zinc-900">
+            <Shield class="h-5 w-5 text-gray-400 transition-colors group-hover:text-blue-500 dark:text-zinc-500" />
           </div>
           <div class="min-w-0">
-            <h3 class="text-sm font-semibold text-gray-900 dark:text-white tracking-tight">{{ t('tailscaleSetupCard.tailscale') }}</h3>
+            <h3 class="text-sm font-semibold tracking-tight text-gray-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">{{ t('tailscaleSetupCard.tailscale') }}</h3>
             <div class="text-[11px] font-medium text-gray-500 dark:text-zinc-400 uppercase tracking-wider mt-1">{{ t('tailscaleSetupCard.meshVpn') }}</div>
           </div>
         </div>
@@ -170,18 +170,26 @@ async function deploy() {
         </div>
       </div>
 
-      <div class="grid grid-cols-1 gap-2 sm:grid-cols-3">
+      <div class="mt-6">
+        <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-zinc-500">{{ t('tailscaleSetupCard.meshVpn') }}</div>
+        <div class="mt-2 text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">Private access</div>
+        <p class="mt-2 max-w-xl text-sm leading-relaxed text-gray-500 dark:text-zinc-400">
+          Join this host to your Tailscale network with an auth key. Deploy once, then reach services securely without opening public ports.
+        </p>
+      </div>
+
+      <div class="mt-5 space-y-3">
         <div
           v-for="feature in features"
           :key="feature.label"
-          class="flex items-center gap-2 rounded-lg border border-gray-100 bg-gray-50 px-3 py-2.5 text-gray-600 dark:border-zinc-800/50 dark:bg-zinc-900/50 dark:text-zinc-300"
+          class="flex items-center gap-3 text-gray-600 dark:text-zinc-300"
         >
-          <component :is="feature.icon" class="h-3.5 w-3.5 shrink-0 text-violet-500" />
-          <span class="text-[11px] font-medium leading-tight">{{ feature.label }}</span>
+          <component :is="feature.icon" class="h-4 w-4 shrink-0 text-gray-400 transition-colors group-hover:text-blue-500 dark:text-zinc-500" />
+          <span class="text-[12px] font-medium leading-tight">{{ feature.label }}</span>
         </div>
       </div>
 
-      <div class="flex flex-col gap-3 flex-1">
+      <div class="mt-auto flex flex-col gap-3 pt-5">
         <div>
           <label class="block text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-zinc-500 mb-2">{{ t('tailscaleSetupCard.authKey') }}</label>
           <div class="relative">
@@ -191,9 +199,9 @@ async function deploy() {
               :placeholder="t('tailscaleSetupCard.authKeyPlaceholder')"
               autocomplete="off"
               spellcheck="false"
-              class="w-full bg-gray-50 dark:bg-zinc-900 border rounded-lg px-3 py-2.5 text-xs font-mono text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-zinc-600 outline-none transition-all duration-200 pr-8"
+              class="w-full rounded-lg border bg-gray-50 px-3 py-2.5 pr-8 text-xs font-mono text-gray-900 outline-none transition-all duration-200 placeholder-gray-400 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white dark:placeholder-zinc-600"
               :class="{
-                'border-gray-200 dark:border-zinc-800 focus:border-violet-400 dark:focus:border-violet-500 focus:ring-1 focus:ring-violet-400/20': tokenState === 'empty',
+                'border-gray-200 focus:border-blue-400 focus:ring-1 focus:ring-blue-400/20 dark:focus:border-blue-500': tokenState === 'empty',
                 'border-green-300 dark:border-green-600 focus:border-green-400': tokenState === 'valid',
                 'border-red-300 dark:border-red-700 focus:border-red-400': tokenState === 'invalid',
               }"
@@ -242,7 +250,7 @@ async function deploy() {
             href="https://login.tailscale.com/admin/settings/keys"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center justify-center gap-2 px-4 py-3 rounded-lg border border-gray-200 dark:border-zinc-700 bg-gray-50 dark:bg-zinc-900/70 text-[11px] font-bold uppercase tracking-wider text-gray-700 dark:text-zinc-200 transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-300 dark:hover:border-violet-500/40 hover:text-violet-600 dark:hover:text-violet-400"
+            class="flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-[11px] font-bold uppercase tracking-wider text-gray-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-300 hover:text-blue-600 dark:border-zinc-700 dark:bg-zinc-900/70 dark:text-zinc-200 dark:hover:border-blue-500/40 dark:hover:text-blue-400"
           >
             <Key class="w-3.5 h-3.5" />
             <span>{{ t('tailscaleSetupCard.getAuthKey') }}</span>
@@ -252,7 +260,7 @@ async function deploy() {
           <button
             @click="deploy"
             :disabled="!isValidToken || deploying"
-            class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-[11px] font-bold uppercase tracking-wider transition-all duration-200"
+            class="group/deploy w-full flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-[11px] font-bold uppercase tracking-wider transition-all duration-200"
             :class="isValidToken && !deploying
               ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 cursor-pointer'
               : 'bg-gray-100 dark:bg-zinc-800 text-gray-400 dark:text-zinc-500 cursor-not-allowed'"
@@ -267,22 +275,22 @@ async function deploy() {
   </div>
 
   <!-- Status state: tailscale container exists -->
-  <div v-else class="relative group h-full flex flex-col bg-white dark:bg-[#0A0A0A] rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-black/5 dark:hover:shadow-black/40">
+  <div v-else class="relative group h-full flex flex-col rounded-xl bg-white dark:bg-[#0A0A0A] overflow-hidden transition-all duration-400 hover:-translate-y-0.5 hover:shadow-2xl hover:shadow-black/5 dark:hover:shadow-black/40">
     <div
-      class="absolute top-0 left-0 w-full h-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+      class="absolute top-0 left-0 h-0.5 w-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
       :class="isRunning
         ? 'bg-green-500'
         : 'bg-red-500'"
     ></div>
 
-    <div class="relative z-10 p-6 flex flex-col h-full">
-      <div class="flex items-center justify-between gap-4 mb-6">
+    <div class="relative z-10 flex h-full flex-col p-6">
+      <div class="flex items-start justify-between gap-4">
         <div class="flex items-center gap-3 min-w-0">
-          <div class="w-10 h-10 rounded-lg bg-gray-50 dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800 flex items-center justify-center shrink-0 group-hover:scale-105 transition-all duration-500">
-            <Shield class="w-5 h-5 text-violet-500" />
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-gray-100 bg-gray-50 transition-all duration-500 group-hover:border-zinc-700 dark:border-zinc-800 dark:bg-zinc-900">
+            <Shield class="h-5 w-5 text-gray-400 transition-colors group-hover:text-blue-500 dark:text-zinc-500" />
           </div>
           <div class="min-w-0">
-            <h3 class="text-sm font-semibold text-gray-900 dark:text-white tracking-tight truncate">Tailscale</h3>
+            <h3 class="truncate text-sm font-semibold tracking-tight text-gray-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">Tailscale</h3>
             <div class="text-[11px] font-medium text-gray-500 dark:text-zinc-400 uppercase tracking-wider mt-1">{{ t('quickMetrics.tailscaleStatusCard.meshVpn') }}</div>
           </div>
         </div>
@@ -300,42 +308,49 @@ async function deploy() {
         </div>
       </div>
 
-      <div class="space-y-3 mt-auto">
-        <div class="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800/50">
-          <div class="flex items-center gap-2 text-gray-500 dark:text-zinc-400">
-            <Wifi v-if="isRunning" class="w-3.5 h-3.5 text-green-500 shrink-0" />
-            <WifiOff v-else class="w-3.5 h-3.5 text-red-400 shrink-0" />
-            <span class="text-[10px] font-bold uppercase tracking-wider">{{ isRunning ? t('quickMetrics.tailscaleStatusCard.uptime') : t('quickMetrics.tailscaleStatusCard.status') }}</span>
-          </div>
-          <span class="text-sm font-semibold text-gray-900 dark:text-white tabular-nums">
-            {{ isRunning ? formatUptime(uptimeMs) : t('quickMetrics.tailscaleStatusCard.offline') }}
-          </span>
+      <div class="mt-6">
+        <div class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-zinc-500">
+          {{ isRunning ? t('quickMetrics.tailscaleStatusCard.uptime') : t('quickMetrics.tailscaleStatusCard.status') }}
         </div>
-
-        <div class="grid grid-cols-2 gap-2">
-          <div class="p-3 rounded-lg bg-gray-50 dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800/50">
-            <div class="flex items-center gap-1.5 mb-2 text-gray-500 dark:text-zinc-400">
-              <Lock class="w-3 h-3" />
-              <span class="text-[9px] font-bold uppercase tracking-widest">{{ t('quickMetrics.tailscaleStatusCard.encryption') }}</span>
+        <div class="mt-2 flex items-end justify-between gap-3">
+          <div class="flex items-end gap-3">
+            <Wifi v-if="isRunning" class="h-5 w-5 shrink-0 text-green-500" />
+            <WifiOff v-else class="h-5 w-5 shrink-0 text-red-400" />
+            <div class="text-3xl font-semibold tracking-tight text-gray-900 dark:text-white tabular-nums">
+              {{ isRunning ? formatUptime(uptimeMs) : t('quickMetrics.tailscaleStatusCard.offline') }}
             </div>
-            <div class="text-sm font-semibold text-gray-800 dark:text-zinc-200 tracking-tight">{{ t('quickMetrics.tailscaleStatusCard.wireGuard') }}</div>
           </div>
-
-          <div class="p-3 rounded-lg bg-gray-50 dark:bg-zinc-900/50 border border-gray-100 dark:border-zinc-800/50">
-            <div class="flex items-center gap-1.5 mb-2 text-gray-500 dark:text-zinc-400">
-              <Globe class="w-3 h-3" />
-              <span class="text-[9px] font-bold uppercase tracking-widest">{{ exposedPorts ? t('quickMetrics.tailscaleStatusCard.ports') : t('quickMetrics.tailscaleStatusCard.version') }}</span>
-            </div>
-            <div class="text-sm font-semibold text-gray-800 dark:text-zinc-200 tracking-tight font-mono truncate">{{ exposedPorts ? exposedPorts : imageVersion }}</div>
+          <div class="text-right text-[11px] font-medium text-gray-500 dark:text-zinc-400">
+            {{ isRunning ? t('quickMetrics.tailscaleStatusCard.wireGuardMeshActive') : t('quickMetrics.tailscaleStatusCard.remoteAccessUnavailable') }}
           </div>
+        </div>
       </div>
 
-        <div class="pt-3 border-t border-gray-100 dark:border-zinc-800/50 flex items-center justify-between gap-3">
-          <span class="text-[11px] text-gray-400 dark:text-zinc-500 font-mono truncate">{{ containerName }}</span>
-          <span class="text-[11px] font-medium text-gray-500 dark:text-zinc-400 truncate text-right">
-            {{ isRunning ? t('quickMetrics.tailscaleStatusCard.wireGuardMeshActive') : t('quickMetrics.tailscaleStatusCard.remoteAccessUnavailable') }}
-          </span>
+      <div class="mt-auto grid grid-cols-1 gap-3 pt-5 border-t border-gray-100 dark:border-zinc-800/80 sm:grid-cols-2">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-gray-100 bg-gray-50 dark:border-zinc-800/50 dark:bg-zinc-900/50">
+            <Lock class="h-3.5 w-3.5 text-gray-400 dark:text-zinc-500" />
+          </div>
+          <div class="min-w-0 flex-1">
+            <div class="text-[9px] font-bold uppercase tracking-widest text-gray-400 dark:text-zinc-500">{{ t('quickMetrics.tailscaleStatusCard.encryption') }}</div>
+            <div class="mt-1 truncate text-sm font-semibold tracking-tight text-gray-800 dark:text-zinc-200">{{ t('quickMetrics.tailscaleStatusCard.wireGuard') }}</div>
+          </div>
         </div>
+
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-gray-100 bg-gray-50 dark:border-zinc-800/50 dark:bg-zinc-900/50">
+            <Globe class="h-3.5 w-3.5 text-gray-400 dark:text-zinc-500" />
+          </div>
+          <div class="min-w-0 flex-1">
+            <div class="text-[9px] font-bold uppercase tracking-widest text-gray-400 dark:text-zinc-500">{{ exposedPorts ? t('quickMetrics.tailscaleStatusCard.ports') : t('quickMetrics.tailscaleStatusCard.version') }}</div>
+            <div class="mt-1 truncate font-mono text-sm font-semibold tracking-tight text-gray-800 dark:text-zinc-200">{{ exposedPorts ? exposedPorts : imageVersion }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 flex items-center justify-between gap-3 border-t border-gray-100 pt-4 dark:border-zinc-800/50">
+        <span class="truncate font-mono text-[11px] text-gray-400 dark:text-zinc-500">{{ containerName }}</span>
+        <span class="truncate text-right text-[11px] font-medium text-gray-500 dark:text-zinc-400">Container identity</span>
       </div>
     </div>
   </div>
