@@ -233,28 +233,25 @@ onUnmounted(() => {
             </router-link>
           </div>
 
-          <!-- Containers Grid -->
-          <div
-            v-if="(showYantrApps && yantrContainers.length > 0) || (showVolumeBrowsers && volumeContainers.length > 0) || (showDockerApps && otherContainers.length > 0)"
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 [grid-auto-flow:dense] mb-3 sm:mb-4"
-          >
-            <YantraContainersGrid v-if="showYantrApps && yantrContainers.length > 0" :containers="yantrContainers" />
-            <VolumeContainersGrid v-if="showVolumeBrowsers && volumeContainers.length > 0" :containers="volumeContainers" @stop-browser="stopBrowser" />
-            <OtherContainersGrid v-if="showDockerApps && otherContainers.length > 0" :containers="otherContainers" @select="viewContainerDetail" />
-          </div>
+          <!-- Unified grid: all cards live together when filter is 'all' -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 [grid-auto-flow:dense]">
+            <YantraContainersGrid v-if="showYantrApps && yantrContainers.length > 0" :containers="yantrContainers" :show-header="activeFilter !== 'all'" />
+            <VolumeContainersGrid v-if="showVolumeBrowsers && volumeContainers.length > 0" :containers="volumeContainers" :show-header="activeFilter !== 'all'" @stop-browser="stopBrowser" />
+            <OtherContainersGrid v-if="showDockerApps && otherContainers.length > 0" :containers="otherContainers" :show-header="activeFilter !== 'all'" @select="viewContainerDetail" />
 
-          <!-- Metrics / Widgets Grid -->
-          <div v-if="showMetrics" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 [grid-auto-flow:dense]">
-            <div class="col-span-full flex items-center gap-2 pb-1">
-              <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-secondary)]">{{ t("home.metrics") }}</span>
-            </div>
-            <component
-              v-for="(widget, i) in widgets"
-              :key="i"
-              :is="widget"
-              class="h-full"
-              :class="widget.__vccOpts?.colSpan === 2 || widget.colSpan === 2 ? 'sm:col-span-2' : ''"
-            />
+            <template v-if="showMetrics">
+              <!-- Section header only when metrics filter is active (not "all") -->
+              <div v-if="activeFilter === 'metrics'" class="col-span-full flex items-center gap-2 pb-1">
+                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-secondary)]">{{ t("home.metrics") }}</span>
+              </div>
+              <component
+                v-for="(widget, i) in widgets"
+                :key="i"
+                :is="widget"
+                class="h-full"
+                :class="widget.__vccOpts?.colSpan === 2 || widget.colSpan === 2 ? 'sm:col-span-2' : ''"
+              />
+            </template>
           </div>
         </div>
       </div>

@@ -7,8 +7,9 @@ const { t } = useI18n();
 
 const emit = defineEmits(['stop-browser'])
 
-const { containers } = defineProps({
+const { containers, showHeader } = defineProps({
   containers: { type: Array, default: () => [] },
+  showHeader: { type: Boolean, default: false },
 });
 
 const { currentTime } = useCurrentTime();
@@ -50,7 +51,7 @@ function getExpirationInfo(browser) {
 <template>
   <div style="display: contents">
     <!-- Section Header -->
-    <div class="col-span-full flex items-center gap-2 pt-2 pb-1">
+    <div v-if="showHeader" class="col-span-full flex items-center gap-2 pt-2 pb-1">
       <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--text-secondary)]">{{ t("home.volumeBrowsers") }}</span>
       <span class="text-[10px] font-bold text-[var(--text-secondary)] opacity-50">{{ containers.length }}</span>
     </div>
