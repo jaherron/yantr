@@ -1,0 +1,12 @@
+services:
+  web:
+    build:
+      context: https://github.com/cashubtc/cashu.me.git#main
+      dockerfile: Dockerfile
+    container_name: cashu-me
+    labels:
+      yantr.app: "cashu-me"
+      yantr.service: "Web UI"
+    restart: unless-stopped
+    ports:
+      - "3000"
