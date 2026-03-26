@@ -280,8 +280,6 @@ for (const appName of apps) {
   const infoPath = path.join(appDir, "info.json");
   const composePath = path.join(appDir, "compose.yml");
 
-  console.log(`  📦  ${appName}`);
-
   const info = await checkInfoJson(appName, infoPath);
   const compose = await checkCompose(appName, composePath);
 
