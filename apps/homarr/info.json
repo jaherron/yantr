@@ -14,8 +14,8 @@
   "ports": [
     { "port": 7575, "protocol": "HTTP", "label": "Web UI" }
   ],
-  "short_description": "Modern, customizable dashboard for self-hosted services with drag-and-drop interface and integrations.",
-  "description": "Homarr is a sleek, modern dashboard that puts all your self-hosted services in one beautiful interface. It features a drag-and-drop layout editor, over 30 built-in integrations for popular self-hosted apps (Sonarr, Radarr, Plex, Jellyfin, Portainer, and many more), and access to 10,000+ icons. The dashboard provides at-a-glance status information for your services, quick access links, and the ability to display system information like CPU, memory, and storage usage. It's designed to be your homelab's command center, showing everything running in your network at a glance.",
+  "short_description": "Customizable dashboard for self-hosted services with drag-and-drop widgets and integrations.",
+  "description": "Homarr is a modern dashboard for self-hosted services with a drag-and-drop layout, built-in integrations for many apps, and a large icon library. It shows service status, quick access links, and optional system metrics for a polished homelab start page.",
   "usecases": [
     "Create a unified homepage showing all your self-hosted apps with live status indicators.",
     "Monitor your homelab services at a glance - see which containers are running, down, or have issues.",

@@ -16,7 +16,7 @@
     { "port": 9000, "protocol": "HTTP", "label": "API" }
   ],
   "short_description": "High-performance S3-compatible object storage for building scalable storage solutions.",
-  "description": "MinIO is a high-performance, S3-compatible object storage solution that's perfect for building private cloud storage. It's designed for large-scale AI/ML, analytics, and backup/archival workloads. MinIO is API-compatible with Amazon S3, meaning any application that works with S3 can use MinIO without modification. Features include distributed erasure coding, identity and access management, bucket replication, versioning, lifecycle policies, encryption (at rest and in transit), and a beautiful web console. It's Kubernetes-native and runs on any infrastructure.",
+  "description": "MinIO is a high-performance, S3-compatible object storage server for private cloud, backups, and datasets. It supports distributed erasure coding, IAM, replication, versioning, encryption, and an administrative console—compatible with S3 clients and Kubernetes deployments.",
   "usecases": [
     "Build a private cloud storage solution compatible with S3 applications.",
     "Store backups, archives, or media files with scalable object storage.",

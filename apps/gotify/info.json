@@ -14,7 +14,7 @@
     { "port": 80, "protocol": "HTTP", "label": "Web UI" }
   ],
   "short_description": "Self-hosted push notification server for sending alerts from your scripts and apps.",
-  "description": "Gotify is a simple self-hosted push notification service that allows you to send and receive messages in real-time. It's designed to be a privacy-focused alternative to services like Pushover or Parse. Features include real-time WebSocket messaging, REST API for sending notifications, multiple users and applications, message prioritization, file attachments, a web UI for managing notifications, and client libraries for various languages. Perfect for sending alerts from home automation, monitoring tools, scripts, or any application that needs to notify you.",
+  "description": "Gotify is a self-hosted push notification server for sending real-time alerts via REST and WebSocket. It supports multiple users/apps, message priorities, file attachments, and a web UI—useful for monitoring alerts, automation scripts, and system notifications.",
   "usecases": [
     "Receive alerts from Uptime Kuma when services go down.",
     "Send notifications from your automation scripts (n8n, Home Assistant).",

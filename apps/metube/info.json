@@ -14,7 +14,7 @@
     { "port": 8081, "protocol": "HTTP", "label": "Web UI" }
   ],
   "short_description": "Web UI for yt-dlp - download videos/audio from YouTube and 1700+ sites.",
-  "description": "MeTube is a web frontend for yt-dlp, the powerful video/audio downloader. It allows you to download videos and audio from YouTube and 1700+ other sites through a clean web interface. Features include URL queue, download progress, automatic format selection, playlist support, authentication for premium content, and simple queue management.",
+  "description": "MeTube is a web frontend for yt-dlp that lets you download videos and audio from YouTube and many other sites. It offers a URL queue, format selection, playlist support, download progress, and simple queue management via a clean web UI.",
   "usecases": [
     "Download YouTube videos for offline viewing.",
     "Extract audio as MP3 from videos.",

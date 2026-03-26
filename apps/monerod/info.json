@@ -15,7 +15,7 @@
     { "port": 18080, "protocol": "TCP", "label": "P2P" }
   ],
   "short_description": "Privacy-focused Monero full node for wallet connections and network support.",
-  "description": "Monero Node is a pruned full node for Monero that provides RPC interface for wallets and supports the Monero network. It uses less disk space than a full node while still providing full verification. Features include pruned mode for reduced storage, restricted RPC mode for security (prevents spending), P2P network connectivity for blockchain sync, and automatic updates. Perfect for connecting your Monero wallet (GUI, CLI, or mobile) to your own node instead of relying on public nodes - improving privacy by not leaking your addresses to third parties.",
+  "description": "Monero Node is a pruned Monero full node offering an RPC interface for wallets and network participation. It supports pruned storage, restricted RPC for safer wallet connectivity, P2P sync, and lets you avoid public nodes to improve transaction privacy.",
   "usecases": [
     "Connect your Monero wallet to your own node for better privacy.",
     "Support the Monero network by relaying transactions.",

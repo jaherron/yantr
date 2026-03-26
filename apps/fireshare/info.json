@@ -14,7 +14,7 @@
     { "port": 80, "protocol": "HTTP", "label": "Web UI" }
   ],
   "short_description": "Self-hosted video sharing designed for game clips.",
-  "description": "Fireshare is a self-hosted video sharing platform designed for sharing game clips with friends. Upload clips from the web interface or drop them into the video folder, then view and share them. Provides OpenGraph metadata for previews on social media and chat apps. Supports linking with SteamGridDB for per-game categorization, and making videos public so anyone who views the site can see them.",
+  "description": "Fireshare is a self-hosted video sharing platform for game clips. Upload via the web UI or drop files into a watch folder, then browse and share clips. Supports OpenGraph previews, SteamGridDB categorization, and public or private galleries.",
   "usecases": [
     "Share game clips with your friends.",
     "Categorize clips by game with data from SteamGridDB.",

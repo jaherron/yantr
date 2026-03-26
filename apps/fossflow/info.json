@@ -14,7 +14,7 @@
     { "port": 80, "protocol": "HTTP", "label": "Web UI" }
   ],
   "short_description": "Isometric diagram editor for network architecture, cloud infrastructure, and flowcharts.",
-  "description": "FossFLOW is an isometric diagram editor for creating beautiful infrastructure diagrams. Features include isometric grid, cloud provider icons, network components, auto-save, offline support, export to PNG/SVG, and real-time collaboration potential. Perfect for documenting homelab setups, cloud architectures, or network diagrams.",
+  "description": "FossFLOW is an isometric diagram editor for infrastructure and flowcharts. It offers an isometric grid, cloud provider icons, network components, auto-save, offline support, and export to PNG/SVG—ideal for documenting homelab and cloud architectures.",
   "usecases": [
     "Create homelab network diagrams.",
     "Document cloud infrastructure.",

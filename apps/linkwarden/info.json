@@ -14,7 +14,7 @@
     { "port": 3000, "protocol": "HTTP", "label": "Web UI" }
   ],
   "short_description": "Self-hosted bookmark manager with full-text search, archiving, and collaboration features.",
-  "description": "Linkwarden is a self-hosted, open-source bookmark manager designed to preserve links and archive web pages. It allows you to save, organize, and search through your bookmarks with full-text search capabilities. Features include link previews, automatic screenshot capture, archival of web page content, collaborative collections for teams, tagging and folders for organization, import/export functionality, and a clean modern interface. Perfect for curating research, saving important articles, or managing shared bookmarks with family or team.",
+  "description": "Linkwarden is a self-hosted bookmark manager for saving, archiving, and searching links. It offers full-text search, page archival and screenshots, collaborative collections, tagging, and import/export—useful for research, shared bookmarks, and preserving web resources.",
   "usecases": [
     "Save and organize bookmarks with automatic archiving of web page content.",
     "Search through saved links and archived content instantly.",

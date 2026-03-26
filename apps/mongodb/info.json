@@ -15,7 +15,7 @@
     { "port": 27017, "protocol": "TCP", "label": "Database" }
   ],
   "short_description": "Popular NoSQL document database with flexible JSON-like documents and powerful querying.",
-  "description": "MongoDB is a popular NoSQL document database that stores data in flexible, JSON-like documents with dynamic schemas. It's designed for scalability, performance, and ease of development. Documents can vary in structure, making it perfect for evolving data models. Features include ad-hoc queries, indexing, aggregation pipeline, replication, sharding, geospatial queries, text search, and a powerful query language. It's widely used in modern web applications, mobile apps, and analytics platforms.",
+  "description": "MongoDB is a NoSQL document database using flexible JSON-like documents and dynamic schemas. It supports ad-hoc queries, indexing, aggregation, replication, and sharding—making it suitable for modern web apps, mobile backends, and analytics that require flexible data models.",
   "usecases": [
     "Store application data for Node.js, Python, or other modern applications.",
     "Build content management systems with flexible document structures.",

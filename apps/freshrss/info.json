@@ -14,7 +14,7 @@
     { "port": 80, "protocol": "HTTP", "label": "Web UI" }
   ],
   "short_description": "Self-hosted RSS/Atom feed aggregator with multi-user support and powerful filtering.",
-  "description": "FreshRSS is a free, self-hosted, powerful RSS feed aggregator designed for reading and organizing news from multiple sources. It features a clean, modern interface, support for multiple users with individual preferences, powerful filtering and search, categorization, favorites, reading history, media playback (podcasts, videos), OPML import/export, and extensions for additional features. It's a great replacement for Google Reader and online services like Feedly. Stay updated with your favorite blogs, news sites, YouTube channels, and podcasts in one place without any tracking.",
+  "description": "FreshRSS is a self-hosted RSS/Atom aggregator for reading and organizing news. It supports multiple users, filtering and search, OPML import/export, media playback for podcasts/videos, and extensions—offering a privacy-friendly replacement for hosted feed services.",
   "usecases": [
     "Aggregate all your favorite blogs and news sources into one private reader.",
     "Follow YouTube channels and get video updates alongside text content.",
