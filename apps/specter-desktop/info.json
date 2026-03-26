@@ -11,10 +11,14 @@
     "wallet"
   ],
   "ports": [
-    { "port": 25441, "protocol": "HTTP", "label": "Web UI" }
+    {
+      "port": 25441,
+      "protocol": "HTTP",
+      "label": "Web UI"
+    }
   ],
   "short_description": "Bitcoin wallet with hardware device support, multisig, and air-gapped signing.",
-  "description": "Specter Desktop is a beginner-friendly yet powerful Bitcoin wallet that works with hardware wallets (Ledger, Trezor, etc.), supports multisig configurations, and offers air-gapped signing for enhanced security. It connects to your Bitcoin node for full verification while providing a clean GUI. Features include hardware wallet integration, multisig wallets, PSBT support, node connection, and watch-only wallets.",
+  "description": "Specter Desktop is a beginner-friendly yet powerful Bitcoin wallet that works with hardware wallets (Ledger, Trezor, etc.), supports multisig configurations, and offers air-gapped signing for enhanced security. It connects to your Bitcoin node for full verification while providing a clean...",
   "usecases": [
     "Manage Bitcoin with hardware wallet.",
     "Set up multisig Bitcoin vault.",

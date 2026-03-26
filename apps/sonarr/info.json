@@ -12,10 +12,14 @@
     "servarr"
   ],
   "ports": [
-    { "port": 8989, "protocol": "HTTP", "label": "Web UI" }
+    {
+      "port": 8989,
+      "protocol": "HTTP",
+      "label": "Web UI"
+    }
   ],
   "short_description": "Smart PVR for TV shows that automatically downloads episodes and organizes your series library.",
-  "description": "Sonarr (formerly NzbDrone) is a PVR (Personal Video Recorder) for Usenet and BitTorrent users. It monitors your RSS feeds for new episodes of your favorite TV shows and automatically downloads them when they become available. Features include season pack downloading, automatic episode renaming, quality profiles, series matching, calendar view, multi-track subtitles, and full integration with the Servarr ecosystem. It works with both Usenet (SABnzbd, NZBGet) and BitTorrent (qBittorrent, Transmission, Deluge) clients, making it the backbone of many homelab media automation setups.",
+  "description": "Sonarr (formerly NzbDrone) is a PVR (Personal Video Recorder) for Usenet and BitTorrent users. It monitors your RSS feeds for new episodes of your favorite TV shows and automatically downloads them when they become available. Features include season pack downloading, automatic episode rena...",
   "usecases": [
     "Track your favorite TV shows and automatically download new episodes as they air.",
     "Build a perfectly organized TV series library with automatic renaming and metadata.",

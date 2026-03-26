@@ -5,10 +5,10 @@ services:
       yantr.app: "ungoogled-chromium"
       yantr.service: "Web Browser"
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - CHROME_CLI=${CHROME_CLI:-https://duckduckgo.com}
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Etc/UTC"
+      CHROME_CLI: "${CHROME_CLI:-https://duckduckgo.com}"
     volumes:
       - config:/config
     ports:

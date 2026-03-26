@@ -12,10 +12,14 @@
     "privacy"
   ],
   "ports": [
-    { "port": 8080, "protocol": "HTTP", "label": "Web UI" }
+    {
+      "port": 8080,
+      "protocol": "HTTP",
+      "label": "Web UI"
+    }
   ],
   "short_description": "Privacy-focused metasearch engine that aggregates results from 80+ search engines without tracking.",
-  "description": "SearXNG is a free and privacy-focused metasearch engine that can be self-hosted. It aggregates results from over 80 search engines (Google, Bing, DuckDuckGo, Wikipedia, etc.) while keeping your searches private - no tracking, no logging, no personalization. It strips tracking parameters from URLs, blocks ads in results, and gives you a clean interface. You can customize which engines to use, create themes, enable infinite scroll, and set default preferences. Perfect for privacy-conscious users who want the power of multiple search engines without being tracked.",
+  "description": "SearXNG is a free and privacy-focused metasearch engine that can be self-hosted. It aggregates results from over 80 search engines (Google, Bing, DuckDuckGo, Wikipedia, etc.) while keeping your searches private - no tracking, no logging, no personalization. It strips tracking parameters fr...",
   "usecases": [
     "Search the web without being tracked - your search queries never leave your server.",
     "Use as your default search at home to avoid Google/Bing tracking.",

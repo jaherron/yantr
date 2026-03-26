@@ -12,10 +12,14 @@
     "movies"
   ],
   "ports": [
-    { "port": 7878, "protocol": "HTTP", "label": "Web UI" }
+    {
+      "port": 7878,
+      "protocol": "HTTP",
+      "label": "Web UI"
+    }
   ],
   "short_description": "Automated movie download manager that integrates with torrent clients for automatic downloading.",
-  "description": "Radarr is an independent fork of Sonarr reworked for automatically downloading movies via Usenet and BitTorrent. It monitors your RSS feeds for new movie releases from your favorite indexers, grabs them automatically, and organizes them into your media library with proper naming conventions. Features include automatic quality upgrades (from SD to 4K), manual search, custom formats, quality profiles, renaming, integration with Plex/Emby/Jellyfin, and a full API. It's part of the Servarr ecosystem and pairs perfectly with torrent clients like qBittorrent, Transmission, or Deluge.",
+  "description": "Radarr is an independent fork of Sonarr reworked for automatically downloading movies via Usenet and BitTorrent. It monitors your RSS feeds for new movie releases from your favorite indexers, grabs them automatically, and organizes them into your media library with proper naming convention...",
   "usecases": [
     "Automatically download new movie releases from your favorite trackers as soon as they're available.",
     "Maintain a perfectly organized movie library with automatic renaming and metadata fetching.",

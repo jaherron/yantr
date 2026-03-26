@@ -11,10 +11,14 @@
     "notifications"
   ],
   "ports": [
-    { "port": 8081, "protocol": "HTTP", "label": "Web UI" }
+    {
+      "port": 8081,
+      "protocol": "HTTP",
+      "label": "Web UI"
+    }
   ],
   "short_description": "Website change monitor - get notified when pages change.",
-  "description": "UrlWatch monitors websites and notifies you when they change. Perfect for tracking price drops, product availability, page updates, job postings, or any web content. Features include diff highlighting (shows exactly what changed), flexible scheduling, multiple notification methods (email, webhook, Telegram, etc.), filter rules to ignore irrelevant changes, and a clean web interface.",
+  "description": "UrlWatch monitors websites and notifies you when they change. Perfect for tracking price drops, product availability, page updates, job postings, or any web content. Features include diff highlighting (shows exactly what changed), flexible scheduling, multiple notification methods (email,...",
   "usecases": [
     "Track product prices and get alerts.",
     "Monitor job board updates.",

@@ -12,10 +12,14 @@
     "orm"
   ],
   "ports": [
-    { "port": 5432, "protocol": "TCP", "label": "Database" }
+    {
+      "port": 5432,
+      "protocol": "TCP",
+      "label": "Database"
+    }
   ],
-  "short_description": "Advanced open-source relational database with JSON support, full-text search, and powerful extensions.",
-  "description": "PostgreSQL is a powerful, open-source object-relational database system known for reliability, feature robustness, and performance. It supports both SQL (relational) and JSON (non-relational) querying, making it perfect for modern applications. Features include ACID compliance, MVCC for concurrent access, foreign keys, triggers, stored procedures, views, complex queries, JSONB for document storage, full-text search, GIS extensions (PostGIS), and an extensive ecosystem of extensions (pgvector for AI, timescaledb for time-series, citus for distributed). It's the database of choice for many production applications.",
+  "short_description": "Open-source relational database with JSON support, full-text search, and extensions.",
+  "description": "PostgreSQL is a powerful, open-source object-relational database system known for reliability, feature robustness, and performance. It supports both SQL (relational) and JSON (non-relational) querying, making it perfect for modern applications. Features include ACID compliance, MVCC for co...",
   "usecases": [
     "Use as the database backend for complex applications like Wiki.js, Ghostfolio, or Home Assistant.",
     "Store JSON data alongside relational data in the same database.",

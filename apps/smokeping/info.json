@@ -11,10 +11,14 @@
     "latency"
   ],
   "ports": [
-    { "port": 80, "protocol": "HTTP", "label": "Web UI" }
+    {
+      "port": 80,
+      "protocol": "HTTP",
+      "label": "Web UI"
+    }
   ],
   "short_description": "Network latency and packet loss monitoring with beautiful historical graphs.",
-  "description": "Smokeping is a powerful network monitoring tool that measures latency and packet loss to your network targets over time. It sends ICMP pings and visualizes the data in detailed graphs showing min/max/average response times, standard deviation, and packet loss percentages. Features include multi-target monitoring, custom ping intervals, alerting on thresholds, historical data retention, and a clean web interface showing trends over hours, days, weeks, or months. Perfect for monitoring your internet connection quality, tracking latency to game servers, or monitoring network equipment.",
+  "description": "Smokeping is a powerful network monitoring tool that measures latency and packet loss to your network targets over time. It sends ICMP pings and visualizes the data in detailed graphs showing min/max/average response times, standard deviation, and packet loss percentages. Features include...",
   "usecases": [
     "Monitor your home internet connection quality over time.",
     "Track latency to important servers (gaming, work VPNs).",

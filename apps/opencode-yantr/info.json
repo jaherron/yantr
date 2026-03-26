@@ -14,7 +14,7 @@
     { "port": 4096, "protocol": "HTTP", "label": "Web UI" }
   ],
   "short_description": "AI coding assistant with Docker access - manage containers from within the browser IDE.",
-  "description": "OpenCode (Docker) is an AI-powered coding environment with full Docker socket access. It combines a browser-based code editor and AI assistance with the ability to build images, run containers, and manage Docker directly from the terminal. Ideal for DevOps workflows, CI scripting, and container-aware development.",
+  "description": "OpenCode (Docker) is an AI-powered coding environment with Docker socket access. It combines browser editing and AI support with commands to build images, run containers, and manage Docker from the integrated terminal. Ideal for DevOps workflows, scripting, and container-aware development.",
   "usecases": [
     "Code and manage Docker containers from the browser.",
     "Build and run Docker images with AI assistance.",

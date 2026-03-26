@@ -14,7 +14,7 @@
     { "port": 4096, "protocol": "HTTP", "label": "Web UI" }
   ],
   "short_description": "AI coding assistant in browser - edit files, run commands, and get AI help.",
-  "description": "OpenCode is an AI-powered coding environment that runs in your browser. It combines a code editor with AI assistance for writing, debugging, and explaining code. Features include file browser, terminal emulator, AI chat for code help, git integration, and cloud development environment capabilities. Perfect for coding on the go or sharing development environments.",
+  "description": "OpenCode is an AI-powered browser IDE combining editor, terminal, and AI code support. It includes file browsing, command execution, AI-assisted debugging and code explanations, git integration, and cloud workspace sharing. Great for flexible development, remote coding, and quick sessions.",
   "usecases": [
     "Code from any browser.",
     "Get AI assistance with coding.",

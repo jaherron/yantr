@@ -11,10 +11,14 @@
     "remote-access"
   ],
   "ports": [
-    { "port": 41641, "protocol": "UDP", "label": "VPN Tunnel" }
+    {
+      "port": 41641,
+      "protocol": "UDP",
+      "label": "VPN Tunnel"
+    }
   ],
   "short_description": "Zero-config VPN using WireGuard protocol with easy mesh networking.",
-  "description": "Tailscale is a zero-config VPN that uses the WireGuard protocol to create a secure, encrypted tunnel between your devices. It makes it easy to connect your computers, phones, and servers together securely without the complexity of traditional VPNs. Unlike WireGuard, Tailscale handles the key exchange and network coordination for you through their control plane, making setup trivial. Features include end-to-end encryption, device authentication via your Google/GitHub/MS account, built-in kill switch, split tunneling, subnet routing, and exit node support. Perfect for accessing your home network remotely, connecting devices across different networks, and accessing self-hosted services without exposing them to the public internet.",
+  "description": "Tailscale is a zero-config VPN that uses the WireGuard protocol to create a secure, encrypted tunnel between your devices. It makes it easy to connect your computers, phones, and servers together securely without the complexity of traditional VPNs. Unlike WireGuard, Tailscale handles the k...",
   "usecases": [
     "Access your home network from anywhere by connecting to your Tailscale network.",
     "Securely reach self-hosted services (Home Assistant, Jellyfin, etc.) without port forwarding.",

@@ -12,10 +12,14 @@
     "portfolio"
   ],
   "ports": [
-    { "port": 80, "protocol": "HTTP", "label": "Web UI" }
+    {
+      "port": 80,
+      "protocol": "HTTP",
+      "label": "Web UI"
+    }
   ],
   "short_description": "Self-hosted crypto portfolio tracker with DeFi support, tax reports, and privacy focus.",
-  "description": "Rotki is a free, open-source portfolio tracker and DeFi wallet analyzer with a focus on privacy. It helps you track your cryptocurrency holdings across wallets and exchanges, analyzes DeFi positions, calculates profits/losses, and generates tax reports. Features include support for 50+ exchanges API integration, Ethereum wallet tracking, DeFi protocol integration (Aave, Compound, Uniswap), manual entry for offline wallets, trade history import, tax report generation, and beautiful charts. Unlike commercial trackers, your data never leaves your server - complete privacy for your financial information.",
+  "description": "Rotki is a free, open-source portfolio tracker and DeFi wallet analyzer with a focus on privacy. It helps you track your cryptocurrency holdings across wallets and exchanges, analyzes DeFi positions, calculates profits/losses, and generates tax reports. Features include support for 50+ exc...",
   "usecases": [
     "Track all your crypto holdings across exchanges in one dashboard.",
     "Monitor DeFi positions - staked tokens, liquidity pools, lending positions.",

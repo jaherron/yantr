@@ -11,10 +11,14 @@
     "google"
   ],
   "ports": [
-    { "port": 5000, "protocol": "HTTP", "label": "Web UI" }
+    {
+      "port": 5000,
+      "protocol": "HTTP",
+      "label": "Web UI"
+    }
   ],
   "short_description": "Self-hosted, ad-free Google search proxy with privacy features and customization options.",
-  "description": "Whoogle is a self-hosted search proxy that fetches Google search results and presents them without ads, tracking, or clutter. It provides a clean, privacy-focused search experience while using Google's search algorithm. Features include no ads or tracking, customizable themes (dark, light, separator), config filters, language and region customization, HTML/DJSON/TXT export options, safe search toggle, and the ability to use as your default search engine. It's the simplest way to search Google privately - your searches never directly hit Google's servers from your IP.",
+  "description": "Whoogle is a self-hosted search proxy that fetches Google search results and presents them without ads, tracking, or clutter. It provides a clean, privacy-focused search experience while using Google's search algorithm. Features include no ads or tracking, customizable themes (dark, light,...",
   "usecases": [
     "Search Google without ads or tracking from your IP address.",
     "Get clean, distraction-free search results.",

@@ -12,10 +12,14 @@
     "notifications"
   ],
   "ports": [
-    { "port": 3001, "protocol": "HTTP", "label": "Web UI" }
+    {
+      "port": 3001,
+      "protocol": "HTTP",
+      "label": "Web UI"
+    }
   ],
   "short_description": "Self-hosted uptime monitoring tool with status pages, notifications, and 30+ check types.",
-  "description": "Uptime Kuma is a fancy self-hosted monitoring tool that helps you monitor your services and get notified when they go down. It supports HTTP(s), TCP, Ping, DNS, Push, Steam Game Server, and more than 30 other protocol types. Features include beautiful status pages with uptime history, multi-region monitoring, certificate expiration tracking, docker container monitoring via socket, push notifications (Telegram, Discord, Slack, Email, SMS via Twilio), and a 100% open-source design. It's a modern alternative to tools like Uptime Robot or Statuspage.io that you fully own.",
+  "description": "Uptime Kuma is a fancy self-hosted monitoring tool that helps you monitor your services and get notified when they go down. It supports HTTP(s), TCP, Ping, DNS, Push, Steam Game Server, and more than 30 other protocol types. Features include beautiful status pages with uptime history, mult...",
   "usecases": [
     "Monitor your self-hosted services (Home Assistant, Jellyfin, Nextcloud) and get alerted when they go down.",
     "Create a public status page to show your family or users that your services are running smoothly.",

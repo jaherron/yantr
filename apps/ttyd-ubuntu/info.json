@@ -11,10 +11,14 @@
     "remote"
   ],
   "ports": [
-    { "port": 7681, "protocol": "HTTP", "label": "Web Terminal" }
+    {
+      "port": 7681,
+      "protocol": "HTTP",
+      "label": "Web Terminal"
+    }
   ],
   "short_description": "Terminal sharing over web - access Ubuntu bash shell from any browser.",
-  "description": "ttyd is a simple command-line tool that allows you to share your terminal over the web. This Ubuntu-based image gives you a full bash shell accessible from any modern browser. Features include clipboard support, scrollback buffer, SSL/TLS support, authentication, and resize handling. Perfect for remote demonstrations, teaching, troubleshooting, or giving temporary shell access without setting up SSH.",
+  "description": "ttyd is a simple command-line tool that allows you to share your terminal over the web. This Ubuntu-based image gives you a full bash shell accessible from any modern browser. Features include clipboard support, scrollback buffer, SSL/TLS support, authentication, and resize handling. Perfe...",
   "usecases": [
     "Give someone remote terminal access without SSH setup.",
     "Demonstrate command-line tools to students or colleagues.",

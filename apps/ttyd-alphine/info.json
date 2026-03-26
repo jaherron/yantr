@@ -11,10 +11,14 @@
     "remote"
   ],
   "ports": [
-    { "port": 7681, "protocol": "HTTP", "label": "Web Terminal" }
+    {
+      "port": 7681,
+      "protocol": "HTTP",
+      "label": "Web Terminal"
+    }
   ],
   "short_description": "Terminal sharing over web - lightweight Alpine Linux bash shell from browser.",
-  "description": "ttyd is a terminal sharing tool that gives you a bash shell accessible from any browser. This Alpine Linux version is extremely lightweight. Features include clipboard support, scrollback, SSL/TLS, authentication, and resize handling. Perfect for demos, quick remote access, or running CLI tools without SSH.",
+  "description": "ttyd is a terminal sharing tool that gives you a bash shell accessible from any browser. This Alpine Linux version is extremely lightweight. Features include clipboard support, scrollback, SSL/TLS, authentication, and resize handling. Perfect for demos, quick remote access, or running CLI...",
   "usecases": [
     "Give browser-based terminal access without SSH configuration.",
     "Demonstrate CLI tools over the web.",

@@ -12,10 +12,14 @@
     "usenet"
   ],
   "ports": [
-    { "port": 9696, "protocol": "HTTP", "label": "Web UI" }
+    {
+      "port": 9696,
+      "protocol": "HTTP",
+      "label": "Web UI"
+    }
   ],
   "short_description": "Unified indexer manager for both Usenet and BitTorrent with PVR app integration.",
-  "description": "Prowlarr is an indexer manager that supports both Usenet and BitTorrent trackers. It acts as a central hub connecting your PVR apps (Sonarr, Radarr, Lidarr, Readarr, Sailarr) to both Usenet indexers and BitTorrent trackers through a unified API. Unlike Jackett which only supports BitTorrent, Prowlarr handles both protocols. Features include support for 80+ Usenet indexers, BitTorrent tracker integration via Torznab/Cardigann, indexer health monitoring, RSS sync, seeding requirements per indexer, and authentication handling. It's the successor to both NZBHydra2 and Jackett.",
+  "description": "Prowlarr is an indexer manager that supports both Usenet and BitTorrent trackers. It acts as a central hub connecting your PVR apps (Sonarr, Radarr, Lidarr, Readarr, Sailarr) to both Usenet indexers and BitTorrent trackers through a unified API. Unlike Jackett which only supports BitTorren...",
   "usecases": [
     "Manage all your Usenet and BitTorrent indexers in one place.",
     "Connect Sonarr/Radarr to both Usenet and torrent sources.",

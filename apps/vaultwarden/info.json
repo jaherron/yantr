@@ -12,10 +12,14 @@
     "sync"
   ],
   "ports": [
-    { "port": 80, "protocol": "HTTP", "label": "Web UI" }
+    {
+      "port": 80,
+      "protocol": "HTTP",
+      "label": "Web UI"
+    }
   ],
   "short_description": "Lightweight, open-source Bitwarden-compatible password manager server written in Rust.",
-  "description": "Vaultwarden (formerly Bitwarden_RS) is a lightweight, open-source server implementation of the Bitwarden password management API, written in Rust. It's fully compatible with official Bitwarden clients including browser extensions, desktop apps, and mobile apps. All passwords are encrypted client-side before being stored on your server. Features include personal vaults, Send (secure sharing), attachments, TOTP authenticator, two-factor authentication (email, Duo, YubiKey, FIDO2 WebAuthn), organizations with collections and password sharing, event logs, and emergency access. Premium features are free when self-hosting.",
+  "description": "Vaultwarden (formerly Bitwarden_RS) is a lightweight, open-source server implementation of the Bitwarden password management API, written in Rust. It's fully compatible with official Bitwarden clients including browser extensions, desktop apps, and mobile apps. All passwords are encrypted...",
   "usecases": [
     "Store and manage all your passwords in a self-hosted vault that only you control, with full Bitwarden client compatibility.",
     "Generate TOTP two-factor authentication codes directly within Vaultwarden for added security.",

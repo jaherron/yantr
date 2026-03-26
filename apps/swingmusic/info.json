@@ -11,10 +11,14 @@
     "streaming"
   ],
   "ports": [
-    { "port": 1970, "protocol": "HTTP", "label": "Web UI" }
+    {
+      "port": 1970,
+      "protocol": "HTTP",
+      "label": "Web UI"
+    }
   ],
   "short_description": "Modern self-hosted music player with clean interface and audio visualization.",
-  "description": "SwingMusic is a beautiful, modern music player for your self-hosted music library. It features a clean minimalist interface, gapless playback, queue management, playlists, search, albums/artists views, and audio visualization. Simply point it to your music folder and enjoy. Supports common audio formats and organizes your music automatically using metadata.",
+  "description": "SwingMusic is a beautiful, modern music player for your self-hosted music library. It features a clean minimalist interface, gapless playback, queue management, playlists, search, albums/artists views, and audio visualization. Simply point it to your music folder and enjoy. Supports common...",
   "usecases": [
     "Stream your local music collection from any browser.",
     "Create playlists and manage your music library.",

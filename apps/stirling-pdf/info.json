@@ -11,10 +11,14 @@
     "document"
   ],
   "ports": [
-    { "port": 8080, "protocol": "HTTP", "label": "Web UI" }
+    {
+      "port": 8080,
+      "protocol": "HTTP",
+      "label": "Web UI"
+    }
   ],
   "short_description": "All-in-one PDF manipulation tool - merge, split, convert, compress, and more.",
-  "description": "Stirling-PDF is a powerful, locally-hosted web application for all your PDF needs. It provides over 30 PDF operations without sending your documents to any external service. Features include merging/splitting PDFs, rotating pages, extracting images, converting between formats (PDF to images, Word to PDF, etc.), compressing PDFs, adding/removing passwords, digital signatures, OCR for scanned documents, page extraction, and batch operations. It's a complete PDF toolkit that runs entirely on your server, keeping your sensitive documents private.",
+  "description": "Stirling-PDF is a powerful, locally-hosted web application for all your PDF needs. It provides over 30 PDF operations without sending your documents to any external service. Features include merging/splitting PDFs, rotating pages, extracting images, converting between formats (PDF to image...",
   "usecases": [
     "Merge multiple PDF files into one document.",
     "Compress large PDFs to reduce file size.",

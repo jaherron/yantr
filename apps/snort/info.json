@@ -11,10 +11,14 @@
     "client"
   ],
   "ports": [
-    { "port": 8080, "protocol": "HTTP", "label": "Web UI" }
+    {
+      "port": 8080,
+      "protocol": "HTTP",
+      "label": "Web UI"
+    }
   ],
   "short_description": "Fast, lightweight Nostr client with real-time updates and clean interface.",
-  "description": "Snort is a blazing fast, lightweight Nostr client built with React. It provides a clean, modern interface for using the Nostr decentralized social network. Features include real-time updates via WebSocket, following management, notes and threads, likes and reposts, zaps (Lightning payments), NIP-05 verification, multiple accounts, and DM support. It's designed for speed and simplicity - no bloat, just a fast way to use Nostr. Perfect for those who want a quick, responsive client without heavy features.",
+  "description": "Snort is a blazing fast, lightweight Nostr client built with React. It provides a clean, modern interface for using the Nostr decentralized social network. Features include real-time updates via WebSocket, following management, notes and threads, likes and reposts, zaps (Lightning payments...",
   "usecases": [
     "Access Nostr social network through a fast, modern web interface.",
     "Post notes, reply to threads, and interact with the community.",

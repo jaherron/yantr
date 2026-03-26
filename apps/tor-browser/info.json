@@ -11,10 +11,14 @@
     "browser"
   ],
   "ports": [
-    { "port": 5800, "protocol": "HTTP", "label": "Web UI" }
+    {
+      "port": 5800,
+      "protocol": "HTTP",
+      "label": "Web UI"
+    }
   ],
   "short_description": "Dockerized Tor Browser with VNC access for anonymous web browsing through Tor network.",
-  "description": "Tor Browser in Docker allows you to browse the web anonymously through the Tor network without installing it locally on your machine. It provides a complete Tor Browser experience accessible through any browser via VNC. This is useful for running in a headless environment, providing anonymous browsing on systems without a display, or isolating Tor usage from your main system. Features include connection to the Tor network, protection against tracking and fingerprinting, access to .onion sites, and no locally stored data after container restart.",
+  "description": "Tor Browser in Docker allows you to browse the web anonymously through the Tor network without installing it locally on your machine. It provides a complete Tor Browser experience accessible through any browser via VNC. This is useful for running in a headless environment, providing anonym...",
   "usecases": [
     "Browse the internet anonymously from any location.",
     "Access .onion sites without installing Tor Browser locally.",

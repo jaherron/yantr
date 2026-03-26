@@ -11,10 +11,14 @@
     "bittorrent"
   ],
   "ports": [
-    { "port": 9091, "protocol": "HTTP", "label": "Web Interface" }
+    {
+      "port": 9091,
+      "protocol": "HTTP",
+      "label": "Web Interface"
+    }
   ],
   "short_description": "Fast, lightweight BitTorrent client with web interface and native Docker support.",
-  "description": "Transmission is a fast, lightweight BitTorrent client that runs as a daemon with a web interface. It's known for its low resource usage, simplicity, and reliability. Features include a web UI for remote management, magnet link support, peer exchange, DHT, encryption, bandwidth scheduling, watch folders for automatic downloads, and NAT-PMP/UPnP port mapping. The LinuxServer.io Docker image includes VPN support and automatic removal of completed downloads. Perfect for building a home media download server.",
+  "description": "Transmission is a fast, lightweight BitTorrent client that runs as a daemon with a web interface. It's known for its low resource usage, simplicity, and reliability. Features include a web UI for remote management, magnet link support, peer exchange, DHT, encryption, bandwidth scheduling,...",
   "usecases": [
     "Download Linux ISOs, open-source software, and public domain media via BitTorrent.",
     "Set up automated downloads using watch folders - drop a .torrent file and it starts downloading automatically.",
