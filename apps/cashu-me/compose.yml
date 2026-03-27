@@ -9,13 +9,10 @@ services:
     depends_on:
       - web
     networks:
-      cashu-me:
-        ipv4_address: 172.28.0.2
-    environment:
-      TOR_SERVICE: "true"
-      TOR_SERVICE_HOSTS: "cashu=80:172.28.0.3:80"
+      - cashu-me
     volumes:
       - tor-keys:/var/lib/tor
+      - ./torrc:/etc/tor/torrc:ro
 
   web:
     build:
@@ -27,8 +24,7 @@ services:
       yantr.service: "Web UI"
     restart: unless-stopped
     networks:
-      cashu-me:
-        ipv4_address: 172.28.0.3
+      - cashu-me
     environment:
       TZ: ${TZ:-UTC}
     ports:
@@ -36,9 +32,6 @@ services:
 
 networks:
   cashu-me:
-    ipam:
-      config:
-        - subnet: 172.28.0.0/16
 
 volumes:
   tor-keys:
