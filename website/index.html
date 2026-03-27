@@ -1418,163 +1418,47 @@
       </section>
 
       <!-- Unlimited Linux Boxes Section -->
-      <section id="linux-boxes" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 border-t border-gray-100 bg-white py-16 sm:py-24">
+      <section id="linux-boxes" class="relative left-1/2 right-1/2 w-screen -translate-x-1/2 border-t border-gray-100 bg-white py-16 sm:py-20">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
-          <div class="space-y-6 sm:space-y-8">
-            <div class="group rounded-3xl border border-gray-200 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_28px_90px_-55px_rgba(15,23,42,0.22)] sm:p-8 lg:p-10">
-              <p class="mb-4 text-[11px] uppercase tracking-[0.28em] text-gray-500">Unlimited Linux Boxes</p>
-              <h2 class="max-w-4xl font-sans text-4xl font-bold tracking-tight text-gray-900 transition-transform duration-500 group-hover:translate-x-1 sm:text-5xl lg:text-6xl">
-                Fresh Debian or Alpine shells, whenever the job needs one.
-              </h2>
-              <p class="mt-5 max-w-3xl font-sans text-base leading-relaxed text-gray-600 sm:text-lg">
-                Yantr turns Linux environments into something you deploy as casually as any other app. Click Debian or Alpine, get SSH immediately, and keep a
-                clean box around only for as long as it earns its keep.
-              </p>
-              <div class="mt-6 flex flex-wrap gap-3 text-xs font-semibold uppercase tracking-[0.18em] text-gray-700">
-                <span class="rounded-full border border-gray-200 bg-white px-4 py-2 transition-transform duration-300 hover:-translate-y-0.5 hover:border-gray-400">One-click deploy</span>
-                <span class="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-emerald-700 transition-transform duration-300 hover:-translate-y-0.5">SSH built in</span>
-                <span class="rounded-full border border-gray-200 bg-white px-4 py-2 transition-transform duration-300 hover:-translate-y-0.5 hover:border-gray-400">Local or remote</span>
-              </div>
-            </div>
+          <div class="text-center mb-10">
+            <p class="text-[11px] uppercase tracking-[0.2em] text-gray-500 mb-2">Unlimited Linux Boxes</p>
+            <h2 class="text-3xl sm:text-4xl font-bold font-sans tracking-tight text-gray-900 mb-2">Fresh Debian or Alpine shells, on demand.</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto text-base leading-relaxed">Deploy a clean SSH-ready Linux environment for tests, debugging, or short-lived tasks — created in one click and disposable by design.</p>
+          </div>
 
-            <div class="group rounded-3xl border border-gray-200 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-gray-300 hover:shadow-[0_28px_90px_-55px_rgba(15,23,42,0.22)] sm:p-8 lg:p-10">
-              <div class="flex flex-col gap-6">
-                <div class="flex flex-wrap items-center gap-3">
-                  <span class="rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-600 transition-all duration-300 group-hover:border-gray-300 group-hover:bg-white">
-                    Clean shell on demand
-                  </span>
-                  <span class="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-700 transition-all duration-300 group-hover:-translate-y-0.5">
-                    No VM ceremony
-                  </span>
-                </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <article class="hero-pillar group flex flex-col items-start rounded-2xl border border-gray-100 bg-white px-5 py-5 hover:shadow-lg transition-all duration-200">
+              <span class="text-2xl mb-3">🐧</span>
+              <h3 class="text-sm font-bold uppercase tracking-[0.14em] text-gray-900">One‑click deploy</h3>
+              <p class="text-sm text-gray-500 mt-2">Choose Debian or Alpine and start an SSH session instantly.</p>
+            </article>
 
-                <div>
-                  <h3 class="max-w-3xl font-sans text-3xl font-bold tracking-tight text-gray-900 transition-transform duration-500 group-hover:translate-x-1 sm:text-4xl">
-                    Linux boxes should feel disposable, not precious.
-                  </h3>
-                  <p class="mt-4 max-w-3xl text-sm leading-relaxed text-gray-600 sm:text-base">
-                    Skip the provisioning spiral. Yantr gives you a fresh SSH-ready environment for scripts, package tests, debugging, automation, or keeping a
-                    remote shell available without dedicating a whole machine to it.
-                  </p>
-                </div>
+            <article class="hero-pillar group flex flex-col items-start rounded-2xl border border-gray-100 bg-white px-5 py-5 hover:shadow-lg transition-all duration-200">
+              <span class="text-2xl mb-3">🔐</span>
+              <h3 class="text-sm font-bold uppercase tracking-[0.14em] text-gray-900">SSH first</h3>
+              <p class="text-sm text-gray-500 mt-2">Mapped SSH port is the primary access method; works locally or via Tailscale.</p>
+            </article>
 
-                <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                  <div class="rounded-2xl border border-gray-200 bg-white p-4 transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:shadow-lg">
-                    <p class="text-[11px] uppercase tracking-[0.18em] text-gray-500">Create</p>
-                    <p class="mt-3 text-2xl font-bold text-gray-900">1 click</p>
-                    <p class="mt-2 text-sm leading-relaxed text-gray-600">Pick Debian or Alpine from the catalog and start from clean state every time.</p>
-                  </div>
-                  <div class="rounded-2xl border border-gray-200 bg-white p-4 transition-all duration-300 hover:-translate-y-1 hover:border-gray-300 hover:shadow-lg">
-                    <p class="text-[11px] uppercase tracking-[0.18em] text-gray-500">Access</p>
-                    <p class="mt-3 text-2xl font-bold text-gray-900">SSH first</p>
-                    <p class="mt-2 text-sm leading-relaxed text-gray-600">The mapped port is the only detail you need before getting to work.</p>
-                  </div>
-                  <div class="rounded-2xl border border-blue-200 bg-blue-50 p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                    <p class="text-[11px] uppercase tracking-[0.18em] text-blue-700">Expand</p>
-                    <p class="mt-3 text-2xl font-bold text-gray-900">More ports later</p>
-                    <p class="mt-2 text-sm leading-relaxed text-gray-700">Publish extra services afterwards with standard Docker syntax.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <article class="hero-pillar group flex flex-col items-start rounded-2xl border border-gray-100 bg-white px-5 py-5 hover:shadow-lg transition-all duration-200">
+              <span class="text-2xl mb-3">🗑️</span>
+              <h3 class="text-sm font-bold uppercase tracking-[0.14em] text-gray-900">Disposable</h3>
+              <p class="text-sm text-gray-500 mt-2">Tear down when finished — no long‑lived machines to maintain.</p>
+            </article>
 
-            <div class="group rounded-3xl border border-gray-200 bg-white overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-gray-300 hover:shadow-[0_28px_90px_-55px_rgba(15,23,42,0.22)]">
-              <div class="flex items-center justify-between gap-4 border-b border-gray-200 bg-gray-50 px-4 py-3 sm:px-6">
-                <div class="flex items-center gap-2 transition-transform duration-500 group-hover:translate-x-1">
-                  <span class="h-2.5 w-2.5 rounded-full bg-rose-400"></span>
-                  <span class="h-2.5 w-2.5 rounded-full bg-amber-400"></span>
-                  <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
-                </div>
-                <p class="font-mono text-[11px] uppercase tracking-[0.22em] text-gray-500">yantr deploy linux-box</p>
-              </div>
-              <div class="border-b border-gray-200 px-4 py-5 font-mono text-sm text-gray-900 transition-colors duration-500 group-hover:bg-gray-50 sm:px-6">
-                ssh yantr@localhost -p XXXX
-              </div>
-              <div class="p-6 sm:p-8">
-                <p class="text-[11px] uppercase tracking-[0.18em] text-gray-500">Access pattern</p>
-                <p class="mt-3 max-w-3xl text-sm leading-relaxed text-gray-600 sm:text-base">
-                  Replace <span class="font-mono text-gray-900">XXXX</span> with the mapped SSH port. The same workflow works locally, through Tailscale, or
-                  through Yantr's remote-access stack.
-                </p>
-              </div>
-            </div>
+            <article class="hero-pillar group flex flex-col items-start rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-5 hover:shadow-lg transition-all duration-200">
+              <span class="text-2xl mb-3">⚙️</span>
+              <h3 class="text-sm font-bold uppercase tracking-[0.14em] text-emerald-700">Extendable</h3>
+              <p class="text-sm text-emerald-700 mt-2">Publish extra services later with standard Docker port mappings.</p>
+            </article>
+          </div>
 
-            <div class="group rounded-3xl border border-gray-200 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-gray-300 hover:shadow-[0_28px_90px_-55px_rgba(15,23,42,0.22)] sm:p-8 lg:p-10">
-              <div class="flex flex-col gap-6">
-                <div class="flex items-end justify-between gap-4">
-                  <div>
-                    <p class="text-[11px] uppercase tracking-[0.18em] text-gray-500">Choose your base</p>
-                    <h3 class="mt-2 font-sans text-2xl font-bold tracking-tight text-gray-900">Debian or Alpine</h3>
-                  </div>
-                  <span class="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-700 transition-transform duration-300 group-hover:-translate-y-0.5">
-                    SSH Ready
-                  </span>
-                </div>
+          <div class="mt-8 max-w-3xl mx-auto text-center">
+            <div class="rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 font-mono text-sm text-gray-900 inline-block">ssh yantr@localhost -p <span class="font-bold">XXXX</span></div>
+            <p class="mt-3 text-sm text-gray-500">Replace <span class="font-mono text-gray-900">XXXX</span> with the mapped SSH port. Works locally, over Tailscale, or using Yantr's remote‑access stack.</p>
+          </div>
 
-                <div class="space-y-3">
-                  <div class="rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-300 hover:translate-x-1 hover:border-gray-300 hover:shadow-lg">
-                    <div class="flex items-center justify-between gap-3">
-                      <div>
-                        <p class="text-sm font-semibold text-gray-900">Debian</p>
-                        <p class="mt-1 text-sm leading-relaxed text-gray-600">Fuller userspace for tools, packages, and long-lived utility boxes.</p>
-                      </div>
-                      <span class="rounded-full bg-gray-100 px-3 py-1 font-mono text-xs text-gray-600">stable</span>
-                    </div>
-                  </div>
-                  <div class="rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-300 hover:translate-x-1 hover:border-gray-300 hover:shadow-lg">
-                    <div class="flex items-center justify-between gap-3">
-                      <div>
-                        <p class="text-sm font-semibold text-gray-900">Alpine</p>
-                        <p class="mt-1 text-sm leading-relaxed text-gray-600">Tiny footprint for disposable shells, experiments, and quick isolated tasks.</p>
-                      </div>
-                      <span class="rounded-full bg-gray-100 px-3 py-1 font-mono text-xs text-gray-600">minimal</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="group rounded-3xl border border-gray-200 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-gray-300 hover:shadow-[0_28px_90px_-55px_rgba(15,23,42,0.22)] sm:p-8 lg:p-10">
-              <p class="text-[11px] uppercase tracking-[0.22em] text-gray-500">From click to shell</p>
-              <div class="mt-6 space-y-4">
-                <div class="flex gap-4 rounded-2xl border border-gray-200 bg-white p-4 transition-all duration-300 hover:translate-x-1 hover:border-gray-300 hover:shadow-lg">
-                  <span class="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-gray-200 bg-gray-50 text-sm font-bold text-gray-900 transition-transform duration-300 hover:rotate-3">1</span>
-                  <div>
-                    <p class="text-sm font-semibold text-gray-900">Deploy the box</p>
-                    <p class="mt-1 text-sm leading-relaxed text-gray-600">Choose Debian for a richer environment or Alpine for a tiny one.</p>
-                  </div>
-                </div>
-                <div class="flex gap-4 rounded-2xl border border-gray-200 bg-white p-4 transition-all duration-300 hover:translate-x-1 hover:border-gray-300 hover:shadow-lg">
-                  <span class="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-gray-200 bg-gray-50 text-sm font-bold text-gray-900 transition-transform duration-300 hover:-rotate-3">2</span>
-                  <div>
-                    <p class="text-sm font-semibold text-gray-900">Grab the mapped SSH port</p>
-                    <p class="mt-1 text-sm leading-relaxed text-gray-600">Yantr gives you the endpoint instead of making you configure it by hand.</p>
-                  </div>
-                </div>
-                <div class="flex gap-4 rounded-2xl border border-blue-200 bg-blue-50 p-4 transition-all duration-300 hover:translate-x-1 hover:shadow-lg">
-                  <span class="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-blue-200 bg-white text-sm font-bold text-gray-900 transition-transform duration-300 hover:rotate-3">3</span>
-                  <div>
-                    <p class="text-sm font-semibold text-gray-900">Treat it like a tool</p>
-                    <p class="mt-1 text-sm leading-relaxed text-gray-700">Keep it around, tear it down, or publish another service from it later.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="space-y-4">
-              <div class="group rounded-3xl border border-gray-200 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-gray-300 hover:shadow-[0_24px_70px_-50px_rgba(15,23,42,0.22)]">
-                <p class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Why it matters</p>
-                <p class="mt-4 text-lg font-bold tracking-tight text-gray-900 transition-transform duration-300 group-hover:translate-x-1">A fresh Linux machine stops being infrastructure work.</p>
-              </div>
-              <div class="group rounded-3xl border border-gray-200 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-gray-300 hover:shadow-[0_24px_70px_-50px_rgba(15,23,42,0.22)]">
-                <p class="text-[11px] uppercase tracking-[0.22em] text-gray-500">What changes</p>
-                <p class="mt-4 text-lg font-bold tracking-tight text-gray-900 transition-transform duration-300 group-hover:translate-x-1">Create a clean box when you need it, not a permanent machine to maintain.</p>
-              </div>
-              <div class="group rounded-3xl border border-amber-200 bg-amber-50 p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_24px_70px_-50px_rgba(15,23,42,0.22)]">
-                <p class="text-[11px] uppercase tracking-[0.22em] text-amber-700">Later on</p>
-                <p class="mt-4 text-lg font-bold tracking-tight text-gray-900 transition-transform duration-300 group-hover:translate-x-1">Publish more ports with mappings like 8080:8080 or just 8080.</p>
-              </div>
-            </div>
+          <div class="mt-8 text-center">
+            <a href="#apps" class="inline-flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold hover:bg-gray-100 transition">Try it — Deploy a box</a>
           </div>
         </div>
       </section>
