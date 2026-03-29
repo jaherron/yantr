@@ -18,15 +18,22 @@ let log = () => {};
 
 async function runWatchtower(containerArgs, label) {
   try {
-    const { exitCode, stdout, stderr } = await spawnProcess("docker", [
-      "run", "--rm",
-      "-v", `${socketPath}:/var/run/docker.sock`,
-      "-e", "DOCKER_API_VERSION=1.44",
-      "containrrr/watchtower",
-      "--run-once",
-      "--cleanup",
-      ...containerArgs,
-    ], { env: { ...process.env, DOCKER_HOST: `unix://${socketPath}`, DOCKER_API_VERSION: "1.44" }, timeout: 10 * 60 * 1000 });
+    const { exitCode, stdout, stderr } = await spawnProcess(
+      "docker",
+      [
+        "run",
+        "--rm",
+        "-v",
+        `${socketPath}:/var/run/docker.sock`,
+        "-e",
+        "DOCKER_API_VERSION=1.44",
+        "containrrr/watchtower",
+        "--run-once",
+        "--cleanup",
+        ...containerArgs,
+      ],
+      { env: { ...process.env, DOCKER_HOST: `unix://${socketPath}`, DOCKER_API_VERSION: "1.44" }, timeout: 10 * 60 * 1000 },
+    );
 
     if (exitCode === 0) {
       // Watchtower logs 'msg="Updated <name>"' for each container it actually pulls+restarts.
@@ -63,16 +70,21 @@ export async function runSelfUpdate() {
 export function initAutoUpdate(logger) {
   log = logger;
   if (process.env.YANTR_SELFUPDATE !== "false") {
-    const intervalHours = parseFloat(process.env.YANTR_SELFUPDATE_INTERVAL) || 1;
-    setTimeout(() => {
-      runSelfUpdate();
-    }, 5 * 60 * 1000);
-    setInterval(() => {
-      if (Math.random() < 0.5) runSelfUpdate();
-    }, intervalHours * 60 * 60 * 1000);
-    log("info", `🔄 [SELFUPDATE] Scheduler started — every ${intervalHours}h with 50% chance (first run in 10m)`);
+    const intervalMinutes = parseFloat(process.env.YANTR_SELFUPDATE_INTERVAL) || 15;
+    setTimeout(
+      () => {
+        runSelfUpdate();
+      },
+      5 * 60 * 1000,
+    );
+    setInterval(
+      () => {
+        if (Math.random() < 0.5) runSelfUpdate();
+      },
+      intervalMinutes * 60 * 1000,
+    );
+    log("info", `🔄 [SELFUPDATE] Scheduler started — every ${intervalMinutes}m with 50% chance (first run in 10m)`);
   } else {
     log("info", "🔄 [SELFUPDATE] Disabled via YANTR_SELFUPDATE=false");
   }
 }
-
